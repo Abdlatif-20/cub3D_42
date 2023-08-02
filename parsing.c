@@ -17,15 +17,15 @@ void	check_name_of_map(char *str, char *find)
 	int	i;
 	int	j;
 
-	i = ft_strlen(str) - 1;
+	i = (int)ft_strlen(str) - 1;
 	j = 0;
 	while (str[i] || find[j])
 	{
-		while (str[i] != '.')
+		while (str[i] && str[i] != '.')
 			i--;
 		if (i < 0)
 			return (ft_putendl_fd("Wrong file extension.", 2), exit(1));
-		if (str[i] == '.')
+		if (str[i] && str[i] == '.')
 		{
 			if (str[0] == '.')
 				return (ft_putendl_fd("Wrong name of file.", 2), exit(1));
@@ -40,12 +40,12 @@ void	check_name_of_map(char *str, char *find)
 	}
 }
 
-int	lenght_of_map(char *av)
+size_t	length_of_map(char *av)
 {
-	int		len;
-	int		final_len;
+	size_t	len;
+	size_t	final_len;
 	char	*line;
-	int 	fd;
+	int		fd;
 
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
@@ -63,15 +63,13 @@ int	lenght_of_map(char *av)
 	return (final_len);
 }
 
-void	fill_map(char *av, char **map)
+void	fill_map(char *av, char **map, t_garbage **heap)
 {
 	int		fd;
 	char	*line;
-	int		flag;
 	int		i;
 
 	fd = open(av, O_RDONLY);
-	flag = 0;
 	if (fd < 0)
 		return (ft_putstr_fd("no such file: ", 2),
 			ft_putendl_fd(av, 2), exit(1));
@@ -79,23 +77,24 @@ void	fill_map(char *av, char **map)
 	i = 0;
 	while (line)
 	{
+		add_to_garbage(heap, line);
 		if (line[0] != '1' && line[0] != ' ')
 			line = get_next_line(fd);
 		else
 		{
 			map[i] = ft_strdup(line);
+			add_to_garbage(heap, map[i]);
 			i++;
 			line = get_next_line(fd);
 		}
 	}
 	map[i] = NULL;
-	return ;
 }
 
 void	check_map_is_valid(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])
@@ -103,7 +102,8 @@ void	check_map_is_valid(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' && (map[i][j + 1] == ' ' || map[i][j + 1] == '\n'))
+			if (map[i][j] == ' ' && (map[i][j + 1] == '0'
+				|| map[i + 1][j] == '0'))
 				return (printf("Error\nMap is not closed\n"), exit(1));
 			j++;
 		}

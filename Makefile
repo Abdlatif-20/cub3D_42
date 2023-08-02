@@ -1,11 +1,11 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 LIB = libft/
-SRC = parsing.c main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = parsing.c parsing2.c main.c garbage.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a

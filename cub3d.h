@@ -19,9 +19,19 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
+typedef struct s_garbage
+{
+	void				*data;
+	struct s_garbage	*next;
+	struct s_garbage	*last;
+}				t_garbage;
+
 void	check_name_of_map(char *str, char *find);
-void	fill_map(char *av, char **map);
+void	fill_map(char *av, char **map, t_garbage **heap);
 char	*get_next_line(int fd);
-int		lenght_of_map(char *av);
+size_t	length_of_map(char *av);
 void	check_map_is_valid(char **map);
+void	add_to_garbage(t_garbage **garbage, void *ptr);
+void	check_texture(char *av);
+void	free_garbage(t_garbage **garbage);
 #endif

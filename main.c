@@ -12,21 +12,31 @@
 
 #include "cub3d.h"
 
+void	print_list(t_garbage *garbage)
+{
+	while (garbage)
+	{
+		printf("%s\n", (char *)garbage->data);
+		garbage = garbage->next;
+	}
+}
+
 int	main(int ac, char **av)
 {
-	char	**map;
+	char		**map;
+	t_garbage	*heap;
 
 	map = NULL;
-	map = (char **)malloc(lenght_of_map(av[1]) * sizeof(char *));
+	heap = NULL;
+	map = (char **)malloc((length_of_map(av[1]) + 1) * sizeof(char *));
 	if (!map)
 		return (0);
 	if (ac == 2)
 	{
 		check_name_of_map(av[1], ".cub");
-		fill_map(av[1], map);
+		fill_map(av[1], map, &heap);
+		check_texture(av[1]);
 		check_map_is_valid(map);
-	for(int i = 0;map[i]; i++)
-		printf("%s\n", map[i]);
 	}
 	else
 		printf("Wrong Argument\n");
