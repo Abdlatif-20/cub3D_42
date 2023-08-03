@@ -5,7 +5,7 @@ RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 LIB = libft/
-SRC = parsing.c main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = parsing/parsing.c main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
