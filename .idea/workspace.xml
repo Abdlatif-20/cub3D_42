@@ -17,7 +17,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1114c03f-de35-4112-8b05-ae86db63d3a7" name="Changes" comment="" />
+    <list default="true" id="1114c03f-de35-4112-8b05-ae86db63d3a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cub3d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/move_player.c" beforeDir="false" afterPath="$PROJECT_DIR$/move_player.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +91,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "Simo",
+    "git-widget-placeholder": "a__branch",
     "last_opened_file_path": "/Users/aben-nei/Desktop/cub3D",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

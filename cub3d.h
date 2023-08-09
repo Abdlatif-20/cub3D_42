@@ -21,7 +21,7 @@
 # include <math.h>
 
 # define CUB_SIZE 18
-# define SPEED 5
+# define SPEED 2
 typedef struct s_garbage
 {
 	void				*data;
@@ -69,7 +69,6 @@ char	*get_next_line(int fd);
 void	length_of_map(char *av, t_data *data);
 void	check_map_is_valid(char **map);
 void	add_to_garbage(t_garbage **garbage, void *ptr);
-void	check_texture(char *av, t_garbage **heap);
 void	free_garbage(t_garbage **garbage);
 bool	check_map(char map);
 bool	check_map_is_closed(char *map);

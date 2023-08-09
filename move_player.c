@@ -22,6 +22,10 @@ int	key_hook(int code, t_data *data)
 		data->flag_left = 1;
 	else if (code == 2)
 		data->flag_right = 1;
+	else if (code == 123)
+		data->rotate_right = 1;
+	else if (code == 124)
+		data->rotate_left = 1;
 	else if (code == 53)
 		exit(0);
 	return (0);
@@ -29,7 +33,6 @@ int	key_hook(int code, t_data *data)
 
 int	key_hook2(int code, t_data *data)
 {
-	printf("%d\n", code);
 	if (code == 13)
 		data->flag_up = 0;
 	else if (code == 1)
@@ -86,9 +89,9 @@ void	key_hook4(t_data *data)
 		}
 	}
 	else if (data->rotate_right)
-		data->player.rotation_angle += 0.1;
+		data->player.rotation_angle += 1 * (M_PI / 180);
 	else if (data->rotate_left)
-		data->player.rotation_angle -= 0.1;
+		data->player.rotation_angle -= 1 * (M_PI / 180);
 }
 
 int	key_hook3(t_data *data)
