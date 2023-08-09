@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:38:57 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/01 17:44:03 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/09 18:44:48 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	length_of_map(char *av, t_data *data)
 	while (line)
 	{
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 		len = ft_strlen(line);
 		if (final_len < len)
 			final_len = len;
@@ -69,7 +71,7 @@ void	length_of_map(char *av, t_data *data)
 	data->width = final_len;
 }
 
-void	fill_map(char *av, char **map, t_garbage **heap)
+void	fill_map(char *av, char **map)
 {
 	int		fd;
 	char	*line;
@@ -83,13 +85,11 @@ void	fill_map(char *av, char **map, t_garbage **heap)
 	i = 0;
 	while (line)
 	{
-		add_to_garbage(heap, line);
 		if (line[0] != '1' && line[0] != ' ')
 			line = get_next_line(fd);
 		else
 		{
 			map[i] = ft_strdup(line);
-			add_to_garbage(heap, map[i]);
 			i++;
 			line = get_next_line(fd);
 		}

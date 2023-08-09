@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/09 11:10:01 by aben-nei          #+#    #+#             */
-/*   Updated: 2022/11/01 18:57:20 by aben-nei         ###   ########.fr       */
+/*   Created: 2022/10/06 18:24:49 by mel-yous          #+#    #+#             */
+/*   Updated: 2022/10/31 18:26:40 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int ch)
+int	ft_toupper(int c)
 {
-	if (ch >= 'a' && ch <= 'z')
-		ch -= 32;
-	return (ch);
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

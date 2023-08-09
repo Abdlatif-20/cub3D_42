@@ -3,65 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 20:25:14 by aben-nei          #+#    #+#             */
-/*   Updated: 2022/10/31 02:25:25 by aben-nei         ###   ########.fr       */
+/*   Created: 2022/10/14 11:28:20 by mel-yous          #+#    #+#             */
+/*   Updated: 2022/11/02 18:19:45 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
-
-static int	str_start(char const *str, char const *set)
-{
-	int	i;
-	int	start;
-
-	i = 0;
-	start = 0;
-	while (set[i])
-	{
-		while (str[start] == set[i])
-		{
-			start++;
-			i = 0;
-		}
-		i++;
-	}
-	return (start);
-}
-
-static int	str_end(char const *str, char const *set)
-{
-	int	i;
-	int	end;
-
-	i = 0;
-	end = ft_strlen(str) - 1;
-	while (set[i])
-	{
-		while (end >= 0 && str[end] == set[i] && str_start(str, set) < end)
-		{
-			end--;
-			i = 0;
-		}
-		i++;
-	}
-	return (end);
-}
+#include "libft.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
-	int		start;
-	int		end;
+	size_t	begin;
+	size_t	end;
+	char	*trim;
 
-	if (!s1)
+	if (s1 == NULL)
 		return (NULL);
-	else if (!set)
+	if (set == NULL)
 		return ((char *)s1);
-	start = str_start(s1, set);
-	end = str_end(s1, set);
-	str = ft_substr(s1, start, (end - start) + 1);
-	return (str);
+	begin = 0;
+	end = ft_strlen(s1);
+	while (s1[begin] != '\0' && ft_strchr(set, s1[begin]))
+		begin++;
+	while (end >= begin && ft_strchr(set, s1[end]))
+		end--;
+	trim = ft_substr(s1, begin, (end - begin) + 1);
+	return (trim);
 }

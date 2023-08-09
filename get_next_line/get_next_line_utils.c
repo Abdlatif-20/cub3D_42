@@ -12,13 +12,13 @@
 
 #include "get_next_line.h"
 
-char	*ft_strdup(char *s)
+char	*ft_strdup_gnl(char *s)
 {
 	char	*str;
 	size_t	i;
 	size_t	len;
 
-	len = ft_strlen(s, '\0');
+	len = ft_strlen_gnl(s, '\0');
 	str = (char *)malloc(len + 1);
 	if (!str)
 		return (NULL);
@@ -29,7 +29,7 @@ char	*ft_strdup(char *s)
 	return (str);
 }
 
-size_t	ft_strlen(char *str, char c)
+size_t	ft_strlen_gnl(char *str, char c)
 {
 	size_t	len;
 
@@ -41,7 +41,7 @@ size_t	ft_strlen(char *str, char c)
 	return (len);
 }
 
-char	*ft_strchr(char *s, char c)
+char	*ft_strchr_gnl(char *s, char c)
 {
 	size_t	i;
 
@@ -57,7 +57,7 @@ char	*ft_strchr(char *s, char c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*str;
 	size_t	len_s1;
@@ -65,9 +65,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		i;
 
 	if (!s1)
-		s1 = ft_strdup("");
-	len_s1 = ft_strlen(s1, '\0');
-	len_s2 = ft_strlen(s2, '\0');
+		s1 = ft_strdup_gnl("");
+	len_s1 = ft_strlen_gnl(s1, '\0');
+	len_s2 = ft_strlen_gnl(s2, '\0');
 	str = (char *)malloc((len_s1 + len_s2) + 1);
 	if (!str)
 		return (free(s1), NULL);
@@ -81,14 +81,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (free(s1), str);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
 	char	*str;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s, '\0'))
+	if (start > ft_strlen_gnl(s, '\0'))
 	{
 		str = (char *)malloc(1);
 		if (!str)
@@ -96,15 +96,15 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		str[0] = '\0';
 		return (str);
 	}
-	if (len > ft_strlen(s, '\0'))
-		len = ft_strlen(s, '\0');
-	if (ft_strlen(s, '\0') - start < len)
-		len = ft_strlen(s, '\0') - start;
+	if (len > ft_strlen_gnl(s, '\0'))
+		len = ft_strlen_gnl(s, '\0');
+	if (ft_strlen_gnl(s, '\0') - start < len)
+		len = ft_strlen_gnl(s, '\0') - start;
 	str = (char *)malloc(len + 1);
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (i < len && start <= ft_strlen(s, '\0'))
+	while (i < len && start <= ft_strlen_gnl(s, '\0'))
 		str[i++] = s[start++];
 	str[i] = '\0';
 	return (str);

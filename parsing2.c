@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 21:11:28 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/02 21:11:42 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/09 18:32:52 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_color(char *line)
 	int		color_of_c;
 
 	color_of_c = 0;
-	split = ft_split(line + 2, ',');
+	split = ft_split(line + 2, ',', 0);
 	if (split[0] && split[1] && split[2])
 	{
 		if (line[0] == 'F')
@@ -39,7 +39,7 @@ void	check_color(char *line)
 		return (printf("Error\nWrong color1\n"), exit(1));
 }
 
-void	check_texture(char *av, t_garbage **heap)
+void	check_texture(char *av)
 {
 	int		fd;
 	int		fd_texture;
@@ -47,7 +47,6 @@ void	check_texture(char *av, t_garbage **heap)
 
 	fd = open(av, O_RDONLY);
 	line = get_next_line(fd);
-	add_to_garbage(heap, line);
 	while (line)
 	{
 		if ((line[0] == 'N' && line[1] != 'O')
@@ -68,7 +67,6 @@ void	check_texture(char *av, t_garbage **heap)
 		else if (line[0] == 'F' || line[0] == 'C')
 			check_color(line);
 		line = get_next_line(fd);
-		add_to_garbage(heap, line);
 	}
 	close(fd);
 	close(fd_texture);

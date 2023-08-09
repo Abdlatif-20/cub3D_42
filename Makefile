@@ -1,20 +1,23 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 LIB = libft/
-SRC = parsing.c\
+SRC = main.c\
+	parsing.c\
 	parsing2.c\
-	main.c\
-	garbage.c\
 	dda_algorithm.c\
 	draw_mini_map.c\
 	move_player.c\
-	utils_print.c\
-	$(GNL)
-	#draw_line.c\
+	$(GNL) \
+	parsing/parsing.c \
+	parsing/map_reader.c \
+	cub_utils.c \
+	g_collector.c \
+	dict_utils.c \
+	initializer.c
 
 OBJ = $(SRC:.c=.o)
 _LIB = libft/libft.a

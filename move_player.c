@@ -22,9 +22,9 @@ int	key_hook(int code, t_data *data)
 		data->flag_left = 1;
 	else if (code == 2)
 		data->flag_right = 1;
-	else if (code == 123)
-		data->rotate_right = 1;
 	else if (code == 124)
+		data->rotate_right = 1;
+	else if (code == 123)
 		data->rotate_left = 1;
 	else if (code == 53)
 		exit(0);
@@ -41,9 +41,9 @@ int	key_hook2(int code, t_data *data)
 		data->flag_left = 0;
 	else if (code == 2)
 		data->flag_right = 0;
-	else if (code == 123)
-		data->rotate_right = 0;
 	else if (code == 124)
+		data->rotate_right = 0;
+	else if (code == 123)
 		data->rotate_left = 0;
 	else if (code == 53)
 		exit(0);
@@ -54,29 +54,37 @@ void	key_hook4(t_data *data)
 {
 	if (data->flag_up)
 	{
-		if (data->map[(int)(data->player.y - 5) / 32]
-			[(int)(data->player.x) / 32] != '1')
+		if (data->map[(int)(data->player.y
+				+ sin(data->player.rotation_angle) * SPEED) / 32]
+			[(int)(data->player.x + cos(data->player.rotation_angle)
+				* SPEED) / 32] != '1')
 		{
-			data->player.y -= cos(data->player.rotation_angle) * SPEED;
-			data->player.x -= sin(data->player.rotation_angle) * SPEED;
+			data->player.y += sin(data->player.rotation_angle) * SPEED;
+			data->player.x += cos(data->player.rotation_angle) * SPEED;
 		}
 	}
 	else if (data->flag_down)
 	{
-		if (data->map[(int)(data->player.y + 5) / 32]
-			[(int)(data->player.x) / 32] != '1')
+		if (data->map[(int)(data->player.y
+				- sin(data->player.rotation_angle) * SPEED) / 32]
+			[(int)(data->player.x - cos(data->player.rotation_angle)
+				* SPEED) / 32] != '1')
 		{
-			data->player.y += cos(data->player.rotation_angle) * SPEED;
-			data->player.x += sin(data->player.rotation_angle) * SPEED;
+			data->player.y -= sin(data->player.rotation_angle) * SPEED;
+			data->player.x -= cos(data->player.rotation_angle) * SPEED;
 		}
 	}
 	else if (data->flag_left)
 	{
-		if (data->map[(int)(data->player.y) / 32]
-			[(int)(data->player.x - 5) / 32] != '1')
+		if (data->map[(int)(data->player.y
+				- sin(data->player.rotation_angle + (M_PI / 2)) * SPEED) / 32]
+			[(int)(data->player.x - cos(data->player.rotation_angle
+				+ (M_PI / 2)) * SPEED) / 32] != '1')
 		{
-			data->player.y -= cos(data->player.rotation_angle + M_PI / 2) * SPEED;
-			data->player.x -= sin(data->player.rotation_angle + M_PI / 2) * SPEED;
+			data->player.y -= sin(data->player.rotation_angle
+					+ (M_PI / 2)) * SPEED;
+			data->player.x -= cos(data->player.rotation_angle
+					+ (M_PI / 2)) * SPEED;
 		}
 	}
 	else if (data->flag_right)
@@ -84,8 +92,10 @@ void	key_hook4(t_data *data)
 		if (data->map[(int)(data->player.y) / 32]
 			[(int)(data->player.x + 5) / 32] != '1')
 		{
-			data->player.y += cos(data->player.rotation_angle + M_PI / 2) * SPEED;
-			data->player.x += sin(data->player.rotation_angle + M_PI / 2) * SPEED;
+			data->player.y += sin(data->player.rotation_angle
+					+ (M_PI / 2)) * SPEED;
+			data->player.x += cos(data->player.rotation_angle
+					+ (M_PI / 2)) * SPEED;
 		}
 	}
 	else if (data->rotate_right)
@@ -96,6 +106,8 @@ void	key_hook4(t_data *data)
 
 int	key_hook3(t_data *data)
 {
+	t_point	p;
+
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_clear_window(data->mlx, data->win);
 	data->img = mlx_new_image(data->mlx, 1200, 1200);
@@ -104,6 +116,7 @@ int	key_hook3(t_data *data)
 	key_hook4(data);
 	mini_map(data, data->map);
 	color_player(data);
+	drawing_line(&data->player, &p, data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);
 }
