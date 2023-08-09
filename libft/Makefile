@@ -23,10 +23,11 @@ OBJ = ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o\
 all : ${NAME}
 
 ${NAME} : ${OBJ}
-	${AR} ${NAME} ${OBJ}
+	@${AR} ${NAME} ${OBJ}
 
 %.o : %.c ${HDR}
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
+	@echo "\033[1;32mCompiling\033[0m" $< "\033[1;32m...\033[0m"
 	@clear
 
 fclean : clean

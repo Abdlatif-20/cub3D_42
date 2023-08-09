@@ -40,27 +40,32 @@ void	check_name_of_map(char *str, char *find)
 	}
 }
 
-size_t	length_of_map(char *av)
+void	length_of_map(char *av, t_data *data)
 {
 	size_t	len;
+	size_t	height;
 	size_t	final_len;
 	char	*line;
 	int		fd;
 
 	fd = open(av, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (ft_putstr_fd("no such file: ", 2),
+			ft_putendl_fd(av, 2), exit(1));
 	line = get_next_line(fd);
 	len = 0;
 	final_len = ft_strlen(line);
+	height = 1;
 	while (line)
 	{
 		line = get_next_line(fd);
 		len = ft_strlen(line);
 		if (final_len < len)
 			final_len = len;
+		height++;
 	}
-	return (final_len);
+	data->height = height;
+	data->width = final_len;
 }
 
 void	fill_map(char *av, char **map, t_garbage **heap)
@@ -97,11 +102,15 @@ void	check_map_is_valid(char **map)
 	int	j;
 
 	i = 0;
+	if (check_map_is_closed(map[0]))
+		return (printf("Error\nMap is not closed\n"), exit(1));
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
+			if (!check_map(map[i][j]))
+				return (printf("Error\n"), exit(1));
 			if (map[i][j] == ' ' && (map[i][j + 1] == '0'
 				|| map[i + 1][j] == '0'))
 				return (printf("Error\nMap is not closed\n"), exit(1));
@@ -109,4 +118,6 @@ void	check_map_is_valid(char **map)
 		}
 		i++;
 	}
+	if (check_map_is_closed(map[i - 1]))
+		return (printf("Error\nMap is not closed\n"), exit(1));
 }

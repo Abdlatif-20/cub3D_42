@@ -39,7 +39,7 @@ void	check_color(char *line)
 		return (printf("Error\nWrong color1\n"), exit(1));
 }
 
-void	check_texture(char *av)
+void	check_texture(char *av, t_garbage **heap)
 {
 	int		fd;
 	int		fd_texture;
@@ -47,6 +47,7 @@ void	check_texture(char *av)
 
 	fd = open(av, O_RDONLY);
 	line = get_next_line(fd);
+	add_to_garbage(heap, line);
 	while (line)
 	{
 		if ((line[0] == 'N' && line[1] != 'O')
@@ -67,7 +68,32 @@ void	check_texture(char *av)
 		else if (line[0] == 'F' || line[0] == 'C')
 			check_color(line);
 		line = get_next_line(fd);
+		add_to_garbage(heap, line);
 	}
 	close(fd);
 	close(fd_texture);
+}
+
+bool	check_map(char map)
+{
+	if (map == '1' || map == '0'
+		|| map == 'N' || map == 'S'
+		|| map == 'E' || map == 'W'
+		|| map == ' ' || map == '\n')
+		return (true);
+	return (false);
+}
+
+bool	check_map_is_closed(char *map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] != '1' && map[i] != ' ' && map[i] != '\n')
+			return (true);
+		i++;
+	}
+	return (false);
 }
