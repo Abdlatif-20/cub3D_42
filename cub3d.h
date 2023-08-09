@@ -22,6 +22,7 @@
 
 # define CUB_SIZE 18
 # define SPEED 2
+
 typedef struct s_garbage
 {
 	void				*data;

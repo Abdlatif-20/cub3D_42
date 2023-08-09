@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+
 void	check_name_of_map(char *str, char *find)
 {
 	int	i;
