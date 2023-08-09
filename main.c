@@ -6,39 +6,41 @@
 /*   By: aben-nei <aben-nei@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/01 17:46:00 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/03 13:29:51 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_list(t_garbage *garbage)
+static void	check_map_extension(char *path)
 {
-	while (garbage)
-	{
-		printf("%s\n", (char *)garbage->data);
-		garbage = garbage->next;
-	}
+	char	*str;
+
+	str = ft_strchr(path, '.');
+	if (!str)
+		throw_error("Map extension is not valid", NULL);
+	if (!(str[1] == 'c' && str[2] == 'u' && str[3] == 'b' && !str[4]))
+		throw_error("Map extension is not valid", NULL);
+}
+
+static void	leaks_detector(void)
+{
+	system("leaks cub3D");
 }
 
 int	main(int ac, char **av)
 {
-	char		**map;
+	char		**full_map;
 	t_garbage	*heap;
+	t_data		data;
 
-	map = NULL;
+	atexit(leaks_detector);
+	if (ac != 2)
+		throw_error("Number of args is not valid", NULL);
 	heap = NULL;
-	map = (char **)malloc((length_of_map(av[1]) + 1) * sizeof(char *));
-	if (!map)
-		return (0);
-	if (ac == 2)
-	{
-		check_name_of_map(av[1], ".cub");
-		fill_map(av[1], map, &heap);
-		check_texture(av[1]);
-		check_map_is_valid(map);
-	}
-	else
-		printf("Wrong Argument\n");
+	check_map_extension(av[1]);
+	full_map = get_full_map(av[1], &heap);
+	init_data(&data, full_map, &heap);
+	empty_trash(&heap);
 	return (0);
 }

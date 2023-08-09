@@ -3,68 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 10:21:08 by aben-nei          #+#    #+#             */
-/*   Updated: 2022/10/28 16:24:52 by aben-nei         ###   ########.fr       */
+/*   Created: 2022/10/18 16:01:32 by mel-yous          #+#    #+#             */
+/*   Updated: 2022/11/02 18:45:26 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
-static int	num_len(long n)
+static size_t	ft_ncount(int n)
 {
-	int	len;
+	size_t	i;
 
-	len = 0;
-	if (n < 0)
+	i = 0;
+	if (n <= 0)
 	{
-		len++;
-		n = -n;
+		i++;
+		n *= -1;
 	}
-	if (n == 0)
-		len++;
 	while (n > 0)
 	{
+		i++;
 		n /= 10;
-		len++;
 	}
-	return (len);
-}
-
-static void	convert_to_char(char *str, long nb, int i)
-{
-	while (nb > 0)
-	{
-		str[i] = 48 + (nb % 10);
-		nb /= 10;
-		i--;
-	}
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		i;
-	long	nb;
+	size_t	sz;
+	char	*ptr;
 
-	nb = n;
-	i = num_len(nb);
-	str = (char *)malloc(i + 1);
-	if (!str)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	sz = ft_ncount(n);
+	ptr = (char *)malloc(sz + 1);
+	if (ptr == NULL)
 		return (NULL);
-	str[i--] = '\0';
-	if (nb == 0)
+	ptr[sz] = '\0';
+	if (n == 0)
+		ptr[0] = '0';
+	if (n < 0)
 	{
-		str[0] = 48;
-		return (str);
+		ptr[0] = '-';
+		n *= -1;
 	}
-	if (nb < 0)
+	while (n > 0)
 	{
-		str[0] = '-';
-		nb *= -1;
+		ptr[sz - 1] = (n % 10) + 48;
+		n /= 10;
+		sz--;
 	}
-	if (nb > 0)
-		convert_to_char(str, nb, i);
-	return (str);
+	return (ptr);
 }

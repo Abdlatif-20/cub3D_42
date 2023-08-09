@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 01:44:14 by aben-nei          #+#    #+#             */
-/*   Updated: 2022/10/30 17:58:01 by aben-nei         ###   ########.fr       */
+/*   Created: 2022/10/20 10:20:29 by mel-yous          #+#    #+#             */
+/*   Updated: 2022/10/31 15:23:24 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s)
-		return ;
-	while (*s)
-		write (fd, s++, 1);
+	if (s != NULL)
+		write(fd, s, ft_strlen(s));
 }
