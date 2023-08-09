@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 21:02:25 by aben-nei          #+#    #+#             */
-/*   Updated: 2022/10/30 18:01:57 by aben-nei         ###   ########.fr       */
+/*   Created: 2022/10/12 19:59:00 by mel-yous          #+#    #+#             */
+/*   Updated: 2022/11/02 18:50:55 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,26 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
+	char	*ptrsub;
 	size_t	i;
+	size_t	slen;
 
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-	{
-		str = (char *)malloc(1);
-		if (!str)
-			return (NULL);
-		str[0] = '\0';
-		return (str);
-	}
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
-	if (ft_strlen(s) - start < len)
-		len = ft_strlen(s) - start;
-	str = (char *)malloc(len + 1);
-	if (!str)
-		return (NULL);
-	ft_bzero(str, len + 1);
 	i = 0;
-	while (i < len && start <= ft_strlen(s))
-		str[i++] = s[start++];
-	return (str);
+	if (s == NULL)
+		return (NULL);
+	slen = ft_strlen(s);
+	if (len > slen || (start + len) > slen)
+		len = slen - start;
+	if (start >= slen || *s == '\0')
+		return (ft_strdup(""));
+	ptrsub = (char *)malloc(len + 1);
+	if (ptrsub == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		ptrsub[i] = s[start + i];
+		i++;
+	}
+	ptrsub[i] = '\0';
+	return (ptrsub);
 }

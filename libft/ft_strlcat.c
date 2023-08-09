@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 18:23:54 by aben-nei          #+#    #+#             */
-/*   Updated: 2022/10/28 16:27:00 by aben-nei         ###   ########.fr       */
+/*   Created: 2022/10/27 11:12:15 by mel-yous          #+#    #+#             */
+/*   Updated: 2022/11/01 23:02:35 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	len_dst;
-	size_t	len_src;
+	size_t	slen;
+	size_t	dlen;
+	size_t	q;
 	size_t	i;
 
-	len_src = ft_strlen(src);
-	if (!dst && !dstsize)
-		return (len_src);
-	len_dst = ft_strlen(dst);
-	if (len_dst >= dstsize)
-		return (len_src + dstsize);
+	slen = ft_strlen(src);
+	if (dst == NULL && dstsize == 0)
+		return (slen);
+	dlen = ft_strlen(dst);
+	q = dlen;
 	i = 0;
-	while (src[i] && i < (dstsize - len_dst - 1))
+	if (dstsize <= dlen)
+		return (slen + dstsize);
+	if (dstsize > dlen)
 	{
-		dst[len_dst + i] = src[i];
-		i++;
+		while (src[i] != '\0' && i < (dstsize - dlen - 1))
+		{
+			dst[q] = src[i];
+			q++;
+			i++;
+		}
+		dst[q] = '\0';
 	}
-	dst[len_dst + i] = '\0';
-	return (len_dst + len_src);
+	return (dlen + slen);
 }
