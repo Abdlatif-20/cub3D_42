@@ -18,20 +18,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1114c03f-de35-4112-8b05-ae86db63d3a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dda_algorithm.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/draw_line.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/move_player.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils_print.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/libft/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/1.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/1.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/map.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsing2.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing2.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/move_player.c" beforeDir="false" afterPath="$PROJECT_DIR$/move_player.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,14 +91,14 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "a__branch",
     "last_opened_file_path": "/Users/aben-nei/Desktop/cub3D",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -163,7 +152,7 @@
       <workItem from="1691426187537" duration="330000" />
       <workItem from="1691489885729" duration="7528000" />
       <workItem from="1691513977566" duration="7555000" />
-      <workItem from="1691573669372" duration="9027000" />
+      <workItem from="1691573669372" duration="11835000" />
     </task>
     <servers />
   </component>

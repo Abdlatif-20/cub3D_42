@@ -51,6 +51,8 @@ typedef struct s_data {
 	int		flag_down;
 	int		flag_left;
 	int		flag_right;
+	int 	rotate_right;
+	int 	rotate_left;
 	int		steps;
 	double	inc_x;
 	double	inc_y;

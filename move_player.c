@@ -29,6 +29,7 @@ int	key_hook(int code, t_data *data)
 
 int	key_hook2(int code, t_data *data)
 {
+	printf("%d\n", code);
 	if (code == 13)
 		data->flag_up = 0;
 	else if (code == 1)
@@ -37,6 +38,10 @@ int	key_hook2(int code, t_data *data)
 		data->flag_left = 0;
 	else if (code == 2)
 		data->flag_right = 0;
+	else if (code == 123)
+		data->rotate_right = 0;
+	else if (code == 124)
+		data->rotate_left = 0;
 	else if (code == 53)
 		exit(0);
 	return (0);
@@ -44,36 +49,46 @@ int	key_hook2(int code, t_data *data)
 
 void	key_hook4(t_data *data)
 {
-	int xp;
-	int yp;
-
-	xp = (int)(data->player.x / 32);
-	yp = (int)(data->player.y / 32);
 	if (data->flag_up)
 	{
 		if (data->map[(int)(data->player.y - 5) / 32]
 			[(int)(data->player.x) / 32] != '1')
-			data->player.y -= SPEED;
-//			data->player.y -= yp + cos(data->player.rotation_angle) * SPEED;
+		{
+			data->player.y -= cos(data->player.rotation_angle) * SPEED;
+			data->player.x -= sin(data->player.rotation_angle) * SPEED;
+		}
 	}
 	else if (data->flag_down)
 	{
 		if (data->map[(int)(data->player.y + 5) / 32]
 			[(int)(data->player.x) / 32] != '1')
-			data->player.y += SPEED;
+		{
+			data->player.y += cos(data->player.rotation_angle) * SPEED;
+			data->player.x += sin(data->player.rotation_angle) * SPEED;
+		}
 	}
 	else if (data->flag_left)
 	{
 		if (data->map[(int)(data->player.y) / 32]
 			[(int)(data->player.x - 5) / 32] != '1')
-			data->player.x -= SPEED;
+		{
+			data->player.y -= cos(data->player.rotation_angle + M_PI / 2) * SPEED;
+			data->player.x -= sin(data->player.rotation_angle + M_PI / 2) * SPEED;
+		}
 	}
 	else if (data->flag_right)
 	{
 		if (data->map[(int)(data->player.y) / 32]
 			[(int)(data->player.x + 5) / 32] != '1')
-			data->player.x += SPEED;
+		{
+			data->player.y += cos(data->player.rotation_angle + M_PI / 2) * SPEED;
+			data->player.x += sin(data->player.rotation_angle + M_PI / 2) * SPEED;
+		}
 	}
+	else if (data->rotate_right)
+		data->player.rotation_angle += 0.1;
+	else if (data->rotate_left)
+		data->player.rotation_angle -= 0.1;
 }
 
 int	key_hook3(t_data *data)
