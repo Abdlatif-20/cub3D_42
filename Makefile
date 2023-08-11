@@ -1,29 +1,32 @@
 NAME = cub3D
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 LIB = libft/
-SRC =	parsing/parsing.c \
-		parsing/map_reader.c \
-		main.c \
-		cub_utils.c \
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c \
-		g_collector.c \
-		dict_utils.c \
-		initializer.c
+SRC = main.c\
+	draw_line.c\
+	draw_mini_map.c\
+	move_player.c\
+	$(GNL) \
+	parsing/parsing.c \
+	parsing/map_reader.c \
+	cub_utils.c \
+	g_collector.c \
+	initializer.c\
+    dict_utils.c \
+    parsing/parsing_utils.c
 
 OBJ = $(SRC:.c=.o)
-LIBFT = libft/libft.a
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+_LIB = libft/libft.a
+MLX_FLAGS = -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(_LIB) -o $(NAME)
 	@clear
 	@echo "\033[1;32mCreating\033[0m" $@ "\033[1;32m...\033[0m"
 

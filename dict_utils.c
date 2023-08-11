@@ -33,18 +33,3 @@ char	*get_key_value(char *str, short option, t_garbage **heap)
 		return (add_to_garbage(heap, sub), sub);
 	}
 }
-
-t_dict	*create_node(char *str, t_garbage **heap)
-{
-	t_dict	*new;
-
-	new = malloc(sizeof(t_dict));
-	if (!new)
-		return (NULL);
-	new->key = get_key_value(str, 0, heap);
-	new->value = get_key_value(str, 1, heap);
-	new->next = NULL;
-	new->last = NULL;
-	add_to_garbage(heap, new);
-	return (new);
-}

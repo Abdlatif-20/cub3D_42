@@ -18,17 +18,87 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1114c03f-de35-4112-8b05-ae86db63d3a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/garbage.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsing2.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/customTargets.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parsing/parsing_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/.github/ISSUE_TEMPLATE/bug_report.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/.github/ISSUE_TEMPLATE/feature_request.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/.github/workflows/ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/CODE_OF_CONDUCT.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/SECURITY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/cmake/Findglfw3.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/cmake/LinkGLFW.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/42.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Basics.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Colors.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Functions.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Hooks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Images.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Input.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Shaders.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/Textures.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/XPM42.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/assets/demo.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/docs/index.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/include/KHR/khrplatform.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/include/MLX42/MLX42.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/include/MLX42/MLX42_Int.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/include/glad/glad.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/include/lodepng/lodepng.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/lib/glad/glad.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/lib/png/lodepng.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/shaders/default.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/shaders/default.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/font/font.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/font/mlx_font.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_cursor.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_exit.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_images.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_init.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_keys.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_loop.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_monitor.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_mouse.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_put_pixel.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/mlx_window.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/textures/mlx_png.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/textures/mlx_texture.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/textures/mlx_xpm42.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/utils/mlx_compare.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/utils/mlx_error.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/utils/mlx_list.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/src/utils/mlx_utils.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/tests/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/tests/WindowFixture.hpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/tests/tests.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/tools/compile_shader.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/tools/compile_shader.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MLX42-master/tools/xpm3_conv.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dict_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/dict_utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/draw_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/draw_line.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/draw_mini_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/draw_mini_map.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/g_collector.c" beforeDir="false" afterPath="$PROJECT_DIR$/g_collector.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_next_line/get_next_line.h" beforeDir="false" afterPath="$PROJECT_DIR$/get_next_line/get_next_line.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initializer.c" beforeDir="false" afterPath="$PROJECT_DIR$/initializer.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/1.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/1.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/map.cub" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/maps/ray_cast.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/move_player.c" beforeDir="false" afterPath="$PROJECT_DIR$/move_player.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing/map_reader.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing/map_reader.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing/parsing.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsing2.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils_print.c" beforeDir="false" afterPath="$PROJECT_DIR$/utils_print.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,37 +118,14 @@
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/draw_mini_map.c" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/maps/map.cub" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="MakefileLocalSettings">
-    <option name="availableProjects">
-      <map>
-        <entry>
-          <key>
-            <ExternalProjectPojo>
-              <option name="name" value="cub3D" />
-              <option name="path" value="$PROJECT_DIR$" />
-            </ExternalProjectPojo>
-          </key>
-          <value>
-            <list>
-              <ExternalProjectPojo>
-                <option name="name" value="cub3D" />
-                <option name="path" value="$PROJECT_DIR$" />
-              </ExternalProjectPojo>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="projectSyncType">
-      <map>
-        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
-      </map>
-    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -94,10 +141,11 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging a__branch&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/aben-nei/Desktop/cub3D&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -110,7 +158,7 @@
   }
 }</component>
   <component name="RunManager" selected="Makefile Application.re">
-    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="all" CONFIG_NAME="all" version="1">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/cub3D">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
@@ -125,7 +173,7 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="re" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="re" CONFIG_NAME="re" version="1">
+    <configuration name="re" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="maps/map.cup" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="clean" CONFIG_NAME="clean" version="1" RUN_PATH="$PROJECT_DIR$/cub3D">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
@@ -152,7 +200,21 @@
       <workItem from="1690998041728" duration="19000" />
       <workItem from="1690998064285" duration="426000" />
       <workItem from="1690998509886" duration="952000" />
-      <workItem from="1691001918590" duration="2679000" />
+      <workItem from="1691001918590" duration="2848000" />
+      <workItem from="1691327650995" duration="2926000" />
+      <workItem from="1691417597645" duration="5306000" />
+      <workItem from="1691426187537" duration="330000" />
+      <workItem from="1691489885729" duration="7528000" />
+      <workItem from="1691513977566" duration="7555000" />
+      <workItem from="1691573669372" duration="12168000" />
+      <workItem from="1691607909150" duration="1971000" />
+      <workItem from="1691660657373" duration="204000" />
+      <workItem from="1691661318664" duration="1107000" />
+      <workItem from="1691664450302" duration="719000" />
+      <workItem from="1691665704216" duration="18000" />
+      <workItem from="1691665762687" duration="1077000" />
+      <workItem from="1691674062294" duration="10498000" />
+      <workItem from="1691756832639" duration="39000" />
     </task>
     <servers />
   </component>
