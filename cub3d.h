@@ -21,15 +21,21 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <math.h>
+# include "get_next_line/get_next_line.h"
 
 # define CUB_SIZE 18
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 # define SPEED 2
-# include "get_next_line/get_next_line.h"
+# define SCALE 32
 
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
 typedef struct s_dict		t_dict;
 typedef struct s_point		t_point;
+typedef struct s_mlx		t_mlx;
+typedef struct s_flags		t_flags;
+typedef struct s_draw		t_draw;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 
@@ -52,7 +58,7 @@ struct s_point {
 	double	rotation_angle;
 };
 
-typedef struct s_data {
+struct	s_mlx{
 	void	*mlx;
 	void	*win;
 	int		endian;
@@ -60,24 +66,37 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	void	*img;
 	char	*addr;
-	double	x;
-	double	y;
-	double	dx;
-	double	dy;
+};
+
+struct	s_flags{
 	int		flag_up;
 	int		flag_down;
 	int		flag_left;
 	int		flag_right;
 	int		rotate_right;
 	int		rotate_left;
+};
+
+struct s_draw{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
 	double	steps;
 	double	inc_x;
 	double	inc_y;
+};
+
+typedef struct s_data {
+	t_mlx	mlx;
+	t_flags	flags;
+	t_draw	draw;
+	t_point	player;
+	t_dict	*textures;
 	size_t	height;
 	size_t	width;
-	t_point	player;
+	float	more_speed;
 	char	**map;
-	t_dict	*textures;
 	int		ceiling[3];
 	int		floor[3];
 }				t_data;

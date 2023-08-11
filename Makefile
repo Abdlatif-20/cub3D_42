@@ -8,7 +8,7 @@ LIB = libft/
 SRC = main.c\
 	parsing.c\
 	parsing2.c\
-	dda_algorithm.c\
+	draw_line.c\
 	draw_mini_map.c\
 	move_player.c\
 	$(GNL) \

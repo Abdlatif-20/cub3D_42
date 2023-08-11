@@ -18,10 +18,10 @@ void	colors(t_data *data, int x, int y, int color)
 	int	j;
 
 	i = y;
-	while (i < y + 32)
+	while (i < y + SCALE)
 	{
 		j = x;
-		while (j < x + 32)
+		while (j < x + SCALE)
 		{
 			my_mlx_pixel_put(data, j, i, color);
 			j++;
@@ -41,10 +41,10 @@ void	mini_map(t_data *data, char **map)
 	while (map[i])
 	{
 		j = 0;
-		y = i * 32;
+		y = i * SCALE;
 		while (map[i][j])
 		{
-			x = j * 32;
+			x = j * SCALE;
 			if (map[i][j] == '1')
 				colors(data, x, y, 0x00800080);
 			else if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
@@ -85,15 +85,15 @@ void	get_position_of_player(char **map, t_data *data)
 	while (map[i])
 	{
 		j = 0;
-		y = i * 32;
+		y = i * SCALE;
 		while (map[i][j])
 		{
-			x = j * 32;
+			x = j * SCALE;
 			if (map[i][j] == 'N' || map[i][j] == 'S'
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
-				data->player.x = x + (32 / 2);
-				data->player.y = y + (32 / 2);
+				data->player.x = x + (SCALE / 2);
+				data->player.y = y + (SCALE / 2);
 			}
 			j++;
 		}

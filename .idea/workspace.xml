@@ -18,72 +18,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1114c03f-de35-4112-8b05-ae86db63d3a7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cub3D.dSYM/Contents/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cub3D.dSYM/Contents/Resources/DWARF/cub3D" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cub_utils.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dict_utils.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/initializer.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsing/map_reader.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parsing/parsing.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/10.cub" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maps/ray_cast.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cub3d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dda_algorithm.c" beforeDir="false" afterPath="$PROJECT_DIR$/dda_algorithm.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/garbage.c" beforeDir="false" afterPath="$PROJECT_DIR$/g_collector.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_next_line/get_next_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/get_next_line/get_next_line.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_next_line/get_next_line.h" beforeDir="false" afterPath="$PROJECT_DIR$/get_next_line/get_next_line.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_next_line/get_next_line_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/get_next_line/get_next_line_utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/libft/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_atoi.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_atoi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_bzero.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_bzero.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_calloc.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_calloc.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_isalnum.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_isalnum.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_isalpha.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_isalpha.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_isascii.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_isascii.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_isdigit.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_isdigit.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_isprint.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_isprint.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_itoa.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_itoa.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstadd_back.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstadd_back.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstadd_front.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstadd_front.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstclear.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstclear.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstdelone.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstdelone.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstiter.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstlast.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstlast.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstnew.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstnew.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstnew_bonus.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_lstsize.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_lstsize.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_memchr.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_memchr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_memcmp.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_memcmp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_memcpy.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_memcpy.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_memmove.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_memmove.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_memset.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_memset.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_putchar_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_putchar_fd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_putendl_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_putendl_fd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_putnbr_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_putnbr_fd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_putstr_fd.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_putstr_fd.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_split.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_split.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strchr.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strchr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strdup.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strdup.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_striteri.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_striteri.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strjoin.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strjoin.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strlcat.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strlcat.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strlcpy.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strlcpy.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strlen.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strlen.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strmapi.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strmapi.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strncmp.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strncmp.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strnstr.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strnstr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strrchr.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strrchr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_strtrim.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_strtrim.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_substr.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_substr.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_tolower.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_tolower.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/ft_toupper.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_toupper.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libft/libft.h" beforeDir="false" afterPath="$PROJECT_DIR$/libft/libft.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dda_algorithm.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/draw_line.c" beforeDir="false" afterPath="$PROJECT_DIR$/draw_line.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/draw_mini_map.c" beforeDir="false" afterPath="$PROJECT_DIR$/draw_mini_map.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/1.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/1.cub" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/map.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/map.cub" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/move_player.c" beforeDir="false" afterPath="$PROJECT_DIR$/move_player.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsing2.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing2.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +56,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2023" />
@@ -119,26 +69,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "Merging a__branch",
-    "last_opened_file_path": "/Users/aben-nei/Desktop/cub3D",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;a__branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aben-nei/Desktop/cub3D&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Makefile Application.re">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/cub3D">
       <method v="2">
@@ -189,7 +139,13 @@
       <workItem from="1691489885729" duration="7528000" />
       <workItem from="1691513977566" duration="7555000" />
       <workItem from="1691573669372" duration="12168000" />
-      <workItem from="1691607909150" duration="1512000" />
+      <workItem from="1691607909150" duration="1971000" />
+      <workItem from="1691660657373" duration="204000" />
+      <workItem from="1691661318664" duration="1107000" />
+      <workItem from="1691664450302" duration="719000" />
+      <workItem from="1691665704216" duration="18000" />
+      <workItem from="1691665762687" duration="1077000" />
+      <workItem from="1691674062294" duration="10498000" />
     </task>
     <servers />
   </component>

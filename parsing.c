@@ -71,6 +71,11 @@ void	length_of_map(char *av, t_data *data)
 	data->width = final_len;
 }
 
+void	ft()
+{
+	printf("hello");
+}
+
 void	fill_map(char *av, char **map)
 {
 	int		fd;
