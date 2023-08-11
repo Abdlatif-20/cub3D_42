@@ -16,7 +16,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->mlx.addr + (y * data->mlx.line_length + x * (data->mlx.bits_per_pixel / 8));
+	dst = data->mlx.addr + (y * data->mlx.line_length + x
+			* (data->mlx.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -46,7 +47,7 @@ void	drawing_line(t_point *p1, t_point *p2, t_data *data)
 	{
 		if (data->draw.x > 0 && data->draw.x < 1200
 			&& data->draw.y > 0 && data->draw.y < 1200)
-		my_mlx_pixel_put(data, data->draw.x, data->draw.y, 0x0000FF00);
+			my_mlx_pixel_put(data, data->draw.x, data->draw.y, 0x0000FF00);
 		data->draw.x += data->draw.inc_x;
 		data->draw.y += data->draw.inc_y;
 		i++;

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
 void	print_list(t_garbage *garbage)
 {
@@ -20,11 +20,11 @@ void	print_list(t_garbage *garbage)
 		garbage = garbage->next;
 	}
 }
-
-void	print(char **map)
-{
-	int	i;
-
-	for (i = 0;map[i];i++)
-		 printf("%s", map[i]);
-}
+//
+//void	print(char **map)
+//{
+//	int	i;
+//
+//	for (i = 0;map[i];i++)
+//		 printf("%s", map[i]);
+//}

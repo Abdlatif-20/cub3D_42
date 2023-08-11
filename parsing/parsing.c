@@ -14,7 +14,6 @@
 
 void	check_textures(t_dict *textures, t_garbage **heap)
 {
-	static int	state[4] = {0, 0, 0, 0};
 	int			fd;
 
 	while (textures)
@@ -22,28 +21,85 @@ void	check_textures(t_dict *textures, t_garbage **heap)
 		fd = open(textures->value, O_RDONLY);
 		if (fd == -1)
 			throw_error(MAP_ERROR, heap);
-		if (!ft_strcmp(textures->key, "NO"))
-			state[0] = 1;
-		else if (!ft_strcmp(textures->key, "SO"))
-			state[1] = 1;
-		else if (!ft_strcmp(textures->key, "WE"))
-			state[2] = 1;
-		else if (!ft_strcmp(textures->key, "EA"))
-			state[3] = 1;
-		else
-			throw_error(MAP_ERROR, heap);
 		close(fd);
 		textures = textures->next;
 	}
-	if (state[0] && state[1] && state[2] && state[3])
-		return ;
-	else
-		throw_error(MAP_ERROR, heap);
 }
 
-void	check_rgb_code(int *rgb, t_garbage **heap)
+void	check_map_components(char **map, t_garbage **heap)
 {
-	if (rgb[0] < 0 || rgb[0] > 255 || rgb[1] < 0 || rgb[1] > 255
-		|| rgb[2] < 0 || rgb[2] > 255)
+	char		*line;
+	int			i;
+	static int	p;
+
+	line = *map;
+	if (!line)
+	{
+		if (p == 0)
+			throw_error(MAP_ERROR, heap);
+		return ;
+	}
+	i = 0;
+	while (line[i])
+	{
+		if (!is_valid_component(line[i]))
+			throw_error(MAP_ERROR, heap);
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+			|| line[i] == 'E')
+			p++;
+		i++;
+	}
+	if (p > 1)
 		throw_error(MAP_ERROR, heap);
+	check_map_components(map + 1, heap);
+}
+
+void	map_is_closed(char **map, t_garbage **heap)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		skip_spaces(map[i], &j);
+		if (i == 0 || i == tab_size(map) - 1)
+		{
+			while (map[i][j] && map[i][j] == '1')
+				j++;
+			if (map[i][j] != '\0')
+				throw_error(MAP_ERROR, heap);
+		}
+		else
+			if (map[i][j] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
+				throw_error(MAP_ERROR, heap);
+		i++;
+	}
+}
+
+void	space_checker(char **map, t_garbage **heap)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+			{
+				if (((map[i][j - 1] && map[i][j - 1] == ' ')
+					|| (map[i][j + 1] && map[i][j + 1] == ' ')))
+					throw_error(MAP_ERROR, heap);
+				if ((map[i - 1][j] && map[i - 1][j] == ' ')
+					|| (map[i + 1][j] && map[i + 1][j] == ' '))
+					throw_error(MAP_ERROR, heap);
+			}
+			j++;
+		}
+		i++;
+	}
 }

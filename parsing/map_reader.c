@@ -44,12 +44,12 @@ char	**get_full_map(char *path, t_garbage **heap)
 	while (line)
 	{
 		add_to_garbage(heap, line);
-		if (is_empty_line(line) && i < 6)
+		if (is_empty_line(line) && i < 7)
 		{
 			line = get_next_line(fd);
 			continue ;
 		}
-		else if (is_empty_line(line) && i >= 6)
+		else if (is_empty_line(line) && i >= 7)
 			throw_error(MAP_ERROR, heap);
 		joined = free_s1_join(joined, line);
 		line = get_next_line(fd);
@@ -62,29 +62,4 @@ char	**get_full_map(char *path, t_garbage **heap)
 	while (tab[i])
 		add_to_garbage(heap, tab[i++]);
 	return (close(fd), add_to_garbage(heap, tab), free(joined), tab);
-}
-
-void	fill_dict(char **full_map, t_dict **dict, t_garbage **heap)
-{
-	int		i;
-	t_dict	*new;
-
-	i = 0;
-	while (i < 6 && full_map[i])
-	{
-		new = create_node(full_map[i], heap);
-		add_to_garbage(heap, new);
-		if (!*dict)
-		{
-			*dict = new;
-			(*dict)->next = NULL;
-			(*dict)->last = new;
-		}
-		else
-		{
-			(*dict)->last->next = new;
-			(*dict)->last = new;
-		}
-		i++;
-	}
 }

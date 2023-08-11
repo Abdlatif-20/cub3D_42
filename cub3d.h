@@ -101,27 +101,20 @@ typedef struct s_data {
 	int		floor[3];
 }				t_data;
 
-void	check_name_of_map(char *str, char *find);
-void	fill_map(char *av, char **map);
-char	*get_next_line(int fd);
+/*--------------------------- drawing ---------------------------*/
 void	drawing_line(t_point *p1, t_point *p2, t_data *data);
-void	length_of_map(char *av, t_data *data);
-void	check_map_is_valid(char **map);
-void	add_to_garbage(t_garbage **garbage, void *ptr);
-void	free_garbage(t_garbage **garbage);
-bool	check_map(char map);
-bool	check_map_is_closed(char *map);
 void	ft_draw_map(char **map, t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	mini_map(t_data *data, char **map);
-void	get_position_of_player(char **map, t_data *data);
+void	mini_map(t_data *data);
+void	get_position_of_player(t_data *data);
 void	color_player(t_data *data);
 int		key_hook(int code, t_data *data);
+/*--------------------------- utils print ---------------------------*/
 void	print(char **map);
 void	print_list(t_garbage *garbage);
+/*--------------------------- hooks ----------------------------*/
 int		key_hook2(int code, t_data *data);
 int		key_hook3(t_data *data);
-void	draw_line(t_data *data, double x, double y, int color);
 
 /*-----------------------------cub_utils.c-----------------------------*/
 void	throw_error(char *msg, t_garbage **heap);
@@ -133,10 +126,12 @@ bool	is_number(char *str);
 /*-----------------------------parsing.c-----------------------------*/
 void	check_textures(t_dict *textures, t_garbage **heap);
 void	check_rgb_code(int *rgb, t_garbage **heap);
+void	check_map_components(char **map, t_garbage **heap);
+void	map_is_closed(char **map, t_garbage **heap);
+void	space_checker(char **map, t_garbage **heap);
 
 /*-----------------------------map_reader.c-----------------------------*/
 char	**get_full_map(char *path, t_garbage **heap);
-void	fill_dict(char **full_map, t_dict **dict, t_garbage **heap);
 
 /*-----------------------------g_collector.c-----------------------------*/
 void	add_to_garbage(t_garbage **heap, void *address);
@@ -144,9 +139,12 @@ void	empty_trash(t_garbage **heap);
 
 /*-----------------------------dict_utils.c-----------------------------*/
 char	*get_key_value(char *str, short option, t_garbage **heap);
-t_dict	*create_node(char *str, t_garbage **heap);
 
 /*-----------------------------initializer.c-----------------------------*/
 void	init_data(t_data *data, char **full_map, t_garbage **heap);
+
+/*-----------------------------parsing_utils.c-----------------------------*/
+bool	is_valid_component(char c);
+void	skip_spaces(char *line, int *i);
 
 #endif

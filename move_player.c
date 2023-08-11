@@ -74,24 +74,29 @@ int	key_hook2(int code, t_data *data)
 
 void	key_hook4(t_data *data)
 {
-	double	x, y;
+	double	x;
+	double	y;
+
 	x = 0;
 	y = 0;
 	if (data->flags.flag_up)
 	{
-			x = data->player.x + cos(data->player.rotation_angle) * SPEED * data->more_speed;
-			y = data->player.y + sin(data->player.rotation_angle) * SPEED * data->more_speed;
-			if (check_wall(data, x, y))
-			{
-				data->player.y = y;
-				data->player.x = x;
-			}
+		x = data->player.x + cos(data->player.rotation_angle)
+			* SPEED * data->more_speed;
+		y = data->player.y + sin(data->player.rotation_angle)
+			* SPEED * data->more_speed;
+		if (check_wall(data, x, y))
+		{
+			data->player.y = y;
+			data->player.x = x;
+		}
 	}
 	else if (data->flags.flag_down)
 	{
-
-		x = data->player.x - cos(data->player.rotation_angle) * SPEED * data->more_speed;
-		y = data->player.y - sin(data->player.rotation_angle) * SPEED * data->more_speed;
+		x = data->player.x - cos(data->player.rotation_angle)
+			* SPEED * data->more_speed;
+		y = data->player.y - sin(data->player.rotation_angle)
+			* SPEED * data->more_speed;
 		if (check_wall(data, x, y))
 		{
 			data->player.y = y;
@@ -100,8 +105,10 @@ void	key_hook4(t_data *data)
 	}
 	else if (data->flags.flag_left)
 	{
-		x = data->player.x - cos(data->player.rotation_angle + (M_PI / 2)) * SPEED * data->more_speed;
-		y = data->player.y - sin(data->player.rotation_angle + (M_PI / 2)) * SPEED * data->more_speed;
+		x = data->player.x - cos(data->player.rotation_angle
+				+ (M_PI / 2)) * SPEED * data->more_speed;
+		y = data->player.y - sin(data->player.rotation_angle
+				+ (M_PI / 2)) * SPEED * data->more_speed;
 		if (check_wall(data, x, y))
 		{
 			data->player.y = y;
@@ -110,8 +117,10 @@ void	key_hook4(t_data *data)
 	}
 	else if (data->flags.flag_right)
 	{
-		x = data->player.x + cos(data->player.rotation_angle + (M_PI / 2)) * SPEED * data->more_speed;
-		y = data->player.y + sin(data->player.rotation_angle + (M_PI / 2)) * SPEED * data->more_speed;
+		x = data->player.x + cos(data->player.rotation_angle
+				+ (M_PI / 2)) * SPEED * data->more_speed;
+		y = data->player.y + sin(data->player.rotation_angle
+				+ (M_PI / 2)) * SPEED * data->more_speed;
 		if (check_wall(data, x, y))
 		{
 			data->player.y = y;
@@ -134,7 +143,7 @@ int	key_hook3(t_data *data)
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel,
 			&data->mlx.line_length, &data->mlx.endian);
 	key_hook4(data);
-	mini_map(data, data->map);
+	mini_map(data);
 	color_player(data);
 	drawing_line(&data->player, &p, data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->mlx.img, 0, 0);

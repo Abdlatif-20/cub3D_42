@@ -30,7 +30,7 @@ void	colors(t_data *data, int x, int y, int color)
 	}
 }
 
-void	mini_map(t_data *data, char **map)
+void	mini_map(t_data *data)
 {
 	int	x;
 	int	y;
@@ -38,17 +38,18 @@ void	mini_map(t_data *data, char **map)
 	int	j;
 
 	i = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
 		y = i * SCALE;
-		while (map[i][j])
+		while (data->map[i][j])
 		{
 			x = j * SCALE;
-			if (map[i][j] == '1')
+			if (data->map[i][j] == '1')
 				colors(data, x, y, 0x00800080);
-			else if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'E' || map[i][j] == 'W')
+			else if (data->map[i][j] == '0' || data->map[i][j] == 'N'
+				|| data->map[i][j] == 'S' || data->map[i][j] == 'E'
+				|| data->map[i][j] == 'W')
 				colors(data, x, y, 0x00FFFFFF);
 			j++;
 		}
@@ -74,7 +75,7 @@ void	color_player(t_data *data)
 	}
 }
 
-void	get_position_of_player(char **map, t_data *data)
+void	get_position_of_player(t_data *data)
 {
 	int	x;
 	int	y;
@@ -82,15 +83,15 @@ void	get_position_of_player(char **map, t_data *data)
 	int	j;
 
 	i = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
 		y = i * SCALE;
-		while (map[i][j])
+		while (data->map[i][j])
 		{
 			x = j * SCALE;
-			if (map[i][j] == 'N' || map[i][j] == 'S'
-				|| map[i][j] == 'E' || map[i][j] == 'W')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
+				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
 				data->player.x = x + (SCALE / 2);
 				data->player.y = y + (SCALE / 2);

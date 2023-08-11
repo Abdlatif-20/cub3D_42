@@ -6,8 +6,6 @@ HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 LIB = libft/
 SRC = main.c\
-	parsing.c\
-	parsing2.c\
 	draw_line.c\
 	draw_mini_map.c\
 	move_player.c\
@@ -16,8 +14,9 @@ SRC = main.c\
 	parsing/map_reader.c \
 	cub_utils.c \
 	g_collector.c \
-	dict_utils.c \
-	initializer.c
+	initializer.c\
+    dict_utils.c \
+    parsing/parsing_utils.c
 
 OBJ = $(SRC:.c=.o)
 _LIB = libft/libft.a

@@ -18,7 +18,7 @@ void	add_to_garbage(t_garbage **heap, void *address)
 
 	new = malloc(sizeof(t_garbage));
 	if (!new)
-		return ;
+		throw_error("Error: malloc failed", NULL);
 	new->address = address;
 	new->next = NULL;
 	new->last = NULL;

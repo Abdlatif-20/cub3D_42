@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
-
 /* ------------------- Prototype Function -------------------*/
 
 char	*get_next_line(int fd);

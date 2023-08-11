@@ -17,14 +17,11 @@ int	ft_close(void)
 	exit(0);
 }
 
-void	ft_initializer(t_data *data, char **map)
+void	ft_initializer(t_data *data)
 {
-	map = NULL;
-	map = (char **)malloc((data->width + 1) * sizeof(char *));
-	if (!map)
-		exit(0);
 	data->mlx.mlx = mlx_init();
-	data->mlx.win = mlx_new_window(data->mlx.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Hello world!");
+	data->mlx.win = mlx_new_window(data->mlx.mlx,
+			SCREEN_WIDTH, SCREEN_HEIGHT, "Hello world!");
 	data->mlx.img = mlx_new_image(data->mlx.mlx, 1200, 1200);
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel,
 			&data->mlx.line_length, &data->mlx.endian);
@@ -51,29 +48,21 @@ static void	check_map_extension(char *path)
 
 int	main(int ac, char **av)
 {
-//	char		**full_map;
+	char		**full_map;
 	t_point		p;
 	t_garbage	*heap;
 	t_data		data;
-	char		**map;
 
 	heap = NULL;
 	if (ac != 2)
 		return (printf("Wrong Argument\n"), 0);
-	check_name_of_map(av[1], ".cub");
-	length_of_map(av[1], &data);
-	map = (char **)malloc((data.width + 1) * sizeof(char *));
-	if (!map)
-		return (0);
 	check_map_extension(av[1]);
-//	full_map = get_full_map(av[1], &heap);
-//	init_data(&data, full_map, &heap);
-	fill_map(av[1], map);
-	ft_initializer(&data, map);
-	mini_map(&data, map);
-	get_position_of_player(map, &data);
+	full_map = get_full_map(av[1], &heap);
+	init_data(&data, full_map, &heap);
+	ft_initializer(&data);
+	mini_map(&data);
+	get_position_of_player(&data);
 	color_player(&data);
-	data.map = map;
 	drawing_line(&data.player, &p, &data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 	mlx_hook(data.mlx.win, 2, 0, key_hook, &data);
