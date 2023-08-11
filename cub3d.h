@@ -61,10 +61,12 @@ bool	is_number(char *str);
 /*-----------------------------parsing.c-----------------------------*/
 void	check_textures(t_dict *textures, t_garbage **heap);
 void	check_rgb_code(int *rgb, t_garbage **heap);
+void	check_map_components(char **map, t_garbage **heap);
+void	map_is_closed(char **map, t_garbage **heap);
+void	space_checker(char **map, t_garbage **heap);
 
 /*-----------------------------map_reader.c-----------------------------*/
 char	**get_full_map(char *path, t_garbage **heap);
-void	fill_dict(char **full_map, t_dict **dict, t_garbage **heap);
 
 /*-----------------------------g_collector.c-----------------------------*/
 void	add_to_garbage(t_garbage **heap, void *address);
@@ -72,9 +74,12 @@ void	empty_trash(t_garbage **heap);
 
 /*-----------------------------dict_utils.c-----------------------------*/
 char	*get_key_value(char *str, short option, t_garbage **heap);
-t_dict	*create_node(char *str, t_garbage **heap);
 
 /*-----------------------------initializer.c-----------------------------*/
 void	init_data(t_data *data, char **full_map, t_garbage **heap);
+
+/*-----------------------------parsing_utils.c-----------------------------*/
+bool	is_valid_component(char c);
+void	skip_spaces(char *line, int *i);
 
 #endif

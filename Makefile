@@ -13,7 +13,8 @@ SRC =	parsing/parsing.c \
 		get_next_line/get_next_line_utils.c \
 		g_collector.c \
 		dict_utils.c \
-		initializer.c
+		initializer.c \
+		parsing/parsing_utils.c
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
