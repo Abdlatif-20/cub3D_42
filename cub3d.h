@@ -20,11 +20,13 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <stdbool.h>
+# include <mlx.h>
 # include "get_next_line/get_next_line.h"
 
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
 typedef struct s_dict		t_dict;
+typedef struct s_mlx		t_mlx;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 
@@ -43,12 +45,22 @@ struct s_dict
 	t_dict	*last;
 };
 
+struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+};
+
 struct s_data
 {
 	t_dict	*textures;
 	int		ceiling[3];
 	int		floor[3];
 	char	**map;
+	int		width;
+	int		height;
+
+	t_mlx	*mlx;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/

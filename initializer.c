@@ -66,9 +66,34 @@ static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
 	}
 }
 
+static int	get_width(char **map)
+{
+	static int	width;
+	int			len;
+
+	if (!*map)
+		return (width);
+	len = ft_strlen(*map);
+	if (len > width)
+		width = len;
+	return (get_width(map + 1));
+}
+
+static int	get_height(char **map)
+{
+	static int	height;
+
+	if (!*map)
+		return (height);
+	height++;
+	return (get_height(map + 1));
+}
+
 static void	init_data_helper(t_data *data, int *state,
 						char **full_map, t_garbage **heap)
 {
+	t_mlx	mlx;
+
 	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5])
 	{
 		check_textures(data->textures, heap);
@@ -81,6 +106,12 @@ static void	init_data_helper(t_data *data, int *state,
 	}
 	else
 		throw_error(MAP_ERROR, heap);
+	data->width = get_width(data->map);
+	data->height = get_height(data->map);
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, 1280,
+			720, "cub3D");
+	data->mlx = &mlx;
 }
 
 static void	fill_state_tbl(char *key, int *state, t_garbage **heap)
