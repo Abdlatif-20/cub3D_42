@@ -14,7 +14,9 @@ SRC =	parsing/parsing.c \
 		g_collector.c \
 		dict_utils.c \
 		initializer.c \
-		parsing/parsing_utils.c
+		parsing/parsing_utils.c \
+		minimap/drawer.c \
+		minimap/engine.c
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a

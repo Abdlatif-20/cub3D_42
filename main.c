@@ -41,6 +41,7 @@ int	main(int ac, char **av)
 	check_map_extension(av[1]);
 	full_map = get_full_map(av[1], &heap);
 	init_data(&data, full_map, &heap);
+	mlx_hook(data.mlx->win, 2, 0, move_player, &data);
 	mlx_loop(data.mlx->mlx);
 	empty_trash(&heap);
 	return (0);

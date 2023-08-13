@@ -27,8 +27,10 @@ typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
 typedef struct s_dict		t_dict;
 typedef struct s_mlx		t_mlx;
+typedef struct s_player		t_player;
 
 # define MAP_ERROR "Error: something is wrong in the map"
+# define SZ 32
 
 struct s_garbage
 {
@@ -49,6 +51,12 @@ struct s_mlx
 {
 	void	*mlx;
 	void	*win;
+};
+
+struct s_player
+{
+	int	x;
+	int	y;
 };
 
 struct s_data
@@ -93,5 +101,11 @@ void	init_data(t_data *data, char **full_map, t_garbage **heap);
 /*-----------------------------parsing_utils.c-----------------------------*/
 bool	is_valid_component(char c);
 void	skip_spaces(char *line, int *i);
+
+/*-----------------------------drawer.c-----------------------------*/
+void	draw_map(t_data *data);
+
+/*-----------------------------engine.c-----------------------------*/
+int	move_player(int keycode, t_data *data);
 
 #endif

@@ -91,11 +91,11 @@ void	space_checker(char **map, t_garbage **heap)
 		{
 			if (map[i][j] == '0')
 			{
-				if (((map[i][j - 1] && map[i][j - 1] == ' ')
+				if (map[i] && ((map[i][j - 1] && map[i][j - 1] == ' ')
 					|| (map[i][j + 1] && map[i][j + 1] == ' ')))
 					throw_error(MAP_ERROR, heap);
-				if ((map[i - 1][j] && map[i - 1][j] == ' ')
-					|| (map[i + 1][j] && map[i + 1][j] == ' '))
+				if (map[i + 1] && ((map[i - 1][j] && map[i - 1][j] == ' ')
+					|| (map[i + 1][j] && map[i + 1][j] == ' ')))
 					throw_error(MAP_ERROR, heap);
 			}
 			j++;

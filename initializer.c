@@ -112,6 +112,7 @@ static void	init_data_helper(t_data *data, int *state,
 	mlx.win = mlx_new_window(mlx.mlx, 1280,
 			720, "cub3D");
 	data->mlx = &mlx;
+	draw_map(data);
 }
 
 static void	fill_state_tbl(char *key, int *state, t_garbage **heap)
