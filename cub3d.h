@@ -28,6 +28,19 @@
 # define SCREEN_HEIGHT 720
 # define SPEED 2
 # define SCALE 32
+# define W 13
+# define S 1
+# define A 0
+# define D 2
+# define RIGHT 124
+# define LEFT 123
+# define ESC 53
+# define UP 126
+# define DOWN 125
+# define ROTATE_RIGHT 124
+# define ROTATE_LEFT 123
+# define NUM_RAYS SCREEN_WIDTH
+# define FOV (60 * (M_PI / 180))
 
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
@@ -93,9 +106,7 @@ typedef struct s_data {
 	t_draw	draw;
 	t_point	player;
 	t_dict	*textures;
-	size_t	height;
-	size_t	width;
-	float	more_speed;
+	double 	angle_vue;
 	char	**map;
 	int		ceiling[3];
 	int		floor[3];
@@ -109,6 +120,8 @@ void	mini_map(t_data *data);
 void	get_position_of_player(t_data *data);
 void	color_player(t_data *data);
 int		key_hook(int code, t_data *data);
+void	drawing_rays(t_point *p1, t_point *p2, t_data *data);
+void 	casting_rays(t_data *data);
 /*--------------------------- utils print ---------------------------*/
 void	print(char **map);
 void	print_list(t_garbage *garbage);

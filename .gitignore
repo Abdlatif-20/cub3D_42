@@ -1,2 +1,4 @@
 /maps
 *.dSYM
+*.o
+.idea/

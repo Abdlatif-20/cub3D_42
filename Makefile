@@ -16,7 +16,9 @@ SRC = main.c\
 	g_collector.c \
 	initializer.c\
     dict_utils.c \
-    parsing/parsing_utils.c
+    parsing/parsing_utils.c\
+    ray_cast.c \
+    draw_ray.c
 
 OBJ = $(SRC:.c=.o)
 _LIB = libft/libft.a

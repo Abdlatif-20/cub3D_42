@@ -32,7 +32,6 @@ void	ft_initializer(t_data *data)
 	data->flags.rotate_left = 0;
 	data->flags.rotate_right = 0;
 	data->player.rotation_angle = 0;
-	data->more_speed = 1;
 }
 
 static void	check_map_extension(char *path)
@@ -64,6 +63,7 @@ int	main(int ac, char **av)
 	get_position_of_player(&data);
 	color_player(&data);
 	drawing_line(&data.player, &p, &data);
+	casting_rays(&data);
 	mlx_put_image_to_window(data.mlx.mlx, data.mlx.win, data.mlx.img, 0, 0);
 	mlx_hook(data.mlx.win, 2, 0, key_hook, &data);
 	mlx_hook(data.mlx.win, 3, 0, key_hook2, &data);
