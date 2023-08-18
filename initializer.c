@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/08 10:47:50 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/17 20:18:08 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	add_to_texture(t_dict **texture, char *key,
-							char *value, t_garbage **heap)
-{
-	t_dict	*new;
-
-	new = malloc(sizeof(t_dict));
-	if (!new)
-		throw_error("Error: malloc failed", heap);
-	new->key = key;
-	new->value = value;
-	new->next = NULL;
-	new->last = NULL;
-	add_to_garbage(heap, new);
-	if (!*texture)
-	{
-		*texture = new;
-		(*texture)->next = NULL;
-		(*texture)->last = new;
-	}
-	else
-	{
-		(*texture)->last->next = new;
-		(*texture)->last = new;
-	}
-}
 
 static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
 {
@@ -66,33 +40,10 @@ static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
 	}
 }
 
-static int	get_width(char **map)
-{
-	static int	width;
-	int			len;
-
-	if (!*map)
-		return (width);
-	len = ft_strlen(*map);
-	if (len > width)
-		width = len;
-	return (get_width(map + 1));
-}
-
-static int	get_height(char **map)
-{
-	static int	height;
-
-	if (!*map)
-		return (height);
-	height++;
-	return (get_height(map + 1));
-}
-
 static void	init_data_helper(t_data *data, int *state,
 						char **full_map, t_garbage **heap)
 {
-	t_mlx	mlx;
+	int	*player_xy;
 
 	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5])
 	{
@@ -106,13 +57,24 @@ static void	init_data_helper(t_data *data, int *state,
 	}
 	else
 		throw_error(MAP_ERROR, heap);
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, 1280, 720, "cub3D");
 	data->width = get_width(data->map);
 	data->height = get_height(data->map);
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, 1280,
-			720, "cub3D");
-	data->mlx = &mlx;
-	draw_map(data);
+	player_xy = get_player_xy(data->map);
+	data->keycode = -1;
+	if (data->map[player_xy[1]][player_xy[0]] == 'E')
+		data->angle = 2 * M_PI;
+	else if (data->map[player_xy[1]][player_xy[0]] == 'S')
+		data->angle = M_PI / 2;
+	else if (data->map[player_xy[1]][player_xy[0]] == 'W')
+		data->angle = M_PI;
+	else
+		data->angle = (3 * M_PI) / 2;
+	data->px = (WALL_SIZE * player_xy[0]);
+	data->py = (WALL_SIZE * player_xy[1]);
+	// data->px = WALL_SIZE * player_xy[0];
+	// data->py = WALL_SIZE * player_xy[1];
 }
 
 static void	fill_state_tbl(char *key, int *state, t_garbage **heap)

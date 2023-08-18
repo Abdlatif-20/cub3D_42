@@ -33,3 +33,29 @@ char	*get_key_value(char *str, short option, t_garbage **heap)
 		return (add_to_garbage(heap, sub), sub);
 	}
 }
+
+void	add_to_texture(t_dict **texture, char *key,
+							char *value, t_garbage **heap)
+{
+	t_dict	*new;
+
+	new = malloc(sizeof(t_dict));
+	if (!new)
+		throw_error("Error: malloc failed", heap);
+	new->key = key;
+	new->value = value;
+	new->next = NULL;
+	new->last = NULL;
+	add_to_garbage(heap, new);
+	if (!*texture)
+	{
+		*texture = new;
+		(*texture)->next = NULL;
+		(*texture)->last = new;
+	}
+	else
+	{
+		(*texture)->last->next = new;
+		(*texture)->last = new;
+	}
+}

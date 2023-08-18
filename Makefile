@@ -16,7 +16,11 @@ SRC =	parsing/parsing.c \
 		initializer.c \
 		parsing/parsing_utils.c \
 		minimap/drawer.c \
-		minimap/engine.c
+		minimap/engine.c \
+		calc.c \
+		mlx_func.c \
+		minimap/dda.c \
+		minimap/rotation.c
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a

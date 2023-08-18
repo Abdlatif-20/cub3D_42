@@ -3,58 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   drawer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/11 15:17:21 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:27:09 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	draw_square(t_data *data, int i, int j, int color)
+static void	draw_square(t_data *data, int x, int y, int color)
 {
-	int	x;
-	int	y;
-	int	scale_x;
-	int	scale_y;
+	int	i;
+	int	j;
 
-	y = 0;
-	scale_y = i * SZ;
-	scale_x = j * SZ;
-	while (y < SZ)
+	i = 1;
+	while (i < WALL_SIZE)
 	{
-		x = 0;
-		while (x < SZ)
+		j = 1;
+		while (j < WALL_SIZE)
 		{
-			mlx_pixel_put(data->mlx->mlx, data->mlx->win,
-				scale_x + x, scale_y + y, color);
-			x++;
+			pixel_put(data, x + j, y + i, color);
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
-static void	draw_player(t_data *data, int i, int j)
+static void	draw_player(t_data *data, int color)
 {
-	int	x;
-	int	y;
-	int	scale_y;
-	int	scale_x;
+	int	i;
+	int	j;
 
-	y = 0;
-	scale_y = i * SZ;
-	scale_x = j * SZ;
-	while (y < 8)
+	i = 0;
+	while (i < PLAYER_SIZE)
 	{
-		x = 0;
-		while (x < 8)
+		j = 0;
+		while (j < PLAYER_SIZE)
 		{
-			mlx_pixel_put(data->mlx->mlx, data->mlx->win,
-				scale_x + 12 + x, scale_y + 12 + y, 0x2ed573);
-			x++;
+			pixel_put(data, data->px + j, data->py + i, color);
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
@@ -64,23 +54,27 @@ void	draw_map(t_data *data)
 	int	j;
 
 	i = 0;
+	data->img_ptr = mlx_new_image(data->mlx_ptr, 1280, 720);
+	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
+			&data->line_length, &data->endian);
 	while (data->map[i])
 	{
 		j = 0;
 		while (data->map[i][j])
 		{
-			if (data->map[i][j] == '1')
-				draw_square(data, i, j, 0x8e44ad);
-			if (data->map[i][j] == '0')
-				draw_square(data, i, j, 0xffffff);
-			else if (data->map[i][j] == 'N' || data->map[i][j] == 'S'
-				|| data->map[i][j] == 'E' || data->map[i][j] == 'W')
-			{
-				draw_square(data, i, j, 0xffffff);
-				draw_player(data, i, j);
-			}
+			if (data->map[i][j] == '0'
+				|| data->map[i][j] == 'N' || data->map[i][j] == 'E'
+				|| data->map[i][j] == 'W' || data->map[i][j] == 'S')
+				draw_square(data, j * WALL_SIZE, i * WALL_SIZE, 0xffffff);
+			else if (data->map[i][j] == '1')
+				draw_square(data, j * WALL_SIZE, i * WALL_SIZE, 0xc56cf0);
 			j++;
 		}
 		i++;
 	}
+	draw_player(data, 0xf53b57);
+	dda(data, data->px + (cos(data->angle) * LINE_LENGTH),
+		data->py + (sin(data->angle) * LINE_LENGTH));
+	mlx_put_image_to_window (data->mlx_ptr,
+		data->win_ptr, data->img_ptr, 0, 0);
 }

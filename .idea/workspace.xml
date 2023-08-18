@@ -3,12 +3,18 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="cub3D" targetName="fclean" />
-      <config projectName="cub3D" targetName="cub3D" />
-      <config projectName="cub3D" targetName="all" />
-      <config projectName="cub3D" targetName="re" />
+      <config projectName="Project" targetName="cub3D" />
+      <config projectName="Project" targetName="re" />
+      <config projectName="Project" targetName="all" />
+      <config projectName="Project" targetName="fclean" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -18,15 +24,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1114c03f-de35-4112-8b05-ae86db63d3a7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/cub3D.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cub3D" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cub3d.h" beforeDir="false" afterPath="$PROJECT_DIR$/cub3d.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dict_utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/dict_utils.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/initializer.c" beforeDir="false" afterPath="$PROJECT_DIR$/initializer.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libft/ft_split.c" beforeDir="false" afterPath="$PROJECT_DIR$/libft/ft_split.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libft/libft.h" beforeDir="false" afterPath="$PROJECT_DIR$/libft/libft.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/maps/map.cub" beforeDir="false" afterPath="$PROJECT_DIR$/maps/map.cub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minimap/drawer.c" beforeDir="false" afterPath="$PROJECT_DIR$/minimap/drawer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/minimap/engine.c" beforeDir="false" afterPath="$PROJECT_DIR$/minimap/engine.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parsing/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/parsing/parsing.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,13 +64,17 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="OCResolveContextSettings">
-    <option name="configuration" value="$PROJECT_DIR$/parsing/parsing.c" />
+    <option name="configuration" value="$PROJECT_DIR$/initializer.c" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2023" />
     <option name="minorVersion" value="1.4" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: -1
+}</component>
   <component name="ProjectId" id="2TNxlxu8JN0JjOiVH3QJg9sSJko" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -81,13 +96,33 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Makefile Application.all">
-    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="maps/map.cub" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="Makefile" CONFIG_NAME="Makefile" version="1" RUN_PATH="cub3D">
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="maps/map.cub" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="Makefile" CONFIG_NAME="Makefile" version="1" RUN_PATH="cub3D">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="maps/map.cub" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="Makefile" CONFIG_NAME="Makefile" version="1" RUN_PATH="cub3D">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="maps/map.cub" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="Makefile" CONFIG_NAME="Makefile" version="1" RUN_PATH="cub3D">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="maps/map.cub" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="Makefile" CONFIG_NAME="Makefile" version="1" RUN_PATH="cub3D">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
@@ -97,21 +132,6 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cub3D" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="cub3D" CONFIG_NAME="cub3D" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="fclean" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cub3D" TARGET_NAME="fclean" CONFIG_NAME="fclean" version="1">
-      <method v="2">
-        <option name="CLION.COMPOUND.BUILD" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Makefile Application.all" />
-      <item itemvalue="Makefile Application.cub3D" />
-      <item itemvalue="Makefile Application.fclean" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -140,12 +160,30 @@
       <workItem from="1691826436341" duration="11044000" />
       <workItem from="1691863829851" duration="1378000" />
       <workItem from="1691868563530" duration="1213000" />
-      <workItem from="1691911778042" duration="202000" />
+      <workItem from="1691911778042" duration="11179000" />
+      <workItem from="1691953142809" duration="147000" />
+      <workItem from="1691953329167" duration="814000" />
+      <workItem from="1691994668929" duration="265000" />
+      <workItem from="1691995016317" duration="18189000" />
+      <workItem from="1692036515326" duration="3472000" />
+      <workItem from="1692083761848" duration="2150000" />
+      <workItem from="1692106444051" duration="1458000" />
+      <workItem from="1692170584811" duration="871000" />
+      <workItem from="1692256069146" duration="25000" />
+      <workItem from="1692256106125" duration="668000" />
+      <workItem from="1692344713386" duration="178000" />
+      <workItem from="1692344940333" duration="3913000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

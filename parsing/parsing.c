@@ -78,6 +78,14 @@ void	map_is_closed(char **map, t_garbage **heap)
 	}
 }
 
+static bool	is_valid_space(char c)
+{
+	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W'
+		&& c != 'E')
+		return (false);
+	return (true);
+}
+
 void	space_checker(char **map, t_garbage **heap)
 {
 	int	i;
@@ -91,11 +99,11 @@ void	space_checker(char **map, t_garbage **heap)
 		{
 			if (map[i][j] == '0')
 			{
-				if (map[i] && ((map[i][j - 1] && map[i][j - 1] == ' ')
-					|| (map[i][j + 1] && map[i][j + 1] == ' ')))
+				if (map[i] && (!is_valid_space(map[i][j - 1])
+					|| !is_valid_space(map[i][j + 1])))
 					throw_error(MAP_ERROR, heap);
-				if (map[i + 1] && ((map[i - 1][j] && map[i - 1][j] == ' ')
-					|| (map[i + 1][j] && map[i + 1][j] == ' ')))
+				if (map[i + 1] && (!is_valid_space(map[i - 1][j])
+					|| !is_valid_space(map[i + 1][j])))
 					throw_error(MAP_ERROR, heap);
 			}
 			j++;
