@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/18 11:27:09 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/26 09:38:18 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	draw_square(t_data *data, int x, int y, int color)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (i < WALL_SIZE)
 	{
-		j = 1;
+		j = 0;
 		while (j < WALL_SIZE)
 		{
 			pixel_put(data, x + j, y + i, color);
@@ -54,7 +54,7 @@ void	draw_map(t_data *data)
 	int	j;
 
 	i = 0;
-	data->img_ptr = mlx_new_image(data->mlx_ptr, 1280, 720);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);
 	while (data->map[i])
@@ -65,16 +65,14 @@ void	draw_map(t_data *data)
 			if (data->map[i][j] == '0'
 				|| data->map[i][j] == 'N' || data->map[i][j] == 'E'
 				|| data->map[i][j] == 'W' || data->map[i][j] == 'S')
-				draw_square(data, j * WALL_SIZE, i * WALL_SIZE, 0xffffff);
+				draw_square(data, j * WALL_SIZE, i * WALL_SIZE, 0x3c6382);
 			else if (data->map[i][j] == '1')
-				draw_square(data, j * WALL_SIZE, i * WALL_SIZE, 0xc56cf0);
+				draw_square(data, j * WALL_SIZE, i * WALL_SIZE, 0xa6915c);
 			j++;
 		}
 		i++;
 	}
-	draw_player(data, 0xf53b57);
-	dda(data, data->px + (cos(data->angle) * LINE_LENGTH),
-		data->py + (sin(data->angle) * LINE_LENGTH));
+	cast_all_rays(data);
 	mlx_put_image_to_window (data->mlx_ptr,
 		data->win_ptr, data->img_ptr, 0, 0);
 }

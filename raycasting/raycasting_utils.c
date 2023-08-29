@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   angle.c                                         :+:      :+:    :+:   */
+/*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 13:54:10 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/16 13:54:11 by mel-yous         ###   ########.fr       */
+/*   Created: 2023/08/26 12:03:46 by mel-yous          #+#    #+#             */
+/*   Updated: 2023/08/26 13:14:12 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	rotate_left(t_data *data)
+int	rgb2int_converter(int *rgb)
 {
-	data->angle -= ROT_SPEED;
-	if (data->angle < 0)
-		data->angle = data->angle + (2 * M_PI);
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	draw_walls(data);
-}
+	int		color;
+	int		i;
 
-void	rotate_right(t_data *data)
-{
-	data->angle += ROT_SPEED;
-	if (data->angle > 2 * M_PI)
-		data->angle = 0;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	draw_walls(data);
+	color = 0;
+	i = 2;
+	while (i >= 0)
+		ft_memset(((char *)&color) + abs(i - 2), rgb[i--], sizeof(char));
+	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/17 20:18:08 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/26 13:25:39 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
 	i = 0;
 	j = 0;
 	rgb = ft_split(str, ',', &j);
-	if (!rgb)
+	if (!rgb || tab_size(rgb) != 3)
 		throw_error(MAP_ERROR, heap);
 	while (rgb[i])
 		add_to_garbage(heap, rgb[i++]);
@@ -58,9 +58,15 @@ static void	init_data_helper(t_data *data, int *state,
 	else
 		throw_error(MAP_ERROR, heap);
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, 1280, 720, "cub3D");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	data->width = get_width(data->map);
 	data->height = get_height(data->map);
+	if (data->width * WALL_SIZE > SCREEN_WIDTH
+		|| data->height * WALL_SIZE > SCREEN_HEIGHT)
+		throw_error(MAP_ERROR, heap);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
+	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
+			&data->line_length, &data->endian);
 	player_xy = get_player_xy(data->map);
 	data->keycode = -1;
 	if (data->map[player_xy[1]][player_xy[0]] == 'E')
@@ -71,10 +77,8 @@ static void	init_data_helper(t_data *data, int *state,
 		data->angle = M_PI;
 	else
 		data->angle = (3 * M_PI) / 2;
-	data->px = (WALL_SIZE * player_xy[0]);
-	data->py = (WALL_SIZE * player_xy[1]);
-	// data->px = WALL_SIZE * player_xy[0];
-	// data->py = WALL_SIZE * player_xy[1];
+	data->px = WALL_SIZE * player_xy[0];
+	data->py =  WALL_SIZE * player_xy[1];
 }
 
 static void	fill_state_tbl(char *key, int *state, t_garbage **heap)

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:20:01 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/18 12:05:15 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/26 21:54:38 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ static void	move_forward(t_data *data)
 	int	new_x;
 	int	new_y;
 
-	new_x = (data->px + 4) + (cos(data->angle) * SPEED);
-	new_y = (data->py + 4) + (sin(data->angle) * SPEED);
+	new_x = (data->px) + (cos(data->angle) * SPEED);
+	new_y = (data->py) + (sin(data->angle) * SPEED);
+	if ((data->map[(new_y - 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1')
+		|| (data->map[(new_y + 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1'))
+		return ;
 	if (data->map[new_y / WALL_SIZE][new_x / WALL_SIZE] != '1')
 	{
 		data->px += (cos(data->angle) * SPEED);
 		data->py += (sin(data->angle) * SPEED);
-		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		draw_map(data);
+		draw_walls(data);
 	}
 }
 
@@ -34,15 +38,19 @@ static void	move_back(t_data *data)
 	int	new_x;
 	int	new_y;
 
-	new_x = (data->px + 4) - (cos(data->angle) * SPEED);
-	new_y = (data->py + 4) - (sin(data->angle) * SPEED);
+	new_x = (data->px) - (cos(data->angle) * SPEED);
+	new_y = (data->py) - (sin(data->angle) * SPEED);
+	if ((data->map[(new_y - 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1')
+		|| (data->map[(new_y + 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1'))
+		return ;
 	if (data->map[new_y / WALL_SIZE][new_x / WALL_SIZE] != '1')
 	{
 		data->px -= (cos(data->angle) * SPEED);
 		data->py -= (sin(data->angle) * SPEED);
-		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		draw_map(data);
+		draw_walls(data);
 	}
 }
 
@@ -51,15 +59,19 @@ static void	move_right(t_data *data)
 	int	new_x;
 	int	new_y;
 
-	new_x = (data->px + 4) - (cos(data->angle - (M_PI / 2)) * SPEED);
-	new_y = (data->py + 4) - (sin(data->angle - (M_PI / 2)) * SPEED);
+	new_x = (data->px) - (cos(data->angle - (M_PI / 2)) * SPEED);
+	new_y = (data->py) - (sin(data->angle - (M_PI / 2)) * SPEED);
+	if ((data->map[(new_y - 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1')
+		|| (data->map[(new_y + 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1'))
+		return ;
 	if (data->map[new_y / WALL_SIZE][new_x / WALL_SIZE] != '1')
 	{
 		data->px += (cos(data->angle + (M_PI / 2)) * SPEED);
 		data->py += (sin(data->angle + (M_PI / 2)) * SPEED);
-		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		draw_map(data);
+		draw_walls(data);
 	}
 }
 
@@ -68,15 +80,19 @@ static void	move_left(t_data *data)
 	int	new_x;
 	int	new_y;
 
-	new_x = (data->px + 4) + (cos(data->angle - (M_PI / 2)) * SPEED);
-	new_y = (data->py + 4) + (sin(data->angle - (M_PI / 2)) * SPEED);
+	new_x = (data->px) + (cos(data->angle - (M_PI / 2)) * SPEED);
+	new_y = (data->py) + (sin(data->angle - (M_PI / 2)) * SPEED);
+	if ((data->map[(new_y - 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1')
+		|| (data->map[(new_y + 4) / WALL_SIZE][new_x / WALL_SIZE] == '1'
+		&& data->map[new_y / WALL_SIZE][(new_x + 4) / WALL_SIZE] == '1'))
+		return ;
 	if (data->map[new_y / WALL_SIZE][new_x / WALL_SIZE] != '1')
 	{
 		data->px += (cos(data->angle - (M_PI / 2)) * SPEED);
 		data->py += (sin(data->angle - (M_PI / 2)) * SPEED);
-		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 		mlx_clear_window(data->mlx_ptr, data->win_ptr);
-		draw_map(data);
+		draw_walls(data);
 	}
 }
 

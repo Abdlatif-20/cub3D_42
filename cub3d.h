@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/17 17:48:22 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/26 21:25:38 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ typedef struct s_dict		t_dict;
 typedef struct s_mlx		t_mlx;
 typedef struct s_player		t_player;
 typedef struct s_dda		t_dda;
+typedef struct s_ray		t_ray;
+typedef struct s_vars		t_vars;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 # define WALL_SIZE 32
 # define PLAYER_SIZE 8
 # define SPEED 2
-# define ROT_SPEED 0.025
+# define ROT_SPEED 0.015
 # define LINE_LENGTH 64
+# define FOV 60 * (M_PI / 180)
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 
 enum e_keycode
 {
@@ -44,7 +49,6 @@ enum e_keycode
 	KEY_W = 13,
 	KEY_D = 2,
 	KEY_S = 1,
-
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_UP = 126,
@@ -77,6 +81,30 @@ struct s_dda
 	double	y_inc;
 };
 
+struct s_ray
+{
+	double	ray_angle;
+	double	distance;
+	double	wall_hit_x;
+	double	wall_hit_y;
+};
+
+struct s_vars
+{
+	bool	ray_looking_down;
+	bool	ray_looking_right;
+	
+	double	x_horz_int;
+	double	y_horz_int;
+	double	x_vert_int;
+	double	y_vert_int;
+	double	x_step;
+	double	y_step;
+
+	double	horz_dist;
+	double	vert_dist;
+};
+
 struct s_data
 {
 	void		*mlx_ptr;
@@ -101,6 +129,8 @@ struct s_data
 	t_dda		*dda_vars;
 
 	int			keycode;
+	t_ray		*rays;
+	t_vars		*vars;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/
@@ -157,5 +187,15 @@ void	dda(t_data *data, double x2, double y2);
 /*-----------------------------rotation.c-----------------------------*/
 void	rotate_left(t_data *data);
 void	rotate_right(t_data *data);
+
+/*-----------------------------raycasting.c-----------------------------*/
+void	cast_all_rays(t_data *data);
+
+/*-----------------------------raycasting_utils.c-----------------------------*/
+int		rgb2int_converter(int *rgb);
+
+/*-----------------------------draw_walls.c-----------------------------*/
+void    colorize_window(t_data *data);
+void    draw_walls(t_data *data);
 
 #endif

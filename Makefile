@@ -1,5 +1,5 @@
 NAME = cub3D
-CC = cc
+CC = cc -Ofast
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 HDR = cub3d.h
@@ -20,7 +20,10 @@ SRC =	parsing/parsing.c \
 		calc.c \
 		mlx_func.c \
 		minimap/dda.c \
-		minimap/rotation.c
+		minimap/rotation.c \
+		raycasting/raycasting.c \
+		raycasting/raycasting_utils.c \
+		raycasting/draw_walls.c \
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
