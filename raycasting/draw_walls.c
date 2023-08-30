@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/29 12:07:57 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/30 13:06:28 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,41 @@ void    colorize_window(t_data *data)
     }
 }
 
+void    wall_drawing(int x, double height, t_data *data)
+{
+    double y;
+
+    data->colors[0] = 244;
+    data->colors[1] = 237;
+    data->colors[2] = 228;
+    y = (SCREEN_HEIGHT / 2) - (height / 2);
+    while (y < ((SCREEN_HEIGHT / 2) - (height / 2)) + height && y < SCREEN_HEIGHT)
+    {
+        my_mlx_pixel_put(data, x, y, 0xeccc68);
+        y++;
+    }
+}
+
 void    draw_walls(t_data *data)
 {
 	t_ray	*rays;
-	int		i;
+	int	       i;
 	double	proj_slice_height;
-	double	proj_center;
-	
-	double		m = 0;
-	double		k = 0;
+	double	height_of_wall;
+    double  distance_player_proj;
 	
 	rays = data->rays;
 	i = 0;
 	proj_slice_height = 0;
-	proj_center = SCREEN_HEIGHT / 2;
+	// proj_center = SCREEN_HEIGHT / 2;
+    distance_player_proj = (SCREEN_WIDTH / 2) / tan(FOV / 2);
 	colorize_window(data);
+    while (i < SCREEN_WIDTH)
+    {
+        height_of_wall = (WALL_SIZE * distance_player_proj) / (rays[i].distance * cos(rays[i].ray_angle - data->angle));
+        wall_drawing(i, height_of_wall, data);
+        i++;
+    }
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
+// color grey 0x808080

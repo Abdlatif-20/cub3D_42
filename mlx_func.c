@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 07:32:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/16 10:27:45 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/29 20:59:02 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,15 @@ void	pixel_put(t_data *data, int x, int y, int color)
 		data->img_data[pos + i] = p[i];
 		i++;
 	}
+}
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
+		return ;
+	dst = data->img_data + (y * data->line_length + x
+			* (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }

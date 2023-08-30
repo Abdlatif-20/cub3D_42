@@ -2,7 +2,7 @@ NO get_next_line/get_next_line.c
 SO libft/libft.a
 WE libft/ft_isdigit.c
 EA libft/ft_strchr.c
-C 28,147,156
+C 30,39,195
 F 193,154,107
 111111111111111111111
 100S00000000000000001

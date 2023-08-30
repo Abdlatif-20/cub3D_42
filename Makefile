@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc -Ofast
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
@@ -16,7 +16,8 @@ SRC =	parsing/parsing.c \
 		initializer.c \
 		parsing/parsing_utils.c \
 		minimap/drawer.c \
-		minimap/engine.c \
+		minimap/move_player.c \
+		minimap/move_player_utils.c \
 		calc.c \
 		mlx_func.c \
 		minimap/dda.c \

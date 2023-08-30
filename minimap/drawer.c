@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/29 13:04:13 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/29 15:57:08 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ static void	draw_square(t_data *data, int x, int y, int color)
 	}
 }
 
-static void	draw_player(t_data *data, int color)
-{
-	int	i;
-	int	j;
+// static void	draw_player(t_data *data, int color)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < PLAYER_SIZE)
-	{
-		j = 0;
-		while (j < PLAYER_SIZE)
-		{
-			pixel_put(data, data->px + j, data->py + i, color);
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < PLAYER_SIZE)
+// 	{
+// 		j = 0;
+// 		while (j < PLAYER_SIZE)
+// 		{
+// 			pixel_put(data, data->px + j, data->py + i, color);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	draw_map(t_data *data)
 {

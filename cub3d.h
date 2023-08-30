@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/26 21:25:38 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:21:02 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ typedef struct s_vars		t_vars;
 # define MAP_ERROR "Error: something is wrong in the map"
 # define WALL_SIZE 32
 # define PLAYER_SIZE 8
-# define SPEED 2
-# define ROT_SPEED 0.015
+# define SPEED 6
+# define ROT_SPEED 3
 # define LINE_LENGTH 64
 # define FOV 60 * (M_PI / 180)
 # define SCREEN_WIDTH 1920
@@ -52,7 +52,8 @@ enum e_keycode
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_UP = 126,
-	KEY_DOWN = 125
+	KEY_DOWN = 125,
+	KEY_ESC = 53
 };
 
 struct s_garbage
@@ -119,6 +120,7 @@ struct s_data
 	t_dict		*textures;
 	int			ceiling[3];
 	int			floor[3];
+	int			colors[3];
 	char		**map;
 	int			width;
 	int			height;
@@ -131,6 +133,13 @@ struct s_data
 	int			keycode;
 	t_ray		*rays;
 	t_vars		*vars;
+
+	int			flag_up;
+	int			flag_down;
+	int			flag_left;
+	int			flag_right;
+	int			rotate_left;
+	int			rotate_right;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/
@@ -146,6 +155,7 @@ void	check_rgb_code(int *rgb, t_garbage **heap);
 void	check_map_components(char **map, t_garbage **heap);
 void	map_is_closed(char **map, t_garbage **heap);
 void	space_checker(char **map, t_garbage **heap);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*-----------------------------map_reader.c-----------------------------*/
 char	**get_full_map(char *path, t_garbage **heap);
@@ -175,8 +185,12 @@ void	skip_spaces(char *line, int *i);
 void	draw_map(t_data *data);
 
 /*-----------------------------engine.c-----------------------------*/
-int		move_player(int keycode, t_data *data);
-int		render_frame(t_data *data);
+// int		move_player(int keycode, t_data *data);
+// int		render_frame(t_data *data);
+int		key_hook(int code, t_data *data);
+int		key_hook2(int code, t_data *data);
+int		key_hook3(t_data *data);
+bool	check_wall(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
 void	pixel_put(t_data *data, int x, int y, int color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:12:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/26 10:07:33 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:28:27 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,19 @@ static double	adjust_angle(double ray_angle)
 static void	check_horz_int(t_data *data, double ray_angle)
 {
 	t_vars	*vars;
+	int		j;
 
 	vars = data->vars;
-	vars->y_horz_int = (int)floor(data->py / WALL_SIZE) * WALL_SIZE;
+	vars->y_horz_int = floor(data->py / WALL_SIZE) * WALL_SIZE;
+	j = 0;
 	if (!vars->ray_looking_down)
-		vars->y_horz_int -= 1;
+		j = 1;
 	else
 		vars->y_horz_int += WALL_SIZE;
 	vars->x_horz_int = data->px + (vars->y_horz_int - data->py) / tan(ray_angle);
-	while (vars->x_horz_int >= 0 && vars->x_horz_int < data->width * WALL_SIZE
-		&& vars->y_horz_int >= 0 && vars->y_horz_int < data->height * WALL_SIZE
-		&& data->map[(int)vars->y_horz_int / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] != '1')
+	while (vars->x_horz_int > 0 && vars->x_horz_int < data->width * WALL_SIZE
+		&& vars->y_horz_int > 0 && vars->y_horz_int < data->height * WALL_SIZE
+		&& data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] != '1')
 	{
 		vars->y_step = WALL_SIZE;
 		if (!vars->ray_looking_down)
@@ -54,17 +56,19 @@ static void	check_horz_int(t_data *data, double ray_angle)
 static void	check_vert_int(t_data *data, double ray_angle)
 {
 	t_vars	*vars;
+	int		j;
 
 	vars = data->vars;
-	vars->x_vert_int = (int)floor(data->px / WALL_SIZE) * WALL_SIZE;
+	vars->x_vert_int = floor(data->px / WALL_SIZE) * WALL_SIZE;
+	j  = 0;
 	if (!vars->ray_looking_right)
-		vars->x_vert_int -= 1;
+		j = 1;
 	else
 		vars->x_vert_int += WALL_SIZE;
 	vars->y_vert_int = data->py + (vars->x_vert_int - data->px) * tan(ray_angle);
-	while (vars->x_vert_int >= 0 && vars->x_vert_int < data->width * WALL_SIZE
-		&& vars->y_vert_int >= 0 && vars->y_vert_int < data->height * WALL_SIZE
-		&& data->map[(int)vars->y_vert_int / WALL_SIZE][(int)vars->x_vert_int / WALL_SIZE] != '1')
+	while (vars->x_vert_int > 0 && vars->x_vert_int < data->width * WALL_SIZE
+		&& vars->y_vert_int > 0 && vars->y_vert_int < data->height * WALL_SIZE
+		&& data->map[(int)vars->y_vert_int / WALL_SIZE][(int)(vars->x_vert_int - j) / WALL_SIZE] != '1')
 	{
 		vars->x_step = WALL_SIZE;
 		if (!vars->ray_looking_right)
@@ -123,4 +127,10 @@ void	cast_all_rays(t_data *data)
 		i++;
 	}
 	data->rays = rays;
+	i = 0;
+	while (i < SCREEN_WIDTH)
+	{
+		dda(data, rays[i].wall_hit_x, rays[i].wall_hit_y);
+		i++;
+	}
 }
