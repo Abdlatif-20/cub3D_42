@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/30 19:00:42 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:07:42 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,31 @@ void    wall_drawing(int x, double height, t_data *data)
     int color;
 
     y = (SCREEN_HEIGHT / 2) - (height / 2);
-    if (data->rays[x].flag_color == 0)
-    {
-        if (data->rays[x].ray_angle > M_PI)
-            color = 0x825e5c;
-        else
-            color = 0xcd84f1;
-    }
-    else
-    {
-        if (data->rays[x].ray_angle < 0.5 * M_PI || data->rays[x].ray_angle > 1.5 * M_PI)
-            color = 0x7efff5;
-        else
-            color =0xeccc68;
-    }
+    // if (data->rays[x].flag_color == 0)
+    // {
+    //     if (data->rays[x].ray_angle > M_PI)
+    //         color = 0x825e5c;
+    //     else
+    //         color = 0xcd84f1;
+    // }
+    // else
+    // {
+    //     if (data->rays[x].ray_angle < 0.5 * M_PI || data->rays[x].ray_angle > 1.5 * M_PI)
+    //         color = 0x7efff5;
+    //     else
+    //         color =0xeccc68;
+    // }
     while (y < ((SCREEN_HEIGHT / 2) - (height / 2)) + height && y < SCREEN_HEIGHT)
     {
         // texture y
         // texture x
         // function to get color from texture
         //fun(x, y, data)
-        my_mlx_pixel_put(data, x, y, color);
+        // printf("color: %d\n", my_pixel_put(data, x, y));
+        get_texture(data, x, y, height);
+        // my_pixel_put(data,data->texture->x_texture, data->texture->y_texture, &color);
+        // my_mlx_pixel_put(data, x, y, my_pixel_put(data,data->texture->x_texture, data->texture->y_texture, &color));
+        my_mlx_pixel_put(data, x, y, my_pixel_put(data,data->texture->x_texture, data->texture->y_texture, &color));
         y++;
     }
 }

@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/29 14:18:20 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:09:12 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	init_data_helper(t_data *data, int *state,
 {
 	int	*player_xy;
 
+	data->texture = malloc(sizeof(t_texture));
 	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5])
 	{
 		check_textures(data->textures, heap);
@@ -67,6 +68,10 @@ static void	init_data_helper(t_data *data, int *state,
 	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);
+	data->texture->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/2.xpm",
+				&data->texture->texture_width, &data->texture->texture_height);
+	data->texture->img_addr = mlx_get_data_addr(data->texture->texture_ptr, &data->texture->bpp,
+				&data->texture->line_length, &data->texture->endian);
 	player_xy = get_player_xy(data->map);
 	data->keycode = -1;
 	if (data->map[player_xy[1]][player_xy[0]] == 'E')

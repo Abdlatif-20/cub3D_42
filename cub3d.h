@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 18:14:53 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/31 19:08:48 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_player		t_player;
 typedef struct s_dda		t_dda;
 typedef struct s_ray		t_ray;
 typedef struct s_vars		t_vars;
+typedef struct s_texture	t_texture;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 # define WALL_SIZE 32
@@ -109,6 +110,26 @@ struct s_vars
 	double	vert_dist;
 };
 
+
+struct	s_texture
+{
+	double	x_texture;
+	double	y_texture;	
+	int		texture_height;
+	int		texture_width;
+
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	void		*texture_ptr;
+	char		*img_addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	
+};
+
+
 struct s_data
 {
 	void		*mlx_ptr;
@@ -121,6 +142,7 @@ struct s_data
 	int			endian;
 
 	t_dict		*textures;
+	t_texture	*texture;
 	int			ceiling[3];
 	int			floor[3];
 	int			colors[3];
@@ -214,5 +236,10 @@ int		rgb2int_converter(int *rgb);
 /*-----------------------------draw_walls.c-----------------------------*/
 void    colorize_window(t_data *data);
 void    draw_walls(t_data *data);
+
+/*----------------------------- textures -----------------------------*/
+void    get_texture(t_data *data, double x, double y, double height);
+// void 	my_pixel_put(t_data *data, int x, int y, int *color);
+int 	my_pixel_put(t_data *data, int x, int y, int *color);
 
 #endif

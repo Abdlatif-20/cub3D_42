@@ -25,6 +25,7 @@ SRC =	parsing/parsing.c \
 		raycasting/raycasting.c \
 		raycasting/raycasting_utils.c \
 		raycasting/draw_walls.c \
+		textures/get_texture.c \
 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
