@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:12:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/30 17:28:27 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:16:13 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 		rays->ray_angle = ray_angle;
 		rays->wall_hit_x = data->vars->x_horz_int;
 		rays->wall_hit_y = data->vars->y_horz_int;
+		rays->flag_color = 0;
 	}
 	else
 	{
@@ -104,6 +105,7 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 		rays->ray_angle = ray_angle;
 		rays->wall_hit_x = data->vars->x_vert_int;
 		rays->wall_hit_y = data->vars->y_vert_int;
+		rays->flag_color = 1;
 	}
 }
 

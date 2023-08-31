@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 17:21:02 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:14:53 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_vars		t_vars;
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 
+
 enum e_keycode
 {
 	KEY_A = 0,
@@ -53,7 +54,8 @@ enum e_keycode
 	KEY_RIGHT = 124,
 	KEY_UP = 126,
 	KEY_DOWN = 125,
-	KEY_ESC = 53
+	KEY_ESC = 53,
+	KEY_COUNT = 256
 };
 
 struct s_garbage
@@ -88,6 +90,7 @@ struct s_ray
 	double	distance;
 	double	wall_hit_x;
 	double	wall_hit_y;
+	bool		flag_color;
 };
 
 struct s_vars
@@ -187,9 +190,9 @@ void	draw_map(t_data *data);
 /*-----------------------------engine.c-----------------------------*/
 // int		move_player(int keycode, t_data *data);
 // int		render_frame(t_data *data);
-int		key_hook(int code, t_data *data);
-int		key_hook2(int code, t_data *data);
-int		key_hook3(t_data *data);
+int		key_press(int code, t_data *data);
+int		key_release(int code, t_data *data);
+int		render_frame(t_data *data);
 bool	check_wall(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
