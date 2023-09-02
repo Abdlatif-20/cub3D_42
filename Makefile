@@ -1,10 +1,11 @@
 NAME = cub3D
 CC = cc -Ofast
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -Ofast
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 LIB = libft/
+OBJ_DIR = obj
 SRC =	parsing/parsing.c \
 		parsing/map_reader.c \
 		main.c \
@@ -18,6 +19,8 @@ SRC =	parsing/parsing.c \
 		minimap/drawer.c \
 		minimap/move_player.c \
 		minimap/move_player_utils.c \
+		minimap/move_up_down.c\
+		minimap/move_left_right.c\
 		calc.c \
 		mlx_func.c \
 		minimap/dda.c \
@@ -27,7 +30,9 @@ SRC =	parsing/parsing.c \
 		raycasting/draw_walls.c \
 		textures/get_texture.c \
 
-OBJ = $(SRC:.c=.o)
+# Generate the list of object files with the same structure as SRC but in OBJ_DIR
+OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+
 LIBFT = libft/libft.a
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
@@ -39,10 +44,13 @@ $(NAME): $(OBJ)
 	@clear
 	@echo "\033[1;32mCreating\033[0m" $@ "\033[1;32m...\033[0m"
 
-%.o: %.c $(HDR)
+# Rules for creating object files in the OBJ_DIR
+$(OBJ_DIR)/%.o: %.c $(HDR)
+	@mkdir -p $(@D)  # Create the directory if it doesn't exist
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@clear
 	@echo "\033[1;32mCompiling\033[0m" $< "\033[1;32m...\033[0m"
+
 fclean: clean
 	@$(RM) $(NAME) $(NAME_BNS)
 	@make fclean -C $(LIB)
@@ -50,7 +58,7 @@ fclean: clean
 	@echo "\033[1;31mDeleting\033[0m" $(NAME) $(NAME_BNS) "\033[1;31m...\033[0m"
 
 clean:
-	@$(RM) $(OBJ) $(OBJ_BNS)
+	@$(RM) -r $(OBJ_DIR)
 	@clear
 	@echo "\033[1;31mDeleting\033[0m" Object files "\033[1;31m...\033[0m"
 

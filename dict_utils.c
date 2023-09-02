@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dict_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:15:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/07 18:15:55 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:52:42 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ char	*get_key_value(char *str, short option, t_garbage **heap)
 	}
 }
 
-void	add_to_texture(t_dict **texture, char *key,
+void	add_to_texture(t_texture **texture, char *key,
 							char *value, t_garbage **heap)
 {
-	t_dict	*new;
+	t_texture	*new;
 
-	new = malloc(sizeof(t_dict));
+	new = malloc(sizeof(t_texture));
 	if (!new)
 		throw_error("Error: malloc failed", heap);
 	new->key = key;

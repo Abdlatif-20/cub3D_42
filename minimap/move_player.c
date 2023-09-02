@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 17:59:45 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/01 22:26:42 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,71 +52,19 @@ int	key_release(int code, t_data *data)
 
 void	render_frame_helper(t_data *data)
 {
-	double	x;
-	double	y;
-
-	if (data->flag_up)
-	{
-		x = data->px + cos(data->angle)
-			* SPEED;
-		y = data->py + sin(data->angle)
-			* SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->flag_down)
-	{
-		x = data->px - cos(data->angle)
-			* SPEED;
-		y = data->py - sin(data->angle)
-			* SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->flag_left)
-	{
-		x = data->px - cos(data->angle + (M_PI / 2)) * SPEED;
-		y = data->py - sin(data->angle + (M_PI / 2)) * SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->flag_right)
-	{
-		x = data->px + cos(data->angle + (M_PI / 2)) * SPEED;
-		y = data->py + sin(data->angle 	+ (M_PI / 2)) * SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->rotate_right)
-		data->angle += ROT_SPEED * (M_PI / 180);
-	if (data->rotate_left)
-		data->angle -= ROT_SPEED * (M_PI / 180);
+	move_up(data);
+	move_down(data);
+	move_left(data);
+	move_right(data);
+	rotate_right(data);
+	rotate_left(data);
 }
 
 int	render_frame(t_data *data)
 {
 	render_frame_helper(data);
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
-			&data->line_length, &data->endian);
 	cast_all_rays(data);
 	draw_walls(data);
-	// draw_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }
-

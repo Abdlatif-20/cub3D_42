@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/31 19:09:12 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/01 17:43:17 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
 static void	init_data_helper(t_data *data, int *state,
 						char **full_map, t_garbage **heap)
 {
-	int	*player_xy;
+	int			*player_xy;
+	t_texture	*textures;
 
-	data->texture = malloc(sizeof(t_texture));
 	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5])
 	{
 		check_textures(data->textures, heap);
@@ -68,10 +68,16 @@ static void	init_data_helper(t_data *data, int *state,
 	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);
-	data->texture->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/2.xpm",
-				&data->texture->texture_width, &data->texture->texture_height);
-	data->texture->img_addr = mlx_get_data_addr(data->texture->texture_ptr, &data->texture->bpp,
-				&data->texture->line_length, &data->texture->endian);
+	textures = data->textures;
+	while ((data->textures))
+	{
+		(data->textures)->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, (data->textures)->value,
+					&(data->textures)->texture_width, &(data->textures)->texture_height);
+		(data->textures)->img_addr = mlx_get_data_addr((data->textures)->texture_ptr, &(data->textures)->bpp,
+					&(data->textures)->line_length, &(data->textures)->endian);
+		(data->textures) = (data->textures)->next;
+	}
+	data->textures = textures;
 	player_xy = get_player_xy(data->map);
 	data->keycode = -1;
 	if (data->map[player_xy[1]][player_xy[0]] == 'E')
@@ -84,6 +90,12 @@ static void	init_data_helper(t_data *data, int *state,
 		data->angle = (3 * M_PI) / 2;
 	data->px = WALL_SIZE * player_xy[0];
 	data->py =  WALL_SIZE * player_xy[1];
+	data->rotate_right = 0;
+	data->rotate_left = 0;
+	data->flag_up = 0;
+	data->flag_down = 0;
+	data->flag_left = 0;
+	data->flag_right = 0;
 }
 
 static void	fill_state_tbl(char *key, int *state, t_garbage **heap)

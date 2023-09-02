@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 18:15:17 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:40:39 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	main(int ac, char **av)
 	t_dda		dda_vars;
 	t_vars		vars;
 
-	// atexit(leaks_detector);
 	if (ac != 2)
 		throw_error("Number of args is not valid", NULL);
 	heap = NULL;
@@ -45,9 +44,6 @@ int	main(int ac, char **av)
 	init_data(&data, full_map, &heap);
 	data.dda_vars = &dda_vars;
 	data.vars = &vars;
-	cast_all_rays(&data);
-	// draw_map(&data);
-	draw_walls(&data);
 	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_hook(data.win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 0, key_release, &data);

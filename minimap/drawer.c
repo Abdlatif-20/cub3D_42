@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/29 15:57:08 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:29:07 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,4 @@ void	draw_map(t_data *data)
 		i++;
 	}
 	cast_all_rays(data);
-	mlx_put_image_to_window (data->mlx_ptr,
-		data->win_ptr, data->img_ptr, 0, 0);
 }
