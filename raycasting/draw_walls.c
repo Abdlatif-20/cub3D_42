@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/31 16:50:27 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:26:58 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    wall_drawing(int x, double height, t_data *data)
         if (data->rays[x].ray_angle < 0.5 * M_PI || data->rays[x].ray_angle > 1.5 * M_PI)
             color = 0x7efff5;
         else
-            color =0xeccc68;
+            color = 0xeccc68;
     }
     while (y < ((SCREEN_HEIGHT / 2) - (height / 2)) + height && y < SCREEN_HEIGHT)
     {
