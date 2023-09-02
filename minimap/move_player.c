@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 17:59:45 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/01 15:54:32 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ int	key_press(int code, t_data *data)
 		data->rotate_left = 1;
 	else if (code == KEY_ESC)
 		exit(0);
+	else if (code == 12)
+	{
+		if (data->hide_mouse == 1)
+		{
+			mlx_mouse_show();
+			data->hide_mouse = 0;
+		}
+		else
+		{
+			mlx_mouse_hide();
+			data->hide_mouse = 1;
+		}
+	}
 	return (0);
 }
 
@@ -57,10 +70,8 @@ void	render_frame_helper(t_data *data)
 
 	if (data->flag_up)
 	{
-		x = data->px + cos(data->angle)
-			* SPEED;
-		y = data->py + sin(data->angle)
-			* SPEED;
+		x = data->px + cos(data->angle) * SPEED;
+		y = data->py + sin(data->angle) * SPEED;
 		if (check_wall(data, x, y))
 		{
 			data->py = y;
@@ -69,10 +80,8 @@ void	render_frame_helper(t_data *data)
 	}
 	if (data->flag_down)
 	{
-		x = data->px - cos(data->angle)
-			* SPEED;
-		y = data->py - sin(data->angle)
-			* SPEED;
+		x = data->px - cos(data->angle) * SPEED;
+		y = data->py - sin(data->angle) * SPEED;
 		if (check_wall(data, x, y))
 		{
 			data->py = y;
@@ -100,9 +109,9 @@ void	render_frame_helper(t_data *data)
 		}
 	}
 	if (data->rotate_right)
-		data->angle += ROT_SPEED * (M_PI / 180);
+		data->angle += KEYBOARD_ROTSPEED * (M_PI / 180);
 	if (data->rotate_left)
-		data->angle -= ROT_SPEED * (M_PI / 180);
+		data->angle -= KEYBOARD_ROTSPEED * (M_PI / 180);
 }
 
 int	render_frame(t_data *data)

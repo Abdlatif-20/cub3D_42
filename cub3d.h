@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 18:14:53 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:10:05 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <mlx.h>
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <stdbool.h>
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include <math.h>
 # include "get_next_line/get_next_line.h"
 
@@ -37,7 +36,8 @@ typedef struct s_vars		t_vars;
 # define WALL_SIZE 32
 # define PLAYER_SIZE 8
 # define SPEED 6
-# define ROT_SPEED 3
+# define MOUSE_ROTSPEED 0.0007
+# define KEYBOARD_ROTSPEED 2.5
 # define LINE_LENGTH 64
 # define FOV 60 * (M_PI / 180)
 # define SCREEN_WIDTH 1920
@@ -55,7 +55,9 @@ enum e_keycode
 	KEY_UP = 126,
 	KEY_DOWN = 125,
 	KEY_ESC = 53,
-	KEY_COUNT = 256
+	KEY_COUNT = 256,
+	MOUSE_LEFT = 1,
+	MOUSE_RIGHT = 2
 };
 
 struct s_garbage
@@ -97,7 +99,7 @@ struct s_vars
 {
 	bool	ray_looking_down;
 	bool	ray_looking_right;
-	
+
 	double	x_horz_int;
 	double	y_horz_int;
 	double	x_vert_int;
@@ -143,6 +145,13 @@ struct s_data
 	int			flag_right;
 	int			rotate_left;
 	int			rotate_right;
+
+	int			hide_mouse;
+	int			mouse_x;
+	int			mouse_y;
+
+	void		*minimap_img;
+	char		*minimap_img_data;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/
@@ -202,8 +211,8 @@ void	pixel_put(t_data *data, int x, int y, int color);
 void	dda(t_data *data, double x2, double y2);
 
 /*-----------------------------rotation.c-----------------------------*/
-void	rotate_left(t_data *data);
-void	rotate_right(t_data *data);
+void	rotate_left(t_data *data, double rotation_speed);
+void	rotate_right(t_data *data, double rotation_speed);
 
 /*-----------------------------raycasting.c-----------------------------*/
 void	cast_all_rays(t_data *data);

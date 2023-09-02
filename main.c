@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/08/30 18:15:17 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:54:09 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,23 @@ static void	check_map_extension(char *path)
 		throw_error("Map extension is not valid", NULL);
 }
 
-int	ft_close(void)
+static int	ft_close(void)
 {
 	exit(0);
+}
+
+static int	mouse_rotation(int x, int y, t_data *data)
+{
+	int diff_x;
+	(void)y;
+
+	if (data->hide_mouse)
+	{
+		mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		diff_x = x - data->mouse_x;
+		data->angle += diff_x * MOUSE_ROTSPEED;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -48,9 +62,10 @@ int	main(int ac, char **av)
 	cast_all_rays(&data);
 	// draw_map(&data);
 	draw_walls(&data);
-	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_hook(data.win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 0, key_release, &data);
+	mlx_hook(data.win_ptr, 6, 0, mouse_rotation, &data);
+	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_loop_hook(data.mlx_ptr, render_frame, &data);
 	mlx_loop(data.mlx_ptr);
 	empty_trash(&heap);
