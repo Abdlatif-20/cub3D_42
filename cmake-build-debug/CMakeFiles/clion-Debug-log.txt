@@ -1,1 +1,1 @@
-CMakeLists.txt not found in /Users/mel-yous/Desktop/42-CURSUS/cub3D Select CMakeLists.txt
+CMakeLists.txt not found in /Users/mel-yous/Desktop/cub3D Select CMakeLists.txt

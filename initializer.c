@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/01 17:43:17 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:31:36 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,14 @@ static void	init_data_helper(t_data *data, int *state,
 		data->angle = M_PI;
 	else
 		data->angle = (3 * M_PI) / 2;
+	/*Initialize move & rotation flags with zero value*/
+	data->flag_down = 0;
+	data->flag_left = 0;
+	data->flag_right = 0;
+	data->flag_up = 0;
+	data->rotate_left = 0;
+	data->rotate_right = 0;
+
 	data->px = WALL_SIZE * player_xy[0];
 	data->py =  WALL_SIZE * player_xy[1];
 	data->rotate_right = 0;
@@ -96,6 +104,11 @@ static void	init_data_helper(t_data *data, int *state,
 	data->flag_down = 0;
 	data->flag_left = 0;
 	data->flag_right = 0;
+	mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	data->mouse_x = SCREEN_WIDTH / 2;
+	data->mouse_y = SCREEN_HEIGHT / 2;
+	data->hide_mouse = 1;
+	mlx_mouse_hide();
 }
 
 static void	fill_state_tbl(char *key, int *state, t_garbage **heap)

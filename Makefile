@@ -34,13 +34,14 @@ SRC =	parsing/parsing.c \
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 LIBFT = libft/libft.a
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
-
+MLX = mlx/libmlx.a
+MLXFLAGS = -framework OpenGL -framework AppKit
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	@$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
+	make -C mlx
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@clear
 	@echo "\033[1;32mCreating\033[0m" $@ "\033[1;32m...\033[0m"
 

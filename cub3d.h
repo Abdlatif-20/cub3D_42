@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/02 13:40:12 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:57:13 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <mlx.h>
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <stdbool.h>
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include <math.h>
 # include "get_next_line/get_next_line.h"
 
@@ -39,9 +38,11 @@ typedef struct s_texture	t_texture;
 # define PLAYER_SIZE 8
 # define SPEED 8
 # define ROT_SPEED 5
+# define MOUSE_ROTSPEED 0.0007
+# define KEYBOARD_ROTSPEED 2.5
 # define LINE_LENGTH 64
 # define FOV 60 * (M_PI / 180)
-# define SCREEN_WIDTH 1400
+# define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 720
 
 enum e_keycode
@@ -55,7 +56,9 @@ enum e_keycode
 	KEY_UP = 126,
 	KEY_DOWN = 125,
 	KEY_ESC = 53,
-	KEY_COUNT = 256
+	KEY_COUNT = 256,
+	MOUSE_LEFT = 1,
+	MOUSE_RIGHT = 2
 };
 
 struct s_garbage
@@ -148,6 +151,11 @@ struct s_data
 	int				flag_right;
 	int				rotate_left;
 	int				rotate_right;
+	int				hide_mouse;
+	int				mouse_x;
+	int				mouse_y;
+	void			*minimap_img;
+	char			*minimap_img_data;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/
