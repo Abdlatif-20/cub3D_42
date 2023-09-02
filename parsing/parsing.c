@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:10:57 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/06 16:47:24 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/01 13:52:42 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_textures(t_dict *textures, t_garbage **heap)
+void	check_textures(t_texture *textures, t_garbage **heap)
 {
 	int			fd;
 

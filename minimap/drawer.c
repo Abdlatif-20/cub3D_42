@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/02 14:15:10 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:28:07 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,4 @@ void	draw_map(t_data *data)
 		i++;
 	}
 	cast_all_rays(data);
-	mlx_put_image_to_window (data->mlx_ptr,
-		data->win_ptr, data->img_ptr, 0, 0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+         #
+#    By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/21 20:18:10 by mel-yous          #+#    #+#              #
-#    Updated: 2022/11/02 20:43:33 by mel-yous         ###   ########.fr        #
+#    Updated: 2023/09/02 14:13:03 by aben-nei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,13 +34,16 @@ $(NAME): $(OBJS)
 
 bonus : $(NAME) $(BOBJS)
 	ar rc $(NAME) $(BOBJS)
+	@clear
 
 %.o: %.c libft.h
 	$(CC) $(CFLAGS) -c $<
+	@clear
 
 clean:	
 	rm -rf $(OBJS) $(BOBJS)
 
 fclean:	clean
 	rm -rf $(NAME)
+	@clear
 re : fclean all

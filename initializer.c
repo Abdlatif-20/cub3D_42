@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/01 16:03:57 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:29:41 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
 static void	init_data_helper(t_data *data, int *state,
 						char **full_map, t_garbage **heap)
 {
-	int	*player_xy;
+	int			*player_xy;
+	t_texture	*textures;
 
 	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5])
 	{
@@ -67,6 +68,16 @@ static void	init_data_helper(t_data *data, int *state,
 	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);
+	textures = data->textures;
+	while ((data->textures))
+	{
+		(data->textures)->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, (data->textures)->value,
+					&(data->textures)->texture_width, &(data->textures)->texture_height);
+		(data->textures)->img_addr = mlx_get_data_addr((data->textures)->texture_ptr, &(data->textures)->bpp,
+					&(data->textures)->line_length, &(data->textures)->endian);
+		(data->textures) = (data->textures)->next;
+	}
+	data->textures = textures;
 	player_xy = get_player_xy(data->map);
 	data->keycode = -1;
 	if (data->map[player_xy[1]][player_xy[0]] == 'E')

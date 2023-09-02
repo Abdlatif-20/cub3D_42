@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/02 14:10:05 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:30:57 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@
 
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
-typedef struct s_dict		t_dict;
+typedef struct s_texture	t_texture;
 typedef struct s_mlx		t_mlx;
 typedef struct s_player		t_player;
 typedef struct s_dda		t_dda;
 typedef struct s_ray		t_ray;
 typedef struct s_vars		t_vars;
+typedef struct s_texture	t_texture;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 # define WALL_SIZE 32
@@ -40,9 +41,8 @@ typedef struct s_vars		t_vars;
 # define KEYBOARD_ROTSPEED 2.5
 # define LINE_LENGTH 64
 # define FOV 60 * (M_PI / 180)
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
-
+# define SCREEN_WIDTH 1400
+# define SCREEN_HEIGHT 720
 
 enum e_keycode
 {
@@ -67,12 +67,24 @@ struct s_garbage
 	t_garbage	*last;
 };
 
-struct s_dict
+struct s_texture
 {
-	char	*key;
-	char	*value;
-	t_dict	*next;
-	t_dict	*last;
+	char		*key;
+	char		*value;
+	double		x_texture;
+	double		y_texture;	
+	int			texture_height;
+	int			texture_width;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	void		*texture_ptr;
+	char		*img_addr;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	t_texture	*next;
+	t_texture	*last;
 };
 
 struct s_dda
@@ -88,10 +100,10 @@ struct s_dda
 
 struct s_ray
 {
-	double	ray_angle;
-	double	distance;
-	double	wall_hit_x;
-	double	wall_hit_y;
+	double		ray_angle;
+	double		distance;
+	double		wall_hit_x;
+	double		wall_hit_y;
 	bool		flag_color;
 };
 
@@ -99,59 +111,49 @@ struct s_vars
 {
 	bool	ray_looking_down;
 	bool	ray_looking_right;
-
 	double	x_horz_int;
 	double	y_horz_int;
 	double	x_vert_int;
 	double	y_vert_int;
 	double	x_step;
 	double	y_step;
-
 	double	horz_dist;
 	double	vert_dist;
 };
 
 struct s_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	char			*img_data;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	t_texture		*textures;
+	int				ceiling[3];
+	int				floor[3];
+	int				colors[3];
+	char			**map;
+	int				width;
+	int				height;
+	double			px;
+	double			py;
+	double			angle;
+	t_dda			*dda_vars;
+	int				keycode;
+	t_ray			*rays;
+	t_vars			*vars;
+	int				flag_up;
+	int				flag_down;
+	int				flag_left;
+	int				flag_right;
+	int				rotate_left;
+	int				rotate_right;
 
-	char		*img_data;
-	int			bpp;
-	int			line_length;
-	int			endian;
-
-	t_dict		*textures;
-	int			ceiling[3];
-	int			floor[3];
-	int			colors[3];
-	char		**map;
-	int			width;
-	int			height;
-
-	double		px;
-	double		py;
-	double		angle;
-	t_dda		*dda_vars;
-
-	int			keycode;
-	t_ray		*rays;
-	t_vars		*vars;
-
-	int			flag_up;
-	int			flag_down;
-	int			flag_left;
-	int			flag_right;
-	int			rotate_left;
-	int			rotate_right;
-
-	int			hide_mouse;
-	int			mouse_x;
-	int			mouse_y;
-
-	void		*minimap_img;
-	char		*minimap_img_data;
+	int				hide_mouse;
+	int				mouse_x;
+	int				mouse_y;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/
@@ -162,7 +164,7 @@ int		ft_strcmp(char *s1, char *s2);
 bool	is_number(char *str);
 
 /*-----------------------------parsing.c-----------------------------*/
-void	check_textures(t_dict *textures, t_garbage **heap);
+void	check_textures(t_texture *textures, t_garbage **heap);
 void	check_rgb_code(int *rgb, t_garbage **heap);
 void	check_map_components(char **map, t_garbage **heap);
 void	map_is_closed(char **map, t_garbage **heap);
@@ -176,9 +178,9 @@ char	**get_full_map(char *path, t_garbage **heap);
 void	add_to_garbage(t_garbage **heap, void *address);
 void	empty_trash(t_garbage **heap);
 
-/*-----------------------------dict_utils.c-----------------------------*/
+/*-----------------------------texture_utils.c-----------------------------*/
 char	*get_key_value(char *str, short option, t_garbage **heap);
-void	add_to_texture(t_dict **texture, char *key,
+void	add_to_texture(t_texture **texture, char *key,
 			char *value, t_garbage **heap);
 
 /*-----------------------------initializer.c-----------------------------*/
@@ -197,8 +199,6 @@ void	skip_spaces(char *line, int *i);
 void	draw_map(t_data *data);
 
 /*-----------------------------engine.c-----------------------------*/
-// int		move_player(int keycode, t_data *data);
-// int		render_frame(t_data *data);
 int		key_press(int code, t_data *data);
 int		key_release(int code, t_data *data);
 int		render_frame(t_data *data);
@@ -210,8 +210,12 @@ void	pixel_put(t_data *data, int x, int y, int color);
 /*-----------------------------dda.c-----------------------------*/
 void	dda(t_data *data, double x2, double y2);
 
-/*-----------------------------rotation.c-----------------------------*/
-void	rotate_left(t_data *data, double rotation_speed);
+/*----------------------------- movement player -----------------------------*/
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
+void	rotate_left(t_data *data, double rotaion_speed);
 void	rotate_right(t_data *data, double rotation_speed);
 
 /*-----------------------------raycasting.c-----------------------------*/
@@ -221,7 +225,12 @@ void	cast_all_rays(t_data *data);
 int		rgb2int_converter(int *rgb);
 
 /*-----------------------------draw_walls.c-----------------------------*/
-void    colorize_window(t_data *data);
-void    draw_walls(t_data *data);
+void	colorize_window(t_data *data);
+void	draw_walls(t_data *data);
+
+/*----------------------------- textures -----------------------------*/
+void	get_texture_offset(t_data *data, double x, double y, double height);
+// void 	my_pixel_put(t_data *data, int x, int y, int *color);
+void	my_pixel_put(t_texture *data, int x, int y, int *color);
 
 #endif

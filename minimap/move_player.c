@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/01 15:54:32 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:29:55 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,8 @@ void	render_frame_helper(t_data *data)
 int	render_frame(t_data *data)
 {
 	render_frame_helper(data);
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
-	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
-			&data->line_length, &data->endian);
 	cast_all_rays(data);
 	draw_walls(data);
-	// draw_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }
-

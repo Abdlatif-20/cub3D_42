@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/02 15:22:47 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:28:04 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int ac, char **av)
 	t_dda		dda_vars;
 	t_vars		vars;
 
-	// atexit(leaks_detector);
 	if (ac != 2)
 		throw_error("Number of args is not valid", NULL);
 	heap = NULL;
