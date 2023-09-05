@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/02 14:32:03 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/05 22:10:06 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	key_press(int code, t_data *data)
 		data->rotate_left = 1;
 	else if (code == KEY_ESC)
 		exit(0);
-	else if (code == 12)
+	else if (code == KEY_Q)
 	{
 		if (data->hide_mouse == 1)
 		{

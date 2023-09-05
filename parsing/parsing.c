@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:10:57 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/01 13:52:42 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:48:26 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,17 @@ void	map_is_closed(char **map, t_garbage **heap)
 		skip_spaces(map[i], &j);
 		if (i == 0 || i == tab_size(map) - 1)
 		{
-			while (map[i][j] && map[i][j] == '1')
+			while (map[i][j] && (map[i][j] == '1' || map[i][j] == ' '))
+			{
+				if (map[i][j] == ' ')
+				{
+					if (map[i + 1][j] != '1')
+						throw_error(MAP_ERROR, heap);
+				}
 				j++;
-			if (map[i][j] != '\0')
-				throw_error(MAP_ERROR, heap);
+			}
+			// if (map[i][j] != '\0')
+			// 	throw_error(MAP_ERROR, heap);
 		}
 		else
 			if (map[i][j] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
@@ -81,7 +88,7 @@ void	map_is_closed(char **map, t_garbage **heap)
 static bool	is_valid_space(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W'
-		&& c != 'E')
+		&& c != 'E' && c != 'D')
 		return (false);
 	return (true);
 }

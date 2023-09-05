@@ -1,6 +1,6 @@
 NAME = cub3D
-CC = cc -Ofast
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -Ofast
+CC = cc -Ofast -O3
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
@@ -27,7 +27,7 @@ SRC =	parsing/parsing.c \
 		minimap/rotation.c \
 		raycasting/raycasting.c \
 		raycasting/raycasting_utils.c \
-		raycasting/draw_walls.c \
+		textures/draw_walls.c \
 		textures/get_texture.c \
 
 # Generate the list of object files with the same structure as SRC but in OBJ_DIR
@@ -40,7 +40,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	make -C mlx
 	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@clear
 	@echo "\033[1;32mCreating\033[0m" $@ "\033[1;32m...\033[0m"

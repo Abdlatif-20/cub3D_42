@@ -15,11 +15,11 @@
 void	rotate_left(t_data *data)
 {
 	if (data->rotate_left)
-		data->angle -= (ROT_SPEED * (M_PI / 180));
+		data->angle -= (KEYBOARD_ROTSPEED * (M_PI / 180));
 }
 
 void	rotate_right(t_data *data)
 {
 	if (data->rotate_right)
-		data->angle += (ROT_SPEED * (M_PI / 180));
+		data->angle += (KEYBOARD_ROTSPEED * (M_PI / 180));
 }

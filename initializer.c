@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/02 14:31:36 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:47:26 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static void	init_data_helper(t_data *data, int *state,
 	int			*player_xy;
 	t_texture	*textures;
 
-	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5])
+	if (state[0] && state[1] && state[2] && state[3] && state[4] && state[5] && state[6])
 	{
 		check_textures(data->textures, heap);
-		if (!full_map[6])
+		if (!full_map[7])
 			throw_error(MAP_ERROR, heap);
-		data->map = full_map + 6;
+		data->map = full_map + 7;
 		space_checker(data->map, heap);
 		check_map_components(data->map, heap);
 		map_is_closed(data->map, heap);
@@ -62,23 +62,23 @@ static void	init_data_helper(t_data *data, int *state,
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	data->width = get_width(data->map);
 	data->height = get_height(data->map);
-	if (data->width * WALL_SIZE > SCREEN_WIDTH
-		|| data->height * WALL_SIZE > SCREEN_HEIGHT)
-		throw_error(MAP_ERROR, heap);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);
 	textures = data->textures;
-	while ((data->textures))
+	while (data->textures)
 	{
-		(data->textures)->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, (data->textures)->value,
-					&(data->textures)->texture_width, &(data->textures)->texture_height);
-		(data->textures)->img_addr = mlx_get_data_addr((data->textures)->texture_ptr, &(data->textures)->bpp,
-					&(data->textures)->line_length, &(data->textures)->endian);
-		(data->textures) = (data->textures)->next;
+		data->textures->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->textures->value,
+					&data->textures->texture_width, &data->textures->texture_height);
+		if (!data->textures->texture_ptr)
+			return (throw_error(TEXTURE_ERROR, heap), exit(0));
+		data->textures->img_addr = mlx_get_data_addr(data->textures->texture_ptr, &data->textures->bpp,
+					&data->textures->line_length, &data->textures->endian);
+		data->textures = data->textures->next;
 	}
 	data->textures = textures;
 	player_xy = get_player_xy(data->map);
+	data->door_xy = get_door_xy(data->map);
 	data->keycode = -1;
 	if (data->map[player_xy[1]][player_xy[0]] == 'E')
 		data->angle = 2 * M_PI;
@@ -95,15 +95,11 @@ static void	init_data_helper(t_data *data, int *state,
 	data->flag_up = 0;
 	data->rotate_left = 0;
 	data->rotate_right = 0;
+	data->rotate_top = 0;
+	data->rotate_bottom = 0;
 
 	data->px = WALL_SIZE * player_xy[0];
 	data->py =  WALL_SIZE * player_xy[1];
-	data->rotate_right = 0;
-	data->rotate_left = 0;
-	data->flag_up = 0;
-	data->flag_down = 0;
-	data->flag_left = 0;
-	data->flag_right = 0;
 	mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	data->mouse_x = SCREEN_WIDTH / 2;
 	data->mouse_y = SCREEN_HEIGHT / 2;
@@ -121,6 +117,8 @@ static void	fill_state_tbl(char *key, int *state, t_garbage **heap)
 		state[2] = 1;
 	else if (!ft_strcmp(key, "EA"))
 		state[3] = 1;
+	else if (!ft_strcmp(key, "DO"))
+		state[6] = 1;
 	else if (!ft_strcmp(key, "C"))
 		state[4] = 1;
 	else if (!ft_strcmp(key, "F"))
@@ -134,17 +132,17 @@ void	init_data(t_data *data, char **full_map, t_garbage **heap)
 	int			i;
 	char		*key;
 	char		*value;
-	static int	state[6] = {0, 0, 0, 0, 0, 0};
+	static int	state[7] = {0, 0, 0, 0, 0, 0, 0};
 
 	i = 0;
 	data->textures = NULL;
-	while (full_map[i] && i < 6)
+	while (full_map && full_map[i] && i < 7)
 	{
 		key = get_key_value(full_map[i], 0, heap);
 		value = get_key_value(full_map[i], 1, heap);
 		fill_state_tbl(key, state, heap);
 		if (!ft_strcmp(key, "NO") || !ft_strcmp(key, "SO")
-			|| !ft_strcmp(key, "WE") || !ft_strcmp(key, "EA"))
+			|| !ft_strcmp(key, "WE") || !ft_strcmp(key, "EA") || !ft_strcmp(key, "DO"))
 			add_to_texture(&data->textures, key, value, heap);
 		else if (!ft_strcmp(key, "C"))
 			init_rgb(value, data->ceiling, heap);

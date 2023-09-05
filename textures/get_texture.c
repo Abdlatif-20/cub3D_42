@@ -12,18 +12,18 @@
 
 # include "../cub3d.h"
 
-void    get_texture_offset(t_data *data, double x, double y, double height)
+void	get_texture_offset(t_data *data, t_texture *texture)
 {
-    double  start_y;
-    
-    start_y = ((height / 2) - (SCREEN_HEIGHT / 2));
-    if (data->rays[(int)x].flag_color == 0)
-        data->textures->x_texture = fmod(data->rays[(int)x].wall_hit_x
-            * data->textures->texture_width / WALL_SIZE, data->textures->texture_width);
-    else
-        data->textures->x_texture = fmod(data->rays[(int)x].wall_hit_y
-            * data->textures->texture_width / WALL_SIZE, data->textures->texture_width);
-    data->textures->y_texture = (y + start_y) * (data->textures->texture_height / height);
+	double  start_y;
+
+	start_y = ((SCREEN_HEIGHT / 2) - (data->height_of_wall / 2));
+	if (data->rays[(int)data->x_wall].flag_color == 0)
+		texture->x_texture = fmod(data->rays[(int)data->x_wall].wall_hit_x
+			* texture->texture_width / WALL_SIZE, texture->texture_width);
+	else
+		texture->x_texture = fmod(data->rays[(int)data->x_wall].wall_hit_y
+			* texture->texture_width / WALL_SIZE, texture->texture_width);
+	texture->y_texture = (data->y_wall - start_y) * (double)texture->texture_height / data->height_of_wall;
 }
 
 void	my_pixel_put(t_texture *data, int x, int y, int *color)

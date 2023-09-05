@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 14:53:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/03 14:53:18 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:44:12 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**get_full_map(char *path, t_garbage **heap)
 			line = get_next_line(fd);
 			continue ;
 		}
-		else if (is_empty_line(line) && i >= 7)
+		else if (is_empty_line(line) && i > 7)
 			throw_error(MAP_ERROR, heap);
 		joined = free_s1_join(joined, line);
 		line = get_next_line(fd);

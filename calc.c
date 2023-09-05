@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:19:12 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/13 09:19:35 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/05 19:05:04 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,26 @@ int	*get_player_xy(char **map)
 		{
 			if (map[y][x] == 'N' || map[y][x] == 'S'
 				|| map[y][x] == 'E' || map[y][x] == 'W')
+				return (xy[0] = x, xy[1] = y, xy);
+			x++;
+		}
+		y++;
+	}
+	return (xy);
+}
+int	*get_door_xy(char **map)
+{
+	static int	xy[2];
+	int			x;
+	int			y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'D')
 				return (xy[0] = x, xy[1] = y, xy);
 			x++;
 		}
