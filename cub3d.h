@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/05 21:36:20 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:00:47 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ typedef struct s_dda		t_dda;
 typedef struct s_ray		t_ray;
 typedef struct s_vars		t_vars;
 typedef struct s_texture	t_texture;
+typedef struct s_door		t_door;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 # define TEXTURE_ERROR "Error: something is wrong in the textures"
 # define WALL_SIZE 32
 # define PLAYER_SIZE 8
-# define SPEED 5
+# define SPEED 3
 # define MOUSE_ROTSPEED 0.001
-# define KEYBOARD_ROTSPEED 3.5
+# define KEYBOARD_ROTSPEED 2.5
 # define LINE_LENGTH 64
 # define FOV 60 * (M_PI / 180)
-# define SCREEN_WIDTH 1000
+# define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 
 enum e_keycode
@@ -102,10 +103,10 @@ struct s_ray
 {
 	double		ray_angle;
 	double		distance;
+	double		distance_door;
 	double		wall_hit_x;
 	double		wall_hit_y;
-	double		door_hit_x;
-	double		door_hit_y;
+	int			is_door;
 	bool		flag_color;
 };
 
@@ -117,14 +118,42 @@ struct s_vars
 	double	y_horz_int;
 	double	x_vert_int;
 	double	y_vert_int;
-	double	x_door_horz_int;
-	double	y_door_horz_int;
-	double	x_door_vert_int;
-	double	y_door_vert_int;
 	double	x_step;
 	double	y_step;
 	double	horz_dist;
 	double	vert_dist;
+	double	door_horz_dist;
+	double	door_vert_dist;
+};
+
+struct s_door
+{
+	int			x;
+	int			y;
+	int			x_texture;
+	int			y_texture;
+	int			texture_height;
+	int			texture_width;
+	char 		**full_door;
+	int			*door_xy;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	void		*texture_ptr;
+	char		*path;
+	char		*door;
+	char		*img_addr;
+	double		x_door_horz_int;
+	double		y_door_horz_int;
+	double		x_door_vert_int;
+	double		y_door_vert_int;
+	double		horz_door_dist;
+	double		vert_door_dist;
+	int			bpp;
+	int			line_length;
+	int			endian;
+	t_door		*next;
+	t_door		*last;
 };
 
 struct s_data
@@ -137,6 +166,7 @@ struct s_data
 	int			line_length;
 	int			endian;
 	t_texture	*textures;
+	t_door		doors;
 	int			ceiling[3];
 	int			floor[3];
 	int			colors[3];
@@ -150,7 +180,6 @@ struct s_data
 	int			keycode;
 	t_ray		*rays;
 	t_vars		*vars;
-	int			*door_xy;
 	double		x_wall;
 	double		y_wall;
 	double		height_of_wall;
@@ -218,7 +247,7 @@ int		render_frame(t_data *data);
 bool	check_wall(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
-void	pixel_put(t_data *data, int x, int y, int color);
+void	my_pixel_put(t_texture *data, int x, int y, int *color);
 
 /*-----------------------------dda.c-----------------------------*/
 void	dda(t_data *data, double x2, double y2);
@@ -230,12 +259,10 @@ void	move_left(t_data *data);
 void	move_right(t_data *data);
 void	rotate_left(t_data *data);
 void	rotate_right(t_data *data);
-void	rotate_top(t_data *data);
-void	rotate_bottom(t_data *data);
 
 /*-----------------------------raycasting.c-----------------------------*/
 void	cast_all_rays(t_data *data);
-
+double	adjust_angle(double ray_angle);
 /*-----------------------------raycasting_utils.c-----------------------------*/
 int		rgb2int_converter(int *rgb);
 
@@ -245,8 +272,10 @@ void	draw_walls(t_data *data);
 
 /*----------------------------- textures -----------------------------*/
 void	get_texture_offset(t_data *data, t_texture *texture);
-// void 	my_pixel_put(t_data *data, int x, int y, int *color);
-void	my_pixel_put(t_texture *data, int x, int y, int *color);
 int		*get_door_xy(char **map);
+void	get_door_texture_offset(t_data *data);
+void	my_pixel_door_put(t_data *data, int x, int y, int *color);
+/*----------------------------- textures -----------------------------*/
+void	cast_all_doors(t_data *data);
 
 #endif

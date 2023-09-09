@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:11:06 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/30 14:16:15 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:51:12 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	dda(t_data *data, double x2, double y2)
 	y = data->dda_vars->y1;
 	while (i < (int)floor(data->dda_vars->steps))
 	{
-		pixel_put(data, (int)round(x), (int)round(y), 0x825e5c);
+		my_mlx_pixel_put(data, (int)round(x), (int)round(y), 0x825e5c);
 		x += data->dda_vars->x_inc;
 		y += data->dda_vars->y_inc;
 		i++;

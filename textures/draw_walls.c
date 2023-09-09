@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/05 21:06:49 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:02:42 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	colorize_window(t_data *data)
 		while (j < SCREEN_WIDTH)
 		{
 			if (i < half_screen)
-				pixel_put(data, j, i, rgb2int_converter(data->ceiling));
+				my_mlx_pixel_put(data, j, i, rgb2int_converter(data->ceiling));
 			else
-				pixel_put(data, j, i, rgb2int_converter(data->floor));
+				my_mlx_pixel_put(data, j, i, rgb2int_converter(data->floor));
 			j++;
 		}
 		i++;
@@ -94,6 +94,8 @@ void	wall_drawing(int x, double height, t_data *data)
 	double	y_bottom;
 
 	y_top = (SCREEN_HEIGHT / 2) - (height / 2);
+	if (y_top < 0)
+		y_top = 0;
 	color = 0;
 	y_bottom = y_top + height;
 	while (y_top < y_bottom && y_top < SCREEN_HEIGHT)
@@ -107,7 +109,13 @@ void	wall_drawing(int x, double height, t_data *data)
 	}
 }
 
-void	draw_door(int x, t_data *data, double height)
+void	get_color_door(t_data *data, int *color)
+{
+	get_door_texture_offset(data);
+	my_pixel_door_put(data, data->doors.x_texture, data->doors.y_texture, color);
+}
+
+void	wall_doors(int x, double height, t_data *data)
 {
 	double	y_top;
 	int		color;
@@ -118,13 +126,10 @@ void	draw_door(int x, t_data *data, double height)
 	y_bottom = y_top + height;
 	while (y_top < y_bottom && y_top < SCREEN_HEIGHT)
 	{
-		// data->x_wall = data->door_xy[0] * WALL_SIZE;
 		data->x_wall = x;
-		data->height_of_wall = height;
-		// get_color_texture(data, &color);
-		color = 0x00FF0000;
-		if (color != 0)
-			my_mlx_pixel_put(data, data->x_wall, y_top, color);
+		data->y_wall = y_top;
+		get_color_door(data, &color);
+		my_mlx_pixel_put(data, x, y_top, color);
 		y_top++;
 	}
 }
@@ -146,8 +151,9 @@ void	draw_walls(t_data *data)
 		height_of_wall = (WALL_SIZE * distance_player_proj) / (rays[i].distance
 				* cos(rays[i].ray_angle - data->angle));
 		wall_drawing(i, height_of_wall, data);
+		if (rays[i].is_door == 1)
+			wall_doors(i, height_of_wall, data);
 		i++;
-		data->x_wall++;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

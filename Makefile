@@ -1,6 +1,6 @@
 NAME = cub3D
 CC = cc -Ofast -O3
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g3 -Wall -Wextra -Werror #-fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
@@ -33,13 +33,14 @@ SRC =	parsing/parsing.c \
 # Generate the list of object files with the same structure as SRC but in OBJ_DIR
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
-LIBFT = libft/libft.a
+LIBFT = $(LIB)/libft.a
 MLX = mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
 all: $(NAME)
 
+# Rules for creating the executable
 $(NAME): $(OBJ)
-	make -C libft
+	make -C $(LIB)
 	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@clear
 	@echo "\033[1;32mCreating\033[0m" $@ "\033[1;32m...\033[0m"
@@ -51,6 +52,7 @@ $(OBJ_DIR)/%.o: %.c $(HDR)
 	@clear
 	@echo "\033[1;32mCompiling\033[0m" $< "\033[1;32m...\033[0m"
 
+# Rules for cleaning generated .o files
 fclean: clean
 	@$(RM) $(NAME) $(NAME_BNS)
 	@make fclean -C $(LIB)

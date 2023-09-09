@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/05 22:10:06 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:23:10 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ int	render_frame(t_data *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	cast_all_rays(data);
 	draw_walls(data);
+	// draw_map(data);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }

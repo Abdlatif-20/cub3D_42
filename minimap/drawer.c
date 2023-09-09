@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/02 14:31:50 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/06 12:51:52 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	draw_square(t_data *data, int x, int y, int color)
 		j = 0;
 		while (j < WALL_SIZE)
 		{
-			pixel_put(data, x + j, y + i, color);
+			my_mlx_pixel_put(data, x + j, y + i, color);
 			j++;
 		}
 		i++;
