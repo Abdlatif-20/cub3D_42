@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/02 15:27:53 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/05 09:30:32 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ void	draw_walls(t_data *data)
 		wall_drawing(i, height_of_wall, data);
 		i++;
 	}
+	
+	draw_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

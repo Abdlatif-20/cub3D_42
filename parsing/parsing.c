@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:10:57 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/01 13:52:42 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:25:55 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,33 +81,14 @@ void	map_is_closed(char **map, t_garbage **heap)
 static bool	is_valid_space(char c)
 {
 	if (c != '1' && c != '0' && c != 'N' && c != 'S' && c != 'W'
-		&& c != 'E')
+		&& c != 'E' && c != '\0')
+	{
 		return (false);
+	}
 	return (true);
 }
 
 void	space_checker(char **map, t_garbage **heap)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == '0')
-			{
-				if (map[i] && (!is_valid_space(map[i][j - 1])
-					|| !is_valid_space(map[i][j + 1])))
-					throw_error(MAP_ERROR, heap);
-				if (map[i + 1] && (!is_valid_space(map[i - 1][j])
-					|| !is_valid_space(map[i + 1][j])))
-					throw_error(MAP_ERROR, heap);
-			}
-			j++;
-		}
-		i++;
-	}
+	
 }

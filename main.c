@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/02 15:28:04 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:03:53 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,6 @@ int	main(int ac, char **av)
 	init_data(&data, full_map, &heap);
 	data.dda_vars = &dda_vars;
 	data.vars = &vars;
-	cast_all_rays(&data);
-	// draw_map(&data);
-	draw_walls(&data);
 	mlx_hook(data.win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 0, key_release, &data);
 	mlx_hook(data.win_ptr, 6, 0, mouse_rotation, &data);

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/02 15:29:41 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/04 08:39:39 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ static void	init_data_helper(t_data *data, int *state,
 	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D");
 	data->width = get_width(data->map);
 	data->height = get_height(data->map);
-	if (data->width * WALL_SIZE > SCREEN_WIDTH
-		|| data->height * WALL_SIZE > SCREEN_HEIGHT)
-		throw_error(MAP_ERROR, heap);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);

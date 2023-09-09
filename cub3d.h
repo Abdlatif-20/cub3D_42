@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/02 15:30:57 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/04 12:46:51 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef struct s_texture	t_texture;
 # define PLAYER_SIZE 8
 # define SPEED 6
 # define MOUSE_ROTSPEED 0.0007
-# define KEYBOARD_ROTSPEED 2.5
+# define KEYBOARD_ROTSPEED 5
 # define LINE_LENGTH 64
 # define FOV 60 * (M_PI / 180)
-# define SCREEN_WIDTH 1400
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1300
+# define SCREEN_HEIGHT 850
 
 enum e_keycode
 {
