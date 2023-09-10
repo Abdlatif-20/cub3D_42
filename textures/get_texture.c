@@ -16,7 +16,7 @@ void	get_texture_offset(t_data *data, t_texture *texture)
 {
 	double  start_y;
 
-	start_y = (SCREEN_HEIGHT / 2) - (data->height_of_wall / 2);
+	start_y = data->halfscreen - (data->height_of_wall / 2);
 	if (data->rays[(int)data->x_wall].flag_color == 0)
 		texture->x_texture = fmod(data->rays[(int)data->x_wall].wall_hit_x
 			* texture->texture_width / WALL_SIZE, texture->texture_width);
@@ -30,7 +30,7 @@ void	get_door_texture_offset(t_data *data)
 {
 	double  start_y;
 
-	start_y = ((SCREEN_HEIGHT / 2) - (data->height_of_wall / 2));
+	start_y = (data->halfscreen - (data->height_of_wall / 2));
 	if (data->rays[(int)data->x_wall].flag_color == 0)
 		data->doors.x_texture = fmod(data->rays[(int)data->x_wall].wall_hit_x
 			* data->doors.texture_width / WALL_SIZE, data->doors.texture_width);

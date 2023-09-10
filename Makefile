@@ -6,13 +6,13 @@
 #    By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/09 19:16:05 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/09 19:16:07 by mel-yous         ###   ########.fr        #
+#    Updated: 2023/09/10 11:18:28 by mel-yous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc -Ofast -O3
-CFLAGS = -g3 -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -g3 -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c

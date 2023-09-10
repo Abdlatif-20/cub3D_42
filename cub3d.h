@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/10 10:36:42 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:36:54 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ struct s_data
 	int			mouse_y;
 	void		*minimap_img;
 	char		*minimap_img_data;
+
+	double		halfscreen;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/09 19:17:07 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:37:32 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ static int	mouse_rotation(int x, int y, t_data *data)
 {
 	int diff_x;
 	int diff_y;
-	// bool	mid = SCREEN_HEIGHT / 2;
 
-	(void)y;
-	(void)diff_y;
 	if (data->hide_mouse)
 	{
 		mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		diff_x = x - data->mouse_x;
-		// diff_y =y - data->mouse_y + mid;
+		diff_y = data->mouse_y - y;
 		data->angle += diff_x * MOUSE_ROTSPEED;
-		// data->angle += diff_y * MOUSE_ROTSPEED;
+		data->halfscreen += diff_y;
+		if (data->halfscreen < 0)
+			data->halfscreen = 0;
+		else if (data->halfscreen > SCREEN_HEIGHT)
+			data->halfscreen = SCREEN_HEIGHT;
 	}
 	return (0);
 }

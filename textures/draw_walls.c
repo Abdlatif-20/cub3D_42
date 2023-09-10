@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/09 17:02:42 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:44:15 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@ void	colorize_window(t_data *data)
 {
 	int	i;
 	int	j;
-	int	half_screen;
 
 	i = 0;
-	half_screen = SCREEN_HEIGHT / 2;
 	while (i < SCREEN_HEIGHT)
 	{
 		j = 0;
 		while (j < SCREEN_WIDTH)
 		{
-			if (i < half_screen)
+			if (i < data->halfscreen)
 				my_mlx_pixel_put(data, j, i, rgb2int_converter(data->ceiling));
 			else
 				my_mlx_pixel_put(data, j, i, rgb2int_converter(data->floor));
@@ -93,11 +91,13 @@ void	wall_drawing(int x, double height, t_data *data)
 	int		color;
 	double	y_bottom;
 
-	y_top = (SCREEN_HEIGHT / 2) - (height / 2);
+	y_top = data->halfscreen - (height / 2);
+	color = 0xffffffFF;
+	y_bottom = y_top + height;
 	if (y_top < 0)
 		y_top = 0;
-	color = 0;
-	y_bottom = y_top + height;
+	if (y_bottom > SCREEN_HEIGHT)
+		y_bottom = SCREEN_HEIGHT;
 	while (y_top < y_bottom && y_top < SCREEN_HEIGHT)
 	{
 		data->x_wall = x;
@@ -121,9 +121,13 @@ void	wall_doors(int x, double height, t_data *data)
 	int		color;
 	double	y_bottom;
 
-	y_top = (SCREEN_HEIGHT / 2) - (height / 2);
+	y_top = data->halfscreen - (height / 2);
 	color = 0;
 	y_bottom = y_top + height;
+	if (y_top < 0)
+		y_top = 0;
+	if (y_bottom > SCREEN_HEIGHT)
+		y_bottom = SCREEN_HEIGHT;
 	while (y_top < y_bottom && y_top < SCREEN_HEIGHT)
 	{
 		data->x_wall = x;
@@ -155,5 +159,6 @@ void	draw_walls(t_data *data)
 			wall_doors(i, height_of_wall, data);
 		i++;
 	}
+	draw_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/09 19:18:38 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:42:37 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,5 @@ int	render_frame(t_data *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	cast_all_rays(data);
 	draw_walls(data);
-	// draw_map(data);
-	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }

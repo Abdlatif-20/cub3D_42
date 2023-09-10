@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/09 19:17:26 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:37:16 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	init_data_helper(t_data *data, int *state,
 			return (throw_error(TEXTURE_ERROR, heap), exit(0));
 		data->doors.img_addr = mlx_get_data_addr(data->doors.texture_ptr, &data->doors.bpp,
 					&data->doors.line_length, &data->doors.endian);
+	data->halfscreen = SCREEN_HEIGHT / 2;
 	data->textures = textures;
 	player_xy = get_player_xy(data->map);
 	data->keycode = -1;
