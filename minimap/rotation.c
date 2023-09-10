@@ -12,24 +12,14 @@
 
 #include "../cub3d.h"
 
-void	rotate_left(t_data *data, double rotation_speed)
+void	rotate_left(t_data *data)
 {
-	data->angle -= rotation_speed;
-	if (data->angle < 0)
-		data->angle = data->angle + (2 * M_PI) * SPEED;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	cast_all_rays(data);
-	draw_walls(data);
-	// draw_map(data);
+	if (data->rotate_left)
+		data->angle -= (KEYBOARD_ROTSPEED * (M_PI / 180));
 }
 
-void	rotate_right(t_data *data, double rotation_speed)
+void	rotate_right(t_data *data)
 {
-	data->angle += rotation_speed;
-	if (data->angle > 2 * M_PI)
-		data->angle = 0;
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	cast_all_rays(data);
-	draw_walls(data);
-	// draw_map(data);
+	if (data->rotate_right)
+		data->angle += (KEYBOARD_ROTSPEED * (M_PI / 180));
 }

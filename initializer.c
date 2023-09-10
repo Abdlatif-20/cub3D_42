@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/04 08:39:39 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:17:26 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,22 @@ static void	init_data_helper(t_data *data, int *state,
 	data->img_data = mlx_get_data_addr(data->img_ptr, &data->bpp,
 			&data->line_length, &data->endian);
 	textures = data->textures;
-	while ((data->textures))
+	while (data->textures)
 	{
-		(data->textures)->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, (data->textures)->value,
-					&(data->textures)->texture_width, &(data->textures)->texture_height);
-		(data->textures)->img_addr = mlx_get_data_addr((data->textures)->texture_ptr, &(data->textures)->bpp,
-					&(data->textures)->line_length, &(data->textures)->endian);
-		(data->textures) = (data->textures)->next;
+		data->textures->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->textures->value,
+					&data->textures->texture_width, &data->textures->texture_height);
+		if (!data->textures->texture_ptr)
+			return (throw_error(TEXTURE_ERROR, heap), exit(0));
+		data->textures->img_addr = mlx_get_data_addr(data->textures->texture_ptr, &data->textures->bpp,
+					&data->textures->line_length, &data->textures->endian);
+		data->textures = data->textures->next;
 	}
+		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door_close.xpm",
+					&data->doors.texture_width, &data->doors.texture_height);
+		if (!data->doors.texture_ptr)
+			return (throw_error(TEXTURE_ERROR, heap), exit(0));
+		data->doors.img_addr = mlx_get_data_addr(data->doors.texture_ptr, &data->doors.bpp,
+					&data->doors.line_length, &data->doors.endian);
 	data->textures = textures;
 	player_xy = get_player_xy(data->map);
 	data->keycode = -1;
@@ -92,9 +100,10 @@ static void	init_data_helper(t_data *data, int *state,
 	data->flag_up = 0;
 	data->rotate_left = 0;
 	data->rotate_right = 0;
-
-	data->px = WALL_SIZE * player_xy[0];
-	data->py =  WALL_SIZE * player_xy[1];
+	data->rotate_top = 0;
+	data->rotate_bottom = 0;
+	data->px = WALL_SIZE * player_xy[0] + WALL_SIZE / 2;
+	data->py =  WALL_SIZE * player_xy[1] + WALL_SIZE / 2;
 	mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 	data->mouse_x = SCREEN_WIDTH / 2;
 	data->mouse_y = SCREEN_HEIGHT / 2;
@@ -129,7 +138,7 @@ void	init_data(t_data *data, char **full_map, t_garbage **heap)
 
 	i = 0;
 	data->textures = NULL;
-	while (full_map[i] && i < 6)
+	while (full_map && full_map[i] && i < 6)
 	{
 		key = get_key_value(full_map[i], 0, heap);
 		value = get_key_value(full_map[i], 1, heap);

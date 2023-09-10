@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:04:36 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:18:38 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	key_press(int code, t_data *data)
 		data->rotate_left = 1;
 	else if (code == KEY_ESC)
 		exit(0);
-	else if (code == 12)
+	else if (code == KEY_Q)
 	{
 		if (data->hide_mouse == 1)
 		{
@@ -65,53 +65,12 @@ int	key_release(int code, t_data *data)
 
 void	render_frame_helper(t_data *data)
 {
-	double	x;
-	double	y;
-
-	if (data->flag_up)
-	{
-		x = data->px + cos(data->angle) * SPEED;
-		y = data->py + sin(data->angle) * SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->flag_down)
-	{
-		x = data->px - cos(data->angle) * SPEED;
-		y = data->py - sin(data->angle) * SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->flag_left)
-	{
-		x = data->px - cos(data->angle + (M_PI / 2)) * SPEED;
-		y = data->py - sin(data->angle + (M_PI / 2)) * SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->flag_right)
-	{
-		x = data->px + cos(data->angle + (M_PI / 2)) * SPEED;
-		y = data->py + sin(data->angle 	+ (M_PI / 2)) * SPEED;
-		if (check_wall(data, x, y))
-		{
-			data->py = y;
-			data->px = x;
-		}
-	}
-	if (data->rotate_right)
-		data->angle += KEYBOARD_ROTSPEED * (M_PI / 180);
-	if (data->rotate_left)
-		data->angle -= KEYBOARD_ROTSPEED * (M_PI / 180);
+	move_up(data);
+	move_down(data);
+	move_left(data);
+	move_right(data);
+	rotate_right(data);
+	rotate_left(data);
 }
 
 int	render_frame(t_data *data)
@@ -120,5 +79,7 @@ int	render_frame(t_data *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	cast_all_rays(data);
 	draw_walls(data);
+	// draw_map(data);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }

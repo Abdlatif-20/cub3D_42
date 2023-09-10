@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/04 16:03:53 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:17:07 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,18 @@ static int	ft_close(void)
 static int	mouse_rotation(int x, int y, t_data *data)
 {
 	int diff_x;
-	(void)y;
+	int diff_y;
+	// bool	mid = SCREEN_HEIGHT / 2;
 
+	(void)y;
+	(void)diff_y;
 	if (data->hide_mouse)
 	{
 		mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		diff_x = x - data->mouse_x;
+		// diff_y =y - data->mouse_y + mid;
 		data->angle += diff_x * MOUSE_ROTSPEED;
+		// data->angle += diff_y * MOUSE_ROTSPEED;
 	}
 	return (0);
 }
@@ -55,13 +60,13 @@ int	main(int ac, char **av)
 	heap = NULL;
 	check_map_extension(av[1]);
 	full_map = get_full_map(av[1], &heap);
+	data.vars = &vars;
 	init_data(&data, full_map, &heap);
 	data.dda_vars = &dda_vars;
-	data.vars = &vars;
+	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_hook(data.win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 0, key_release, &data);
 	mlx_hook(data.win_ptr, 6, 0, mouse_rotation, &data);
-	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_loop_hook(data.mlx_ptr, render_frame, &data);
 	mlx_loop(data.mlx_ptr);
 	empty_trash(&heap);

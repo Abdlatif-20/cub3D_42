@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 16:16:56 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/09 16:17:00 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:49:27 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	is_valid_component(char c)
 {
 	if (c == ' ' || c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E'
-		|| c == 'W')
+		|| c == 'W' || c == 'D')
 		return (true);
 	return (false);
 }

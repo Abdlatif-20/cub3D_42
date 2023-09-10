@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/04 16:00:23 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:18:31 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	draw_square(t_data *data, int x, int y, int color, int square_size)
 		j = 0;
 		while (j < square_size)
 		{
-			pixel_put(data, x + j, y + i, color);
+			my_mlx_pixel_put(data, x + j, y + i, color);
 			j++;
 		}
 		i++;
@@ -41,7 +41,7 @@ static void	draw_player(t_data *data, int color)
 		j = 0;
 		while (j < PLAYER_SIZE)
 		{
-			pixel_put(data, j + 100, i + 100, color);
+			my_mlx_pixel_put(data, j + 100, i + 100, color);
 			j++;
 		}
 		i++;
@@ -64,9 +64,9 @@ void	draw_map(t_data *data)
 		while (px < data->px + 100)
 		{
 			if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE] && data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == '1')
-				pixel_put(data, j, i, 0x000000);
+				my_mlx_pixel_put(data, j, i, 0x000000);
 			else
-				pixel_put(data, j, i, 0xffffff);
+				my_mlx_pixel_put(data, j, i, 0xffffff);
 			px++;
 			j++;
 		}
@@ -74,5 +74,4 @@ void	draw_map(t_data *data)
 		i++;
 	}
 	draw_player(data, 0xff3f34);
-	
 }

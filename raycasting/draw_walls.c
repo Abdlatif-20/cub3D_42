@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/05 09:30:32 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/10 10:37:10 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	colorize_window(t_data *data)
 	int	half_screen;
 
 	i = 0;
-	half_screen = SCREEN_HEIGHT / 2;
+	half_screen = 600;
 	while (i < SCREEN_HEIGHT)
 	{
 		j = 0;
@@ -78,25 +78,25 @@ void	wall_drawing(int x, double height, t_data *data)
 
 void	draw_walls(t_data *data)
 {
-	t_ray	*rays;
-	int		i;
-	double	proj_slice_height;
-	double	height_of_wall;
-	double	distance_player_proj;
+	// t_ray	*rays;
+	// int		i;
+	// double	proj_slice_height;
+	// double	height_of_wall;
+	// double	distance_player_proj;
 
-	rays = data->rays;
-	i = 0;
-	proj_slice_height = 0;
-	distance_player_proj = (SCREEN_WIDTH / 2) / tan(FOV / 2);
-	colorize_window(data);
-	while (i < SCREEN_WIDTH)
-	{
-		height_of_wall = (WALL_SIZE * distance_player_proj) / (rays[i].distance
-				* cos(rays[i].ray_angle - data->angle));
-		wall_drawing(i, height_of_wall, data);
-		i++;
-	}
+	// rays = data->rays;
+	// i = 0;
+	// proj_slice_height = 0;
+	// distance_player_proj = (SCREEN_WIDTH / 2) / tan(FOV / 2);
+	// colorize_window(data);
+	// while (i < SCREEN_WIDTH)
+	// {
+	// 	height_of_wall = (WALL_SIZE * distance_player_proj) / (rays[i].distance
+	// 			* cos(rays[i].ray_angle - data->angle));
+	// 	wall_drawing(i, height_of_wall, data);
+	// 	i++;
+	// }
 	
-	draw_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+	// draw_map(data);
+	// mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
