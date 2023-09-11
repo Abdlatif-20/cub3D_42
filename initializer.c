@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/10 12:37:16 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:48:35 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	init_data_helper(t_data *data, int *state,
 					&data->textures->line_length, &data->textures->endian);
 		data->textures = data->textures->next;
 	}
-		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door_close.xpm",
+		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door20.xpm",
 					&data->doors.texture_width, &data->doors.texture_height);
 		if (!data->doors.texture_ptr)
 			return (throw_error(TEXTURE_ERROR, heap), exit(0));

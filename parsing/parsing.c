@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:10:57 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/11 13:05:20 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:13:06 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	map_is_closed(char **map, t_garbage **heap)
 
 void	space_checker(char **map, t_garbage **heap)
 {
-	
+	(void)heap;
+	(void)map;
 }

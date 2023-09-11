@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/10 12:36:54 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:38:08 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,32 +128,20 @@ struct s_vars
 
 struct s_door
 {
-	int			x;
-	int			y;
 	int			x_texture;
 	int			y_texture;
 	int			texture_height;
 	int			texture_width;
-	char 		**full_door;
-	int			*door_xy;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
 	void		*texture_ptr;
-	char		*path;
-	char		*door;
 	char		*img_addr;
-	double		x_door_horz_int;
-	double		y_door_horz_int;
-	double		x_door_vert_int;
-	double		y_door_vert_int;
 	double		horz_door_dist;
 	double		vert_door_dist;
 	int			bpp;
 	int			line_length;
 	int			endian;
-	t_door		*next;
-	t_door		*last;
 };
 
 struct s_data

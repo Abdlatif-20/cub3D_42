@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:12:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/09 18:59:21 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/11 18:35:48 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
 		&&data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)(vars->x_horz_int) / WALL_SIZE] == 'D')
 	{
 		*flag_door = 1;
-		data->doors.x_door_horz_int = vars->x_horz_int;
-		data->doors.y_door_horz_int = vars->y_horz_int;
 		vars->door_horz_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
 	}
 	vars->horz_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
@@ -98,8 +96,6 @@ static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
 		&&data->map[(int)vars->y_vert_int / WALL_SIZE][(int)(vars->x_vert_int - j) / WALL_SIZE] == 'D')
 		{
 			*flag_door = 1;
-			data->doors.x_door_vert_int = vars->x_vert_int;
-			data->doors.y_door_vert_int = vars->y_vert_int;
 			vars->door_vert_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
 		}
 	vars->vert_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));

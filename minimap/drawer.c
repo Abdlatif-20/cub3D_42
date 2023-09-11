@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/11 12:54:06 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/11 14:21:31 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static void	draw_player(t_data *data, int color)
 	}
 }
 
+//Grey square for the minimap = 0x808080
+
 void	draw_map(t_data *data)
 {
 	int	i;
@@ -65,6 +67,8 @@ void	draw_map(t_data *data)
 		{
 			if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE] && data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == '1')
 				my_mlx_pixel_put(data, j, i, 0x000000);
+			else if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE] && data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == 'D')
+				my_mlx_pixel_put(data, j, i, 0x808080);
 			else
 				my_mlx_pixel_put(data, j, i, 0xffffff);
 			px++;
