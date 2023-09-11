@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   drawer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/09 19:18:31 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/11 12:54:06 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	draw_square(t_data *data, int x, int y, int color, int square_size)
-{
-	int	i;
-	int	j;
+// static void	draw_square(t_data *data, int x, int y, int color, int square_size)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while (i < square_size)
-	{
-		j = 0;
-		while (j < square_size)
-		{
-			my_mlx_pixel_put(data, x + j, y + i, color);
-			j++;
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < square_size)
+// 	{
+// 		j = 0;
+// 		while (j < square_size)
+// 		{
+// 			my_mlx_pixel_put(data, x + j, y + i, color);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 static void	draw_player(t_data *data, int color)
 {
