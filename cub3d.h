@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/11 18:38:08 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:41:22 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_ray		t_ray;
 typedef struct s_vars		t_vars;
 typedef struct s_texture	t_texture;
 typedef struct s_door		t_door;
+typedef struct s_anim		t_anim;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 # define TEXTURE_ERROR "Error: something is wrong in the textures"
@@ -186,6 +187,15 @@ struct s_data
 	char		*minimap_img_data;
 
 	double		halfscreen;
+	t_anim		*knife;
+	bool		lmouse_pressed;
+};
+
+struct s_anim
+{
+	void	*img;
+	int		width;
+	int		height;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/

@@ -1,7 +1,7 @@
-NO texture_files/a1.xpm
-SO texture_files/a2.xpm
-WE texture_files/a3.xpm
-EA texture_files/a4.xpm
+NO texture_files/scifi.xpm
+SO texture_files/scifi.xpm
+WE texture_files/scifi.xpm
+EA texture_files/scifi.xpm
 F 30,39,46
 C 44,44,84
 

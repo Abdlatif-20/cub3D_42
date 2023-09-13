@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/10 12:37:32 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:50:49 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ static int	mouse_rotation(int x, int y, t_data *data)
 	return (0);
 }
 
+static int mouse_hook(int keycode, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+
+	printf("%d", keycode);
+	if (keycode == 1)
+		data->lmouse_pressed = true;
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	char		**full_map;
@@ -56,6 +67,7 @@ int	main(int ac, char **av)
 	t_dda		dda_vars;
 	t_vars		vars;
 
+	
 	if (ac != 2)
 		throw_error("Number of args is not valid", NULL);
 	heap = NULL;
@@ -64,6 +76,7 @@ int	main(int ac, char **av)
 	data.vars = &vars;
 	init_data(&data, full_map, &heap);
 	data.dda_vars = &dda_vars;
+	mlx_mouse_hook(data.win_ptr, mouse_hook, &data);
 	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_hook(data.win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 0, key_release, &data);
@@ -73,3 +86,4 @@ int	main(int ac, char **av)
 	empty_trash(&heap);
 	return (0);
 }
+
