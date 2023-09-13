@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/11 18:38:08 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/12 13:57:31 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_door		t_door;
 # define FOV 60 * (M_PI / 180)
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
+# define OPEN_DOOR 1
 
 enum e_keycode
 {
@@ -56,6 +57,7 @@ enum e_keycode
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_ESC = 53,
+	KEY_DOOR = 49, // space
 	KEY_COUNT = 256,
 	MOUSE_LEFT = 1,
 	MOUSE_RIGHT = 2
@@ -175,6 +177,7 @@ struct s_data
 	int			flag_down;
 	int			flag_left;
 	int			flag_right;
+	bool		open_door;
 	int			rotate_left;
 	int			rotate_right;
 	int			rotate_top;
@@ -235,6 +238,7 @@ int		key_press(int code, t_data *data);
 int		key_release(int code, t_data *data);
 int		render_frame(t_data *data);
 bool	check_wall(t_data *data, double x, double y);
+bool	check_door(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
 void	my_pixel_put(t_texture *data, int x, int y, int *color);

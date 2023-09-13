@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/10 12:42:37 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/12 14:05:45 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	key_press(int code, t_data *data)
 		data->rotate_left = 1;
 	else if (code == KEY_ESC)
 		exit(0);
+	else if (code == KEY_DOOR)
+	{
+		if (data->open_door == 1)
+			data->open_door = 0;
+		else
+			data->open_door = 1;
+	}
 	else if (code == KEY_Q)
 	{
 		if (data->hide_mouse == 1)
@@ -58,7 +65,9 @@ int	key_release(int code, t_data *data)
 		data->rotate_right = 0;
 	else if (code == KEY_LEFT)
 		data->rotate_left = 0;
-	else if (code == 53)
+	// else if (code == KEY_DOOR)
+	// 	data->open_door = 0;
+	else if (code == KEY_ESC)
 		exit(0);
 	return (0);
 }

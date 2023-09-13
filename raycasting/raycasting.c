@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:12:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/11 18:35:48 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/12 15:12:22 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,19 @@ static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
 	vars->x_step = WALL_SIZE / tan(ray_angle);
 	while (vars->x_horz_int > 0 && vars->x_horz_int < data->width * WALL_SIZE
 		&& vars->y_horz_int > 0 && vars->y_horz_int < data->height * WALL_SIZE
-		&& data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] != '1'
-		&& data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)(vars->x_horz_int) / WALL_SIZE] != 'D')
+		&& data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] != '1')
 	{
+		if (data->map[(int)((vars->y_horz_int) - j) / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] == 'D')
+        {
+            // Calculate the horizontal distance to the door
+            double door_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
+			if (door_dist > 40)
+			{
+            	*flag_door = 1;
+            	vars->door_horz_dist = door_dist;
+            	break;
+			}
+        }
 		vars->y_step = WALL_SIZE;
 		if (!vars->ray_looking_down)
 			vars->y_step *= -1;
@@ -51,13 +61,6 @@ static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
 			vars->x_step *= -1;
 		vars->x_horz_int += vars->x_step;
 	}
-	if (vars->x_horz_int > 0 && vars->x_horz_int < data->width * WALL_SIZE
-		&& vars->y_horz_int > 0 && vars->y_horz_int < data->height * WALL_SIZE
-		&&data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)(vars->x_horz_int) / WALL_SIZE] == 'D')
-	{
-		*flag_door = 1;
-		vars->door_horz_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
-	}
 	vars->horz_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
 }
 
@@ -66,7 +69,6 @@ static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
 	t_vars	*vars;
 	int		j;
 
-	(void)flag_door;
 	vars = data->vars;
 	vars->x_vert_int = floor(data->px / WALL_SIZE) * WALL_SIZE;
 	j  = 0;
@@ -78,9 +80,19 @@ static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
 	vars->y_step = WALL_SIZE * tan(ray_angle);
 	while (vars->x_vert_int > 0 && vars->x_vert_int < data->width * WALL_SIZE
 		&& vars->y_vert_int > 0 && vars->y_vert_int < data->height * WALL_SIZE
-		&& data->map[(int)vars->y_vert_int / WALL_SIZE][(int)(vars->x_vert_int - j) / WALL_SIZE] != '1'
-		&& data->map[(int)vars->y_vert_int / WALL_SIZE][(int)(vars->x_vert_int - j) / WALL_SIZE] != 'D')
+		&& data->map[(int)vars->y_vert_int / WALL_SIZE][(int)(vars->x_vert_int - j) / WALL_SIZE] != '1')
 	{
+		if (data->map[(int)vars->y_vert_int / WALL_SIZE][(int)((vars->x_vert_int) - j) / WALL_SIZE] == 'D')
+		{
+			// Calculate the vertical distance to the door
+			double door_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
+			if (door_dist > 40)
+			{
+				*flag_door = 1;
+				vars->door_vert_dist = door_dist;
+				break;
+			}
+		}
 		vars->x_step = WALL_SIZE;
 		if (!vars->ray_looking_right)
 			vars->x_step *= -1;
@@ -91,13 +103,6 @@ static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
 			vars->y_step *= -1;
 			vars->y_vert_int += vars->y_step;
 	}
-	if (vars->x_vert_int > 0 && vars->x_vert_int < data->width * WALL_SIZE
-		&& vars->y_vert_int > 0 && vars->y_vert_int < data->height * WALL_SIZE
-		&&data->map[(int)vars->y_vert_int / WALL_SIZE][(int)(vars->x_vert_int - j) / WALL_SIZE] == 'D')
-		{
-			*flag_door = 1;
-			vars->door_vert_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
-		}
 	vars->vert_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
 }
 
@@ -119,6 +124,7 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 	if (data->vars->horz_dist < data->vars->vert_dist)
 	{
 		rays->distance = data->vars->horz_dist;
+		// printf("horz_dist = %f\n", data->vars->horz_dist);
 		rays->ray_angle = ray_angle;
 		rays->wall_hit_x = data->vars->x_horz_int;
 		rays->wall_hit_y = data->vars->y_horz_int;
@@ -128,6 +134,7 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 	else
 	{
 		rays->distance = data->vars->vert_dist;
+		// printf("vert_dist = %f\n", data->vars->vert_dist);
 		rays->ray_angle = ray_angle;
 		rays->wall_hit_x = data->vars->x_vert_int;
 		rays->wall_hit_y = data->vars->y_vert_int;
