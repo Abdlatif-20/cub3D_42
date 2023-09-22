@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 21:47:58 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/12 14:47:19 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/13 21:16:50 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	move_up(t_data *data)
 
 	if (data->flag_up)
 	{
-		x = data->px + cos(data->angle) * SPEED;
-		y = data->py + sin(data->angle) * SPEED;
+		x = data->px + cos(data->angle) * SPEED * data->flag_speed;
+		y = data->py + sin(data->angle) * SPEED * data->flag_speed;
 		if (check_wall(data, x, y))
 		{
 			data->py = y;
@@ -36,8 +36,8 @@ void	move_down(t_data *data)
 
 	if (data->flag_down)
 	{
-		x = data->px - cos(data->angle) * SPEED;
-		y = data->py - sin(data->angle) * SPEED;
+		x = data->px - cos(data->angle) * SPEED * data->flag_speed;
+		y = data->py - sin(data->angle) * SPEED * data->flag_speed;
 		if (check_wall(data, x, y))
 		{
 			data->py = y;

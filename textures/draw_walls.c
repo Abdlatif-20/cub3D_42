@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_walls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/10 12:44:15 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:40:55 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,14 @@ t_texture	*get_value(t_texture *texture, char *key)
 	return (tmp);
 }
 
-void	get_color_texture(t_data *data, int *color)
+void	ft_convert_to_rgb(unsigned  color, unsigned int rgb[3])
+{
+	rgb[0] = (color >> 16) & 0xFF;
+	rgb[1] = (color >> 8) & 0xFF;
+	rgb[2] = color & 0xFF;
+}
+
+void	get_color_texture(t_data *data, unsigned int *color)
 {
 	t_texture	*value;
 
@@ -57,13 +64,13 @@ void	get_color_texture(t_data *data, int *color)
 		if (data->rays[(int)data->x_wall].ray_angle > M_PI)
 		{
 			value = get_value(data->textures, "NO");
-			get_texture_offset(data, value);
-			my_pixel_put(value, value->x_texture, value->y_texture, color);
+			get_texture_offset(data, value, 0);
+				my_pixel_put(value, value->x_texture, value->y_texture, color);
 		}
 		else
 		{
 			value = get_value(data->textures, "SO");
-			get_texture_offset(data, value);
+			get_texture_offset(data, value, 1);
 			my_pixel_put(value, value->x_texture, value->y_texture, color);
 		}
 	}
@@ -73,23 +80,30 @@ void	get_color_texture(t_data *data, int *color)
 			|| data->rays[(int)data->x_wall].ray_angle > 1.5 * M_PI)
 		{
 			value = get_value(data->textures, "WE");
-			get_texture_offset(data, value);
+			get_texture_offset(data, value, 1);
 			my_pixel_put(value, value->x_texture, value->y_texture, color);
 		}
 		else
 		{
 			value = get_value(data->textures, "EA");
-			get_texture_offset(data, value);
+			get_texture_offset(data, value, 0);
 			my_pixel_put(value, value->x_texture, value->y_texture, color);
 		}
 	}
 }
 
+void	decrementBrightness(unsigned int *r, unsigned int *g, unsigned int *b, double decrement) {
+	*r = *r * decrement;
+	*g = *g * decrement;
+	*b = *b * decrement;
+}
+
 void	wall_drawing(int x, double height, t_data *data)
 {
-	double	y_top;
-	int		color;
-	double	y_bottom;
+	double			y_top;
+	unsigned int	color;
+	double			color_decrement;
+	double			y_bottom;
 
 	y_top = data->halfscreen - (height / 2);
 	color = 0xffffffFF;
@@ -104,6 +118,13 @@ void	wall_drawing(int x, double height, t_data *data)
 		data->y_wall = y_top;
 		data->height_of_wall = height;
 		get_color_texture(data, &color);
+		unsigned int rgb[3];
+		color_decrement = (1 / data->rays[x].distance) * 200;
+		if (color_decrement > 1)
+			color_decrement = 1;
+		ft_convert_to_rgb(color, rgb);
+		decrementBrightness(&rgb[0], &rgb[1], &rgb[2], color_decrement);
+		color = rgb2int_converter(rgb);
 		my_mlx_pixel_put(data, x, y_top, color);
 		y_top++;
 	}
@@ -115,10 +136,11 @@ void	get_color_door(t_data *data, int *color)
 	my_pixel_door_put(data, data->doors.x_texture, data->doors.y_texture, color);
 }
 
-void	wall_doors(int x, double height, t_data *data)
+void	draw_doors(int x, double height, t_data *data)
 {
 	double	y_top;
 	int		color;
+	double	color_decrement;
 	double	y_bottom;
 
 	y_top = data->halfscreen - (height / 2);
@@ -133,6 +155,13 @@ void	wall_doors(int x, double height, t_data *data)
 		data->x_wall = x;
 		data->y_wall = y_top;
 		get_color_door(data, &color);
+		unsigned int rgb[3];
+		color_decrement = (1 / data->rays[x].distance) * 200;
+		if (color_decrement > 1)
+			color_decrement = 1;
+		ft_convert_to_rgb(color, rgb);
+		decrementBrightness(&rgb[0], &rgb[1], &rgb[2], color_decrement);
+		color = rgb2int_converter(rgb);
 		my_mlx_pixel_put(data, x, y_top, color);
 		y_top++;
 	}
@@ -156,7 +185,7 @@ void	draw_walls(t_data *data)
 				* cos(rays[i].ray_angle - data->angle));
 		wall_drawing(i, height_of_wall, data);
 		if (rays[i].is_door == 1)
-			wall_doors(i, height_of_wall, data);
+			draw_doors(i, height_of_wall, data);
 		i++;
 	}
 	draw_map(data);

@@ -6,13 +6,13 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/12 12:59:47 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:30:40 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_rgb(char *str, int *rgb_arr, t_garbage **heap)
+static void	init_rgb(char *str, unsigned int *rgb_arr, t_garbage **heap)
 {
 	char	**rgb;
 	int		i;
@@ -76,7 +76,7 @@ static void	init_data_helper(t_data *data, int *state,
 					&data->textures->line_length, &data->textures->endian);
 		data->textures = data->textures->next;
 	}
-		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door20.xpm",
+		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door_frames/M1.xpm",
 					&data->doors.texture_width, &data->doors.texture_height);
 		if (!data->doors.texture_ptr)
 			return (throw_error(TEXTURE_ERROR, heap), exit(0));
@@ -103,7 +103,11 @@ static void	init_data_helper(t_data *data, int *state,
 	data->rotate_right = 0;
 	data->rotate_top = 0;
 	data->rotate_bottom = 0;
-	data->open_door = 0;
+	data->flag_speed = 1;
+	data->open_door = 1;
+	data->doors.open_door = 1;
+	data->flag_open = 0;
+	data->index_door = 0;
 	data->px = WALL_SIZE * player_xy[0] + WALL_SIZE / 2;
 	data->py =  WALL_SIZE * player_xy[1] + WALL_SIZE / 2;
 	mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
@@ -137,6 +141,7 @@ void	init_data(t_data *data, char **full_map, t_garbage **heap)
 	char		*key;
 	char		*value;
 	static int	state[6] = {0, 0, 0, 0, 0, 0};
+	t_anim		*knife;
 
 	i = 0;
 	data->textures = NULL;
@@ -155,4 +160,26 @@ void	init_data(t_data *data, char **full_map, t_garbage **heap)
 		i++;
 	}
 	init_data_helper(data, state, full_map, heap);
+	knife = malloc(16 * sizeof(t_anim));
+	if (!knife)
+		throw_error("Error: malloc failed", heap);
+	knife[0].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/0.xpm", &knife[0].width, &knife[0].height);
+	knife[1].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/1.xpm", &knife[1].width, &knife[1].height);
+	knife[2].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/2.xpm", &knife[2].width, &knife[2].height);
+	knife[3].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/3.xpm", &knife[3].width, &knife[3].height);
+	knife[4].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/4.xpm", &knife[4].width, &knife[4].height);
+	knife[5].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/5.xpm", &knife[5].width, &knife[5].height);
+	knife[6].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/6.xpm", &knife[6].width, &knife[6].height);
+	knife[7].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/7.xpm", &knife[7].width, &knife[7].height);
+	knife[8].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/8.xpm", &knife[8].width, &knife[8].height);
+	knife[9].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/9.xpm", &knife[9].width, &knife[9].height);
+	knife[10].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/10.xpm", &knife[10].width, &knife[10].height);
+	knife[11].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/11.xpm", &knife[11].width, &knife[11].height);
+	knife[12].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/12.xpm", &knife[12].width, &knife[12].height);
+	knife[13].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/13.xpm", &knife[13].width, &knife[13].height);
+	knife[14].img = mlx_xpm_file_to_image(data->mlx_ptr, "./texture_files/hand/14.xpm", &knife[14].width, &knife[14].height);
+
+	knife[15].img = NULL;
+	data->knife = knife;
+	data->lmouse_pressed = false;
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 12:03:46 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/30 12:54:04 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/15 22:49:41 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	rgb2int_converter(int *rgb)
+int	rgb2int_converter(unsigned int *rgb)
 {
 	int		color;
 	int		i;

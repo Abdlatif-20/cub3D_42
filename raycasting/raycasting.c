@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:12:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/12 15:12:22 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:49:32 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,24 @@ double	adjust_angle(double ray_angle)
 	return (new_angle);
 }
 
-static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
+int	match_door(t_door *door, int x1, int y1)
+{
+	int	i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (door[i].x_door == x1 && door[i].y_door == y1)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+static void	check_horz_int(t_data *data, double ray_angle, int *index_door)
 {
 	t_vars	*vars;
 	int		j;
-
 	vars = data->vars;
 	vars->y_horz_int = floor(data->py / WALL_SIZE) * WALL_SIZE;
 	j = 0;
@@ -41,16 +54,17 @@ static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
 		&& data->map[(int)(vars->y_horz_int - j) / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] != '1')
 	{
 		if (data->map[(int)((vars->y_horz_int) - j) / WALL_SIZE][(int)vars->x_horz_int / WALL_SIZE] == 'D')
-        {
-            // Calculate the horizontal distance to the door
-            double door_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
-			if (door_dist > 40)
+		{
+			// Calculate the horizontal distance to the door
+			data->door_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
+			int i = match_door(data->door, (int)vars->x_horz_int / WALL_SIZE, (int)((vars->y_horz_int) - j) / WALL_SIZE);
+			data->index_door = i;
+			if (data->door[i].open_door)
 			{
-            	*flag_door = 1;
-            	vars->door_horz_dist = door_dist;
-            	break;
+				*index_door = 1;
+				break;
 			}
-        }
+		}
 		vars->y_step = WALL_SIZE;
 		if (!vars->ray_looking_down)
 			vars->y_step *= -1;
@@ -64,12 +78,12 @@ static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
 	vars->horz_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
 }
 
-static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
+static void	check_vert_int(t_data *data, double ray_angle, int *index_door)
 {
 	t_vars	*vars;
 	int		j;
-
 	vars = data->vars;
+
 	vars->x_vert_int = floor(data->px / WALL_SIZE) * WALL_SIZE;
 	j  = 0;
 	if (!vars->ray_looking_right)
@@ -85,11 +99,12 @@ static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
 		if (data->map[(int)vars->y_vert_int / WALL_SIZE][(int)((vars->x_vert_int) - j) / WALL_SIZE] == 'D')
 		{
 			// Calculate the vertical distance to the door
-			double door_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
-			if (door_dist > 40)
+			data->door_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
+			int i = match_door(data->door, (int)((vars->x_vert_int) - j) / WALL_SIZE, (int)vars->y_vert_int / WALL_SIZE);
+			data->index_door = i;
+			if (data->door[i].open_door)
 			{
-				*flag_door = 1;
-				vars->door_vert_dist = door_dist;
+				*index_door = 1;
 				break;
 			}
 		}
@@ -110,21 +125,20 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 {
 	int v;
 	int h;
-	int flag_door;
+	int index_door;
 
-	flag_door = 0;
+	index_door = 0;
 	ray_angle = adjust_angle(ray_angle);
 	data->vars->ray_looking_down = ray_angle > 0 && ray_angle < M_PI;
 	data->vars->ray_looking_right = ray_angle < 0.5 * M_PI || ray_angle > 1.5 * M_PI;
-	check_horz_int(data, ray_angle, &flag_door);
-	h = flag_door;
-	flag_door = 0;
-	check_vert_int(data, ray_angle, &flag_door);
-	v = flag_door;
+	check_horz_int(data, ray_angle, &index_door);
+	h = index_door;
+	index_door = 0;
+	check_vert_int(data, ray_angle, &index_door);
+	v = index_door;
 	if (data->vars->horz_dist < data->vars->vert_dist)
 	{
 		rays->distance = data->vars->horz_dist;
-		// printf("horz_dist = %f\n", data->vars->horz_dist);
 		rays->ray_angle = ray_angle;
 		rays->wall_hit_x = data->vars->x_horz_int;
 		rays->wall_hit_y = data->vars->y_horz_int;
@@ -134,7 +148,6 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 	else
 	{
 		rays->distance = data->vars->vert_dist;
-		// printf("vert_dist = %f\n", data->vars->vert_dist);
 		rays->ray_angle = ray_angle;
 		rays->wall_hit_x = data->vars->x_vert_int;
 		rays->wall_hit_y = data->vars->y_vert_int;
@@ -155,7 +168,7 @@ void	cast_all_rays(t_data *data)
 	angle_inc = FOV / SCREEN_WIDTH;
 	rays = malloc(sizeof(t_ray) * SCREEN_WIDTH);
 	if (!rays)
-		throw_error("Error: Malloc failed", NULL) ;
+		throw_error("Error: Malloc failed", NULL);
 	while (i < SCREEN_WIDTH)
 	{
 		cast_ray(data, &rays[i], ray_angle);
@@ -163,10 +176,4 @@ void	cast_all_rays(t_data *data)
 		i++;
 	}
 	data->rays = rays;
-	i = 0;
-	while (i < SCREEN_WIDTH)
-	{
-		dda(data, rays[i].wall_hit_x, rays[i].wall_hit_y);
-		i++;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/12 13:57:31 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:30:40 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_ray		t_ray;
 typedef struct s_vars		t_vars;
 typedef struct s_texture	t_texture;
 typedef struct s_door		t_door;
+typedef struct s_anim		t_anim;
 
 # define MAP_ERROR "Error: something is wrong in the map"
 # define TEXTURE_ERROR "Error: something is wrong in the textures"
@@ -57,10 +58,12 @@ enum e_keycode
 	KEY_LEFT = 123,
 	KEY_RIGHT = 124,
 	KEY_ESC = 53,
-	KEY_DOOR = 49, // space
 	KEY_COUNT = 256,
 	MOUSE_LEFT = 1,
-	MOUSE_RIGHT = 2
+	MOUSE_RIGHT = 2,
+	SPEED_UP = 69,
+	SPEED_DOWN = 78,
+	KEY_SPACE = 49
 };
 
 struct s_garbage
@@ -132,6 +135,9 @@ struct s_door
 {
 	int			x_texture;
 	int			y_texture;
+	int			x_door;
+	int			y_door;
+	bool		open_door;
 	int			texture_height;
 	int			texture_width;
 	void		*mlx_ptr;
@@ -148,47 +154,60 @@ struct s_door
 
 struct s_data
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		*img_data;
-	int			bpp;
-	int			line_length;
-	int			endian;
-	t_texture	*textures;
-	t_door		doors;
-	int			ceiling[3];
-	int			floor[3];
-	int			colors[3];
-	char		**map;
-	int			width;
-	int			height;
-	double		px;
-	double		py;
-	double		angle;
-	t_dda		*dda_vars;
-	int			keycode;
-	t_ray		*rays;
-	t_vars		*vars;
-	double		x_wall;
-	double		y_wall;
-	double		height_of_wall;
-	int			flag_up;
-	int			flag_down;
-	int			flag_left;
-	int			flag_right;
-	bool		open_door;
-	int			rotate_left;
-	int			rotate_right;
-	int			rotate_top;
-	int			rotate_bottom;
-	int			hide_mouse;
-	int			mouse_x;
-	int			mouse_y;
-	void		*minimap_img;
-	char		*minimap_img_data;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	char			*img_data;
+	int				bpp;
+	int				line_length;
+	int				endian;
+	t_texture		*textures;
+	t_door			doors;
+	t_door			*door;
+	int				index_door;
+	unsigned int	ceiling[3];
+	unsigned int	floor[3];
+	unsigned int	colors[3];
+	char			**map;
+	int				width;
+	int				height;
+	double			px;
+	double			py;
+	double			angle;
+	t_dda			*dda_vars;
+	int				keycode;
+	t_ray			*rays;
+	t_vars			*vars;
+	double			x_wall;
+	double			y_wall;
+	double			height_of_wall;
+	int				flag_up;
+	int				flag_down;
+	int				flag_left;
+	int				flag_right;
+	double			flag_speed;
+	int				rotate_left;
+	int				rotate_right;
+	int				rotate_top;
+	int				open_door;
+	double			door_dist;
+	int				flag_open;
+	int				rotate_bottom;
+	int				hide_mouse;
+	int				mouse_x;
+	int				mouse_y;
+	void			*minimap_img;
+	char			*minimap_img_data;
+	double			halfscreen;
+	t_anim			*knife;
+	bool			lmouse_pressed;
+};
 
-	double		halfscreen;
+struct s_anim
+{
+	void	*img;
+	int		width;
+	int		height;
 };
 
 /*-----------------------------cub_utils.c-----------------------------*/
@@ -204,7 +223,7 @@ void	check_rgb_code(int *rgb, t_garbage **heap);
 void	check_map_components(char **map, t_garbage **heap);
 void	map_is_closed(char **map, t_garbage **heap);
 void	space_checker(char **map, t_garbage **heap);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color);
 
 /*-----------------------------map_reader.c-----------------------------*/
 char	**get_full_map(char *path, t_garbage **heap);
@@ -238,13 +257,12 @@ int		key_press(int code, t_data *data);
 int		key_release(int code, t_data *data);
 int		render_frame(t_data *data);
 bool	check_wall(t_data *data, double x, double y);
-bool	check_door(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
-void	my_pixel_put(t_texture *data, int x, int y, int *color);
+void	my_pixel_put(t_texture *data, int x, int y, unsigned int *color);
 
 /*-----------------------------dda.c-----------------------------*/
-void	dda(t_data *data, double x2, double y2);
+void	dda(t_data *data, double x1, double y1, double x2, double y2);
 
 /*----------------------------- movement player -----------------------------*/
 void	move_up(t_data *data);
@@ -258,17 +276,21 @@ void	rotate_right(t_data *data);
 void	cast_all_rays(t_data *data);
 double	adjust_angle(double ray_angle);
 /*-----------------------------raycasting_utils.c-----------------------------*/
-int		rgb2int_converter(int *rgb);
+int		rgb2int_converter(unsigned int *rgb);
 
 /*-----------------------------draw_walls.c-----------------------------*/
-void	colorize_window(t_data *data);
+// void	colorize_window(t_data *data, int i_ray);
 void	draw_walls(t_data *data);
 
 /*----------------------------- textures -----------------------------*/
-void	get_texture_offset(t_data *data, t_texture *texture);
+void	get_texture_offset(t_data *data, t_texture *texture, int flag);
+void	get_texture_offset1(t_data *data, t_texture *texture, int flag);
 int		*get_door_xy(char **map);
 void	get_door_texture_offset(t_data *data);
+void	get_door_texture_offset1(t_data *data);
+void	animition_door(t_data *data);
 void	my_pixel_door_put(t_data *data, int x, int y, int *color);
+void	my_pixel_door_put1(t_data *data, int x, int y, int *color);
 /*----------------------------- textures -----------------------------*/
 void	cast_all_doors(t_data *data);
 

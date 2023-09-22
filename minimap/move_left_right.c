@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_left_right.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 21:47:50 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/01 21:57:03 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/13 21:17:14 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	move_left(t_data *data)
 
 	if (data->flag_left)
 	{
-		x = data->px - cos(data->angle + (M_PI / 2)) * SPEED;
-		y = data->py - sin(data->angle + (M_PI / 2)) * SPEED;
+		x = data->px - cos(data->angle + (M_PI / 2)) * SPEED  * data->flag_speed;
+		y = data->py - sin(data->angle + (M_PI / 2)) * SPEED * data->flag_speed;
 		if (check_wall(data, x, y))
 		{
 			data->py = y;
@@ -36,8 +36,8 @@ void	move_right(t_data *data)
 
 	if (data->flag_right)
 	{
-		x = data->px + (cos(data->angle + (M_PI / 2)) * SPEED);
-		y = data->py + sin(data->angle 	+ (M_PI / 2)) * SPEED;
+		x = data->px + (cos(data->angle + (M_PI / 2)) * SPEED) * data->flag_speed;
+		y = data->py + sin(data->angle 	+ (M_PI / 2)) * SPEED * data->flag_speed;
 		if (check_wall(data, x, y))
 		{
 			data->py = y;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/10 12:37:32 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:49:21 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,51 @@ static int	mouse_rotation(int x, int y, t_data *data)
 	return (0);
 }
 
+static int mouse_hook(int keycode, int x, int y, t_data *data)
+{
+	(void)x;
+	(void)y;
+
+	if (keycode == 1)
+		data->lmouse_pressed = true;
+	return (1);
+}
+
+void	get_pos_door(t_data *data, t_door *doors, int k)
+{
+	static int	i;
+	int	j;
+
+	while (i < data->height)
+	{
+		j = 0;
+		while (j < data->width)
+		{
+			if (data->map[i][j] == 'D')
+			{
+				doors[k].x_door = j;
+				doors[k].y_door = i++;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	filed_door(t_data *data, t_door *doors)
+{
+	int	i;
+
+	i = 0;
+	while (i < 20)
+	{
+		doors[i].open_door = 1;
+		get_pos_door(data, doors, i);
+		i++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	char		**full_map;
@@ -55,15 +100,22 @@ int	main(int ac, char **av)
 	t_data		data;
 	t_dda		dda_vars;
 	t_vars		vars;
+	t_door		*doors;
 
 	if (ac != 2)
 		throw_error("Number of args is not valid", NULL);
 	heap = NULL;
+	doors = malloc(sizeof(t_door) * 20);
+	if (!doors)
+		throw_error("Malloc error", NULL);
 	check_map_extension(av[1]);
 	full_map = get_full_map(av[1], &heap);
 	data.vars = &vars;
 	init_data(&data, full_map, &heap);
 	data.dda_vars = &dda_vars;
+	filed_door(&data, doors);
+	data.door = doors;
+	mlx_mouse_hook(data.win_ptr, mouse_hook, &data);
 	mlx_hook(data.win_ptr, 17, 0, ft_close, NULL);
 	mlx_hook(data.win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.win_ptr, 3, 0, key_release, &data);
@@ -73,3 +125,4 @@ int	main(int ac, char **av)
 	empty_trash(&heap);
 	return (0);
 }
+

@@ -12,17 +12,23 @@
 
 # include "../cub3d.h"
 
-void	get_texture_offset(t_data *data, t_texture *texture)
+void	get_texture_offset(t_data *data, t_texture *texture, int flag)
 {
 	double  start_y;
-
+	int j;
+	(void)flag;
+	j = 0;
+	// if (flag)
+	// 	j = 1;
 	start_y = data->halfscreen - (data->height_of_wall / 2);
 	if (data->rays[(int)data->x_wall].flag_color == 0)
 		texture->x_texture = fmod(data->rays[(int)data->x_wall].wall_hit_x
 			* texture->texture_width / WALL_SIZE, texture->texture_width);
+		// texture->x_texture = (j - (fmod(data->rays[(int)data->x_wall].wall_hit_x, WALL_SIZE) / WALL_SIZE)) * texture->texture_width;
 	else
 		texture->x_texture = fmod(data->rays[(int)data->x_wall].wall_hit_y
 			* texture->texture_width / WALL_SIZE, texture->texture_width);
+		// texture->x_texture = (j - (fmod(data->rays[(int)data->x_wall].wall_hit_y,WALL_SIZE)/WALL_SIZE))*texture->texture_width;
 	texture->y_texture = (data->y_wall - start_y) * (texture->texture_height / data->height_of_wall);
 }
 
@@ -39,8 +45,7 @@ void	get_door_texture_offset(t_data *data)
 			* data->doors.texture_width / WALL_SIZE, data->doors.texture_width);
 	data->doors.y_texture = (data->y_wall - start_y) * (double)data->doors.texture_height / data->height_of_wall;
 }
-
-void	my_pixel_put(t_texture *data, int x, int y, int *color)
+void	my_pixel_put(t_texture *data, int x, int y, unsigned int *color)
 {
 	char	*dst;
 
