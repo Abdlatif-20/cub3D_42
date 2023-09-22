@@ -33,8 +33,6 @@ struct  s_col_name
                   return ((void *)0); }
 
 
-
-
 char	*mlx_int_get_line(char *ptr,int *pos,int size)
 {
   int	pos2;
@@ -51,8 +49,6 @@ char	*mlx_int_get_line(char *ptr,int *pos,int size)
   *pos += pos2+pos3+2;
   return (ptr+pos4);
 }
-
-
 
 char	*mlx_int_static_line(char **xpm_data,int *pos,int size)
 {
