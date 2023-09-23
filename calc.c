@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:19:12 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 17:02:29 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:45:53 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,18 @@ int	*get_door_xy(char **map)
 	return (xy);
 }
 
-void	num_of_door(t_data *data)
+int	num_of_door(t_data *data)
 {
 	int	i;
+	int num_door;
 
 	i = 0;
+	num_door = 0;
 	while (i < data->height)
 	{
 		if (ft_strchr(data->map[i], 'D'))
-			data->num_door++;
+			num_door++;
 		i++;
 	}
+	return (num_door);
 }

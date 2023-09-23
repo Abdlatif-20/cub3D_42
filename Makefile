@@ -6,13 +6,13 @@
 #    By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/09 19:16:05 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/22 15:08:08 by aben-nei         ###   ########.fr        #
+#    Updated: 2023/09/23 19:58:28 by aben-nei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc -Ofast -O3
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 # -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c

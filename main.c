@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 14:46:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/23 17:03:21 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:47:28 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int ac, char **av)
 	full_map = get_full_map(av[1], &heap);
 	data.vars = &vars;
 	init_data(&data, full_map, &heap);
-	num_of_door(&data);
+	data.num_door = num_of_door(&data);
 	t_door doors[data.num_door];
 	data.dda_vars = &dda_vars;
 	filed_door(&data, doors);
