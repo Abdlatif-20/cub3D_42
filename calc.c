@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.ma>             +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 09:19:12 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/05 19:05:04 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:47:56 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,17 @@ int	*get_door_xy(char **map)
 		y++;
 	}
 	return (xy);
+}
+
+void	num_of_door(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->height)
+	{
+		if (ft_strchr(data->map[i], 'D'))
+			data->num_door++;
+		i++;
+	}
 }

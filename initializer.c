@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/21 21:30:40 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:52:10 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ static void	init_data_helper(t_data *data, int *state,
 	data->doors.open_door = 1;
 	data->flag_open = 0;
 	data->index_door = 0;
+	data->num_door = 0;
 	data->px = WALL_SIZE * player_xy[0] + WALL_SIZE / 2;
 	data->py =  WALL_SIZE * player_xy[1] + WALL_SIZE / 2;
 	mlx_mouse_move(data->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);

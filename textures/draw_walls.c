@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 10:26:50 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/21 15:40:55 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:10:26 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void	draw_walls(t_data *data)
 	int		i;
 	double	height_of_wall;
 	double	distance_player_proj;
+	double correct_distance;
 
 	rays = data->rays;
 	i = 0;
@@ -181,8 +182,8 @@ void	draw_walls(t_data *data)
 	colorize_window(data);
 	while (i < SCREEN_WIDTH)
 	{
-		height_of_wall = (WALL_SIZE * distance_player_proj) / (rays[i].distance
-				* cos(rays[i].ray_angle - data->angle));
+		correct_distance = rays[i].distance * cos(rays[i].ray_angle - data->angle);
+		height_of_wall = (WALL_SIZE * distance_player_proj) / correct_distance;
 		wall_drawing(i, height_of_wall, data);
 		if (rays[i].is_door == 1)
 			draw_doors(i, height_of_wall, data);

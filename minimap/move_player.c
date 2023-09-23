@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/21 21:48:24 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:18:12 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ int	render_frame(t_data *data)
 	draw_walls(data);
 	draw_pistol(data);
 	if (data->door_dist > 20 && !data->door[data->index_door].open_door)
+	{
 		data->door[data->index_door].open_door = 1;
+	}
 	return (0);
 }

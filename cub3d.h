@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/21 21:30:40 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:28:56 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ struct s_vars
 	double	y_horz_int;
 	double	x_vert_int;
 	double	y_vert_int;
+	int		j;
 	double	x_step;
 	double	y_step;
 	double	horz_dist;
@@ -173,6 +174,7 @@ struct s_data
 	int				height;
 	double			px;
 	double			py;
+	int				num_door;
 	double			angle;
 	t_dda			*dda_vars;
 	int				keycode;
@@ -257,6 +259,7 @@ int		key_press(int code, t_data *data);
 int		key_release(int code, t_data *data);
 int		render_frame(t_data *data);
 bool	check_wall(t_data *data, double x, double y);
+bool	check_door(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
 void	my_pixel_put(t_texture *data, int x, int y, unsigned int *color);
@@ -293,5 +296,6 @@ void	my_pixel_door_put(t_data *data, int x, int y, int *color);
 void	my_pixel_door_put1(t_data *data, int x, int y, int *color);
 /*----------------------------- textures -----------------------------*/
 void	cast_all_doors(t_data *data);
+void	num_of_door(t_data *data);
 
 #endif
