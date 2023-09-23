@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/23 19:46:19 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 21:12:06 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ void	draw_map(t_data *data);
 int		key_press(int code, t_data *data);
 int		key_release(int code, t_data *data);
 int		render_frame(t_data *data);
-bool	check_wall(t_data *data, double x, double y);
+bool	check_wall(t_data *data, double x, double y, int flag);
 bool	check_door(t_data *data, double x, double y);
 
 /*-----------------------------mlx_func.c-----------------------------*/
