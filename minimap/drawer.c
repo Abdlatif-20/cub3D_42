@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   drawer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 12:49:49 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 16:47:54 by aben-nei         ###   ########.fr       */
+/*   Created: 2023/08/11 15:17:13 by mel-yous          #+#    #+#             */
+/*   Updated: 2023/09/23 16:44:47 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+// static void	draw_square(t_data *data, int x, int y, int color, int square_size)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (i < square_size)
+// 	{
+// 		j = 0;
+// 		while (j < square_size)
+// 		{
+// 			my_mlx_pixel_put(data, x + j, y + i, color);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
 
 static void	draw_player(t_data *data, int color)
 {
@@ -18,16 +36,17 @@ static void	draw_player(t_data *data, int color)
 	int	j;
 
 	i = 0;
-	while (i < 8)
+	while (i < PLAYER_SIZE)
 	{
 		j = 0;
-		while (j < 8)
+		while (j < PLAYER_SIZE)
 		{
 			my_mlx_pixel_put(data, j + 100, i + 100, color);
 			j++;
 		}
 		i++;
 	}
+	
 }
 
 void draw_map(t_data *data)
@@ -57,9 +76,12 @@ void draw_map(t_data *data)
 					if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE]
 					&& data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == '1')
 						my_mlx_pixel_put(data, j, i, 0x40513B);
-				else if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE]
+				else if (data->door[data->index_door].open_door && (int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE]
 					&& data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == 'D')
 						my_mlx_pixel_put(data, j, i, 0xE5D283);
+				else if (!data->door[data->index_door].open_door && (int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map)
+					&& data->map[(int)py / WALL_SIZE] && data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == 'D')
+						my_mlx_pixel_put(data, j, i, 0xffffff);
 				else
 					my_mlx_pixel_put(data, j, i, 0xB99B6B);
 				}
