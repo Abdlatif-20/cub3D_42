@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:30:23 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 16:16:20 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:19:11 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,18 @@ void	clear_window_draw(t_data *data)
 		DDA(data, SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) - 8,
 			SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) + 8);
 	}
+	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr,
 		data->window_img->img_ptr, 0, 0);
+	int	w, h;
+	void	*north = my_mlx_xpm_file_to_img(data, "./icons/north.xpm", &w, &h);
+	void	*east = my_mlx_xpm_file_to_img(data, "./icons/east.xpm", &w, &h);
+	void	*south = my_mlx_xpm_file_to_img(data, "./icons/south.xpm", &w, &h);
+	void	*west = my_mlx_xpm_file_to_img(data, "./icons/west.xpm", &w, &h);
+
+
+	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr, north, 95, SCREEN_HEIGHT - 205);
+	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr, east, 188, (SCREEN_HEIGHT - 218) + 100);
+	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr, south, 95, SCREEN_HEIGHT - 23);
+	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr, west, 3, (SCREEN_HEIGHT - 218) + 100);
 }

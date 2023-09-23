@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:49:49 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 16:48:59 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:50:43 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	draw_player(t_data *data, int color)
 		j = 0;
 		while (j < 8)
 		{
-			my_mlx_pixel_put(data, j + 100, i + 100, color);
+			my_mlx_pixel_put(data, j + 100, i + (SCREEN_HEIGHT - 210) + 100, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-void draw_map(t_data *data)
+void draw_minimap(t_data *data)
 {
 	int i;
 	int j;
@@ -39,26 +39,26 @@ void draw_map(t_data *data)
 	int radius = 100; // Radius of the circle
 	int border_width = 3; // Width of the border
 
-	i = 0;
-	py = (int)data->py - radius - border_width;
-	while (py < (int)data->py + radius + border_width)
+	i = SCREEN_HEIGHT - 210;
+	py = (int)data->player->y - radius - border_width;
+	while (py < (int)data->player->y + radius + border_width)
 	{
-		px = (int)data->px - radius - border_width;
+		px = (int)data->player->x - radius - border_width;
 		j = 0;
-		while (px < data->px + radius + border_width)
+		while (px < data->player->x + radius + border_width)
 		{
 			// Calculate the distance from the current pixel to the center of the circle
-			int distance = (px - (int)data->px) * (px - (int)data->px) + (py - (int)data->py) * (py - (int)data->py);
+			int distance = (px - (int)data->player->x) * (px - (int)data->player->x) + (py - (int)data->player->y) * (py - (int)data->player->y);
 
 			if (distance <= (radius + border_width) * (radius + border_width))
 			{
 				if (distance <= radius * radius)
 				{
-					if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE]
-					&& data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == '1')
+					if ((int)py / SCALE_SIZE >= 0 && (int)py / SCALE_SIZE < tab_size(data->map) && data->map[(int)py / SCALE_SIZE]
+					&& data->map[(int)py / SCALE_SIZE][(int)px / SCALE_SIZE] == '1')
 						my_mlx_pixel_put(data, j, i, 0x40513B);
-				else if ((int)py / WALL_SIZE >= 0 && (int)py / WALL_SIZE < tab_size(data->map) && data->map[(int)py / WALL_SIZE]
-					&& data->map[(int)py / WALL_SIZE][(int)px / WALL_SIZE] == 'D')
+				else if ((int)py / SCALE_SIZE >= 0 && (int)py / SCALE_SIZE < tab_size(data->map) && data->map[(int)py / SCALE_SIZE]
+					&& data->map[(int)py / SCALE_SIZE][(int)px / SCALE_SIZE] == 'D')
 						my_mlx_pixel_put(data, j, i, 0xE5D283);
 				else
 					my_mlx_pixel_put(data, j, i, 0xB99B6B);
@@ -75,6 +75,5 @@ void draw_map(t_data *data)
 		py++;
 		i++;
 	}
-
 	draw_player(data, 0xAA5656);
 }

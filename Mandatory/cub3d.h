@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/18 11:56:43 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:28:26 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 # define SCALE_SIZE 32
 # define SPEED 5
 # define KEYBOARD_ROTSPEED 2.5
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
 typedef struct s_garbage	t_garbage;
 typedef struct s_data		t_data;
