@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:12:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 14:49:10 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:00:02 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ double	adjust_angle(double ray_angle)
 	return (new_angle);
 }
 
-int	match_door(t_door *door, int x1, int y1)
+int	match_door(int num_door, t_door *door, int x1, int y1)
 {
 	int	i;
 
 	i = 0;
-	while (i < 20)
+	while (i < num_door)
 	{
 		if (door[i].x_door == x1 && door[i].y_door == y1)
 			return (i);
@@ -56,7 +56,7 @@ static void	check_horz_int(t_data *data, double ray_angle, int *flag_door)
 		{
 			// Calculate the horizontal distance to the door
 			data->door_dist = sqrt(pow(data->px - vars->x_horz_int, 2) + pow(data->py - vars->y_horz_int, 2));
-			int i = match_door(data->door, (int)vars->x_horz_int / WALL_SIZE, (int)((vars->y_horz_int) - vars->j) / WALL_SIZE);
+			int i = match_door(data->num_door,  data->door, (int)vars->x_horz_int / WALL_SIZE, (int)((vars->y_horz_int) - vars->j) / WALL_SIZE);
 			data->index_door = i;
 			if (data->door[i].open_door)
 			{
@@ -98,7 +98,7 @@ static void	check_vert_int(t_data *data, double ray_angle, int *flag_door)
 		{
 			// Calculate the vertical distance to the door
 			data->door_dist = sqrt(pow(data->px - vars->x_vert_int, 2) + pow(data->py - vars->y_vert_int, 2));
-			int i = match_door(data->door, (int)((vars->x_vert_int) - vars->j) / WALL_SIZE, (int)vars->y_vert_int / WALL_SIZE);
+			int i = match_door(data->num_door, data->door, (int)((vars->x_vert_int) - vars->j) / WALL_SIZE, (int)vars->y_vert_int / WALL_SIZE);
 			data->index_door = i;
 			if (data->door[i].open_door)
 			{
@@ -142,6 +142,7 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 		rays->wall_hit_y = data->vars->y_horz_int;
 		rays->flag_color = 0;
 		rays->is_door = h;
+		data->open_door = data->index_door;
 	}
 	else
 	{
@@ -151,6 +152,7 @@ static void	cast_ray(t_data *data, t_ray *rays, double ray_angle)
 		rays->wall_hit_y = data->vars->y_vert_int;
 		rays->flag_color = 1;
 		rays->is_door = v;
+		data->open_door = data->index_door;
 	}
 }
 

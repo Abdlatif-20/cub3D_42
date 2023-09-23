@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 17:19:53 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/23 14:18:12 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:43:33 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	key_press(int code, t_data *data)
 	}
 	else if (code == KEY_SPACE)
 	{
-		if (data->door_dist < 20 && data->doors.open_door == 1)
+		if (data->door_dist < 40 && data->doors.open_door == 1)
 			data->door[data->index_door].open_door = 0;
 	}
 	return (0);
@@ -155,9 +155,7 @@ int	render_frame(t_data *data)
 	cast_all_rays(data);
 	draw_walls(data);
 	draw_pistol(data);
-	if (data->door_dist > 20 && !data->door[data->index_door].open_door)
-	{
+	if (data->door_dist > 30 && !data->door[data->index_door].open_door)
 		data->door[data->index_door].open_door = 1;
-	}
 	return (0);
 }

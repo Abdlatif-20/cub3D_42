@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 14:52:10 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:59:20 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static void	init_data_helper(t_data *data, int *state,
 	data->rotate_top = 0;
 	data->rotate_bottom = 0;
 	data->flag_speed = 1;
-	data->open_door = 1;
+	data->open_door = 0;
 	data->doors.open_door = 1;
 	data->flag_open = 0;
 	data->index_door = 0;

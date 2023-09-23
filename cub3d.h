@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 17:38:31 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/23 15:28:56 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:59:26 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,5 +297,6 @@ void	my_pixel_door_put1(t_data *data, int x, int y, int *color);
 /*----------------------------- textures -----------------------------*/
 void	cast_all_doors(t_data *data);
 void	num_of_door(t_data *data);
+int		match_door(int num_door, t_door *door, int x1, int y1);
 
 #endif
