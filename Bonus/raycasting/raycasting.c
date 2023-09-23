@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:33:34 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 11:33:31 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:51:59 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,6 @@ static void	cast_one_ray(t_data *data, float ray_angle)
 	}
 }
 
-void	draw_square(t_data *data, int x, int y, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			my_mlx_pixel_put(data, x + i, y + j, 0x0);
-			j++;
-		}
-		i++;
-	}
-}
-
-static void	draw_ammo_bar(t_data *data)
-{
-	int	i;
-	int	x;
-
-	x = 35;
-	i = 0;
-	while (i < data->player->ammo)
-	{
-		draw_square(data, x, 8, 20);
-		x += 20;
-		i++;
-	}
-}
-
 void	cast_all_rays(t_data *data)
 {
 	int		i;
@@ -95,12 +62,4 @@ void	cast_all_rays(t_data *data)
 		ray_angle += angle_incr;
 		i++;
 	}
-	if (data->player->weapon == PISTOL)
-	{
-		draw_ammo_bar(data);
-		DDA(data, (SCREEN_WIDTH / 2) - 8, SCREEN_HEIGHT / 2, (SCREEN_WIDTH / 2) + 8, SCREEN_HEIGHT / 2);
-		DDA(data, SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) - 8, SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) + 8);
-	}
-	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr,
-		data->window_img->img_ptr, 0, 0);
 }

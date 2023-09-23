@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:14:30 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 11:04:10 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:22:06 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,22 @@ static void	load_textures(t_data *data)
 	}
 }
 
+static void	fill_map_with_spaces(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->map[i])
+	{
+		while ((int)ft_strlen(data->map[i]) < data->map_width)
+		{
+			data->map[i] = ft_strjoin(data->map[i], " ");
+			add_to_garbage(g_heap(), data->map[i]);
+		}
+		i++;
+	}
+}
+
 void	init_data(t_data *data, char *path)
 {
 	int	w;
@@ -75,15 +91,17 @@ void	init_data(t_data *data, char *path)
 	textures_checker(data);
 	color_checker(data);
 	map_checker(data->map);
-	data->mlx = init_mlx();
-	data->window_img = init_win_image(data);
 	data->map_width = get_map_width(data->map);
 	data->map_height = get_map_height(data->map);
+	fill_map_with_spaces(data);
+	data->mlx = init_mlx();
+	data->window_img = init_win_image(data);
 	data->player = init_player(data);
 	data->textures->texture_img = NULL;
 	data->mouse_x = SCREEN_WIDTH / 2;
 	data->mouse_y = SCREEN_HEIGHT / 2;
 	load_textures(data);
-	data->bullet_icon = my_mlx_xpm_file_to_img(data, "./textures/pistol/bullet.xpm", &w, &h);
+	data->bullet_icon = my_mlx_xpm_file_to_img(data,
+			"./textures/pistol/bullet.xpm", &w, &h);
 	mlx_mouse_move(data->mlx->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:28:54 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 10:14:46 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:49:58 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,37 @@ void	get_texture_offset(t_data *data, t_texture *texture,
 		texture->x_offset = fmod(data->ray->wall_hit_y 
 				* texture->xpm_width / SCALE_SIZE, texture->xpm_width);
 	texture->y_offset = (y_top - start_y) * (texture->xpm_height / wall_height);
+}
+
+void	draw_square(t_data *data, int x, int y, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			my_mlx_pixel_put(data, x + i, y + j, 0x000000);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_ammo_bar(t_data *data)
+{
+	int	i;
+	int	x;
+
+	x = 35;
+	i = 0;
+	while (i < data->player->ammo)
+	{
+		draw_square(data, x, 8, 20);
+		x += 20;
+		i++;
+	}
 }

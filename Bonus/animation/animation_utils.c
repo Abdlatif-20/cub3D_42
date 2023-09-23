@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:27:18 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/21 18:35:30 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:54:54 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	load_put_image(t_data *data, char *dir, char *frame)
 	void	*image;
 	int		width;
 	int		height;
-	char	path[50];
+	char	path[60];
 	t_mlx	*mlx;
 
 	mlx = data->mlx;
-	ft_strlcpy(path, dir, 50);
-	ft_strlcat(path, frame, 50);
+	ft_strlcpy(path, dir, 60);
+	ft_strlcat(path, frame, 60);
 	image = my_mlx_xpm_file_to_img(data, path, &width, &height);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, image, 30, 0);
 	mlx_destroy_image(mlx->mlx_ptr, image);

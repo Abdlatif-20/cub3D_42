@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:00:16 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/19 18:43:58 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 15:30:18 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,8 @@ void	rotate_left(t_data *data)
 	data->flags->redraw_scene = true;
 }
 
-int	mouse_rotation(int x, int y, t_data *data)
+static void	center_mouse(t_data *data, int x, int y)
 {
-	int	old_x;
-	int	old_y;
-	int	i;
-	int	j;
-
-	if (data->flags->hide_mouse == false)
-		return (0);
 	if (x > SCREEN_WIDTH || x < 0)
 	{
 		mlx_mouse_move(data->mlx->win_ptr, SCREEN_WIDTH / 2, y);
@@ -47,6 +40,18 @@ int	mouse_rotation(int x, int y, t_data *data)
 		data->mouse_y = SCREEN_HEIGHT / 2;
 		data->flags->adjust_mouse = true;
 	}
+}
+
+int	mouse_rotation(int x, int y, t_data *data)
+{
+	int	old_x;
+	int	old_y;
+	int	i;
+	int	j;
+
+	if (data->flags->hide_mouse == false)
+		return (0);
+	center_mouse(data, x, y);
 	if (data->flags->adjust_mouse == false)
 	{
 		old_x = data->mouse_x;
@@ -63,6 +68,5 @@ int	mouse_rotation(int x, int y, t_data *data)
 		data->mouse_y = y;
 		data->flags->redraw_scene = true;
 	}
-	data->flags->adjust_mouse = false;
-	return (0);
+	return (data->flags->adjust_mouse = false, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:19:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/19 10:48:31 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/22 14:44:45 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,30 @@ static void	space_checker(char **map)
 	}
 }
 
+static void	door_checker(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'D')
+			{
+				if (map[i][j - 1] == '0' || map[i][j + 1] == '0')
+					throw_error(DOOR_ERROR, g_heap());
+				if (map[i - 1][j] == '1' || map[i + 1][j] == '1')
+					throw_error(DOOR_ERROR, g_heap());
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	map_checker(char **map)
 {
 	int	i;
@@ -95,4 +119,5 @@ void	map_checker(char **map)
 	if (p != 1)
 		throw_error(PLAYER_ERROR, g_heap());
 	space_checker(map);
+	door_checker(map);
 }

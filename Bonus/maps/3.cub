@@ -1,7 +1,7 @@
-NO ./textures/b1.xpm
-SO ./textures/b2.xpm
-WE ./textures/b3.xpm
-EA ./textures/b4.xpm
+NO ./textures/metal_1.xpm
+SO ./textures/metal_2.xpm
+WE ./textures/metal_3.xpm
+EA ./textures/metal_4.xpm
 C 48, 57, 82
 F 29, 29, 29
 
