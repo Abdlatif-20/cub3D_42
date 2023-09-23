@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 13:05:06 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:50:06 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@
 # define FILE_ERROR "Error: file is not valid"
 # define MLX_NEW_IMG_ERROR "Error: mlx_new_image failed"
 # define MLX_XPM_FILE_TO_IMG_ERROR "Error: mlx_xpm_file_to_image failed"
+# define DOOR_ERROR "Error: something is wrong with doors"
 
 /*========================= GAME CONSTANTS =========================*/
 # define SCALE_SIZE 32
-# define SPEED 3.5
+# define SPEED 4
 # define KEYBOARD_ROTSPEED 2.5
 # define MOUSE_ROTSPEED 0.0008
 # define SCREEN_WIDTH 1280
@@ -78,7 +79,8 @@ enum e_keys
 enum e_weapon
 {
 	KNIFE = 0,
-	PISTOL = 1
+	PISTOL = 1,
+	SNIPER = 2
 };
 
 struct s_garbage
@@ -280,6 +282,8 @@ void		my_pixel_put(t_texture *data, int x, int y, int *color);
 t_texture	*get_value(t_texture *texture, char *key);
 void		get_texture_offset(t_data *data, t_texture *texture,
 				float wall_height, float y_top);
+void		draw_square(t_data *data, int x, int y, int size);
+void		draw_ammo_bar(t_data *data);
 
 /*-----------------------------hooks.c-----------------------------*/
 int			key_press(int keycode, t_data *data);
@@ -292,6 +296,7 @@ void		knife_animation(t_data *data);
 
 /*-----------------------------pistol_animation.c-----------------------------*/
 void		pistol_animation(t_data *data);
+void		sniper_mode(t_data *data);
 
 /*-----------------------------animation_utls.c-----------------------------*/
 void		load_put_image(t_data *data, char *dir, char *frame);

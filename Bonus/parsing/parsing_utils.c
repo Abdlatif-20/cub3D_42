@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:28:04 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/15 18:18:03 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:26:47 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	contains_bad_char(char *str)
 	while (str[i])
 	{
 		if (str[i] != '0' && str[i] != '1'
-			&& str[i] != ' ' && !is_player(str[i]))
+			&& str[i] != ' ' && !is_player(str[i]) && str[i] != 'D')
 			return (true);
 		i++;
 	}

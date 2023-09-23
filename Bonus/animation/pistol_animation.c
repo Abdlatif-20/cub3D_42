@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 16:20:29 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 12:03:48 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:54:20 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,17 @@ void	pistol_animation(t_data *data)
 	}
 	render_0to8_frames(data, i);
 	i++;
+}
+
+void	sniper_mode(t_data *data)
+{
+	void	*scope_img;
+	int		width;
+	int		height;
+
+	scope_img = my_mlx_xpm_file_to_img(data,
+			"./textures/pistol/scope.xpm", &width, &height);
+	mlx_put_image_to_window(data->mlx->mlx_ptr,
+		data->mlx->win_ptr, scope_img, 0, 0);
+	mlx_destroy_image(data->mlx->mlx_ptr, scope_img);
 }

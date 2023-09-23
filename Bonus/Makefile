@@ -6,13 +6,13 @@
 #    By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/21 16:58:37 by mel-yous         ###   ########.fr        #
+#    Updated: 2023/09/23 16:37:56 by mel-yous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc -Ofast -O3 -I ../mlx/ -I ../libft/ -I ../get_next_line/
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RM = rm -f
 HDR = cub3d.h
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
@@ -51,7 +51,7 @@ $(GNL)
 # Generate the list of object files with the same structure as SRC but in OBJ_DIR
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
-LIBFT = $(LIB)/libft.a /Users/mel-yous/.brew/Cellar/glfw/3.3.8/lib/libglfw.dylib
+LIBFT = $(LIB)/libft.a
 MLX = ../mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
 all: $(NAME)

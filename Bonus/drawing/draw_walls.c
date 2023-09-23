@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:30:23 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/21 12:31:21 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:16:20 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,14 @@ void	clear_window_draw(t_data *data)
 	mlx_clear_window(data->mlx->mlx_ptr, data->mlx->win_ptr);
 	colorize_window(data);
 	cast_all_rays(data);
+	if (data->player->weapon == PISTOL)
+	{
+		draw_ammo_bar(data);
+		DDA(data, (SCREEN_WIDTH / 2) - 8, SCREEN_HEIGHT / 2,
+			(SCREEN_WIDTH / 2) + 8, SCREEN_HEIGHT / 2);
+		DDA(data, SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) - 8,
+			SCREEN_WIDTH / 2, (SCREEN_HEIGHT / 2) + 8);
+	}
+	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr,
+		data->window_img->img_ptr, 0, 0);
 }

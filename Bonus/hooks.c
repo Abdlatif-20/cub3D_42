@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:14:52 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 12:59:15 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/23 14:34:07 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int	key_press(int keycode, t_data *data)
 		data->flags->rotate_right = true;
 	else if (keycode == KEY_Q)
 		hide_show_mouse(data);
-	else if (keycode == KEY_R && data->player->weapon == PISTOL
-		&& data->player->ammo < AMMO_MAX)
+	else if (keycode == KEY_R && (data->player->weapon == PISTOL
+			|| data->player->weapon == SNIPER) && data->player->ammo < AMMO_MAX)
 	{
 		play_sound("./sound/reload.wav");
 		data->player->ammo = AMMO_MAX;
-		data->flags->redraw_scene = true;
+		data->flags->reload_pistol = true;
 	}
 	return (0);
 }
@@ -73,6 +73,26 @@ int	key_release(int keycode, t_data *data)
 	return (0);
 }
 
+static void	switch_weapon(t_data *data, int keycode)
+{
+	if (keycode == 2)
+	{
+		data->flags->switch_weapon = true;
+		if (data->player->weapon == SNIPER)
+			data->player->weapon = PISTOL;
+		else if (data->player->weapon == PISTOL)
+			data->player->weapon = SNIPER;
+	}
+	if (keycode == 3)
+	{
+		data->flags->switch_weapon = true;
+		if (data->player->weapon == KNIFE)
+			data->player->weapon = PISTOL;
+		else
+			data->player->weapon = KNIFE;
+	}
+}
+
 int	mouse_hook(int keycode, int x, int y, t_data *data)
 {
 	(void)x;
@@ -86,20 +106,17 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 		}
 		else
 		{
+			if (data->player->weapon == SNIPER && data->player->ammo > 0)
+				play_sound("./sound/sniper.wav");
 			if (data->player->ammo > 0)
 			{
 				data->player->ammo--;
 				data->flags->pistol_shoot = true;
 			}
+			else
+				play_sound("./sound/emptygun.wav");
 		}
 	}
-	if (keycode == 3)
-	{
-		data->flags->switch_weapon = true;
-		if (data->player->weapon == KNIFE)
-			data->player->weapon = PISTOL;
-		else
-			data->player->weapon = KNIFE;
-	}
+	switch_weapon(data, keycode);
 	return (0);
 }
