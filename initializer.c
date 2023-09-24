@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 18:59:20 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:57:24 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	init_data_helper(t_data *data, int *state,
 					&data->textures->line_length, &data->textures->endian);
 		data->textures = data->textures->next;
 	}
-		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door_frames/M1.xpm",
+		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door_frames/door2.xpm",
 					&data->doors.texture_width, &data->doors.texture_height);
 		if (!data->doors.texture_ptr)
 			return (throw_error(TEXTURE_ERROR, heap), exit(0));
