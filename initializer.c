@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 10:47:45 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/24 15:57:24 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/24 18:40:55 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,16 @@ static void	init_data_helper(t_data *data, int *state,
 	{
 		data->textures->texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, data->textures->value,
 					&data->textures->texture_width, &data->textures->texture_height);
-		if (!data->textures->texture_ptr)
+		if (!data->textures->texture_ptr || data->textures->texture_width > 512 || data->textures->texture_height > 512)
 			return (throw_error(TEXTURE_ERROR, heap), exit(0));
 		data->textures->img_addr = mlx_get_data_addr(data->textures->texture_ptr, &data->textures->bpp,
 					&data->textures->line_length, &data->textures->endian);
 		data->textures = data->textures->next;
 	}
-		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door_frames/door2.xpm",
+		// data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door20.xpm",
+		data->doors.texture_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "texture_files/door/d3.xpm",
 					&data->doors.texture_width, &data->doors.texture_height);
-		if (!data->doors.texture_ptr)
+		if (!data->doors.texture_ptr || data->doors.texture_width > 512 || data->doors.texture_height > 512)
 			return (throw_error(TEXTURE_ERROR, heap), exit(0));
 		data->doors.img_addr = mlx_get_data_addr(data->doors.texture_ptr, &data->doors.bpp,
 					&data->doors.line_length, &data->doors.endian);
