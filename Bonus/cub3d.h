@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 18:04:44 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/24 23:21:25 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct s_player		t_player;
 typedef struct s_ray		t_ray;
 typedef struct s_flags		t_flags;
 typedef struct s_weapon		t_weapon;
+typedef struct s_door		t_door;
 
 enum e_keys
 {
@@ -103,6 +104,19 @@ struct s_texture
 	t_texture	*last;
 };
 
+struct s_door
+{
+	int 	door_height;
+	int 	door_width;
+	float	x_offset;
+	float	y_offset;
+	int		door_distance;
+	bool	open_door;
+	int		x;
+	int		y;
+	t_image *door_img;
+};
+
 struct s_mlx
 {
 	void	*mlx_ptr;
@@ -143,6 +157,7 @@ struct s_ray
 	float	x_vert_int;
 	float	horz_dist;
 	float	vert_dist;
+	bool	hit_door;
 	float	y_step;
 	float	x_step;
 	int		hit_vert_horz;
@@ -170,6 +185,7 @@ struct s_flags
 	bool	pistol_shoot;
 	bool	switch_weapon;
 	bool	reload_pistol;
+	bool	hit_door;
 };
 
 struct s_data
@@ -189,9 +205,13 @@ struct s_data
 	t_player	*player;
 	t_ray		*ray;
 	t_flags		*flags;
+	t_door		*door;
+	t_door		*doors;
+	int			index_door;
 
 	int			mouse_x;
 	int			mouse_y;
+	int			num_door;
 
 	void		*bullet_icon;
 };
@@ -253,8 +273,8 @@ int			get_map_height(char **map);
 
 /*-----------------------------raycasting_utils.c-----------------------------*/
 float		adjust_angle(float ray_angle);
-void		check_horz_intersection(t_data *data, float ray_angle);
-void		check_vert_intersection(t_data *data, float ray_angle);
+void		check_horz_intersection(t_data *data, float ray_angle, int *flag_door);
+void		check_vert_intersection(t_data *data, float ray_angle, int *flag_door);
 
 /*-----------------------------raycasting.c-----------------------------*/
 void		cast_all_rays(t_data *data);
@@ -263,6 +283,13 @@ void		cast_all_rays(t_data *data);
 void		colorize_window(t_data *data);
 void		wall_drawing(int x, float height, t_data *data);
 void		clear_window_draw(t_data *data);
+
+/*-----------------------------draw_doors.c-----------------------------*/
+void		door_drawing(int x, float height, t_data *data);
+void		get_door_offset(t_data *data, t_door *door, float wall_height, float y_top);
+void		my_pixel_put_door(t_door *door, int x, int y, int *color);
+void		get_offset_door(t_data *data, t_door *door, float wall_height, float y_top);
+int			match_door(int num_door, t_door *door, int x1, int y1);
 
 /*-----------------------------move_player.c-----------------------------*/
 int			move_player(t_data *data);
