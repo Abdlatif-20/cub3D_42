@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:14:52 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 14:34:07 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:02:20 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	key_press(int keycode, t_data *data)
 		data->player->ammo = AMMO_MAX;
 		data->flags->reload_pistol = true;
 	}
+	open_door(keycode, data);
 	return (0);
 }
 

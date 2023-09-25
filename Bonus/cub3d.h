@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/24 23:21:25 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/25 22:07:18 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_ray		t_ray;
 typedef struct s_flags		t_flags;
 typedef struct s_weapon		t_weapon;
 typedef struct s_door		t_door;
+typedef struct s_vars		t_vars;
 
 enum e_keys
 {
@@ -74,7 +75,8 @@ enum e_keys
 	KEY_UP = 126,
 	KEY_DOWN = 125,
 	KEY_Q = 12,
-	KEY_R = 15
+	KEY_R = 15,
+	KEY_SPACE = 49
 };
 
 enum e_weapon
@@ -106,15 +108,15 @@ struct s_texture
 
 struct s_door
 {
-	int 	door_height;
-	int 	door_width;
+	int		door_height;
+	int		door_width;
 	float	x_offset;
 	float	y_offset;
 	int		door_distance;
 	bool	open_door;
 	int		x;
 	int		y;
-	t_image *door_img;
+	t_image	*door_img;
 };
 
 struct s_mlx
@@ -185,7 +187,24 @@ struct s_flags
 	bool	pistol_shoot;
 	bool	switch_weapon;
 	bool	reload_pistol;
-	bool	hit_door;
+	bool	hit_door_vert;
+	bool	hit_door_horz;
+	bool	flag_door;
+};
+
+struct s_vars
+{
+	int				x;
+	int				y;
+	int				i;
+	int				j;
+	int				px;
+	int				py;
+	unsigned int	rgb[3];
+	double			color_decrement;
+	int				radius;
+	int				border_width;
+	int				distance;
 };
 
 struct s_data
@@ -207,6 +226,7 @@ struct s_data
 	t_flags		*flags;
 	t_door		*door;
 	t_door		*doors;
+	t_vars		vars;
 	int			index_door;
 
 	int			mouse_x;
@@ -273,27 +293,51 @@ int			get_map_height(char **map);
 
 /*-----------------------------raycasting_utils.c-----------------------------*/
 float		adjust_angle(float ray_angle);
-void		check_horz_intersection(t_data *data, float ray_angle, int *flag_door);
-void		check_vert_intersection(t_data *data, float ray_angle, int *flag_door);
+void		check_horz_intersection(t_data *data, float ray_angle,
+				int *flag_door);
+void		check_vert_intersection(t_data *data, float ray_angle,
+				int *flag_door);
 
 /*-----------------------------raycasting.c-----------------------------*/
 void		cast_all_rays(t_data *data);
 
 /*-----------------------------draw_walls.c-----------------------------*/
 void		colorize_window(t_data *data);
+void		get_color_texture(t_data *data, int *color,
+				float wall_height, float y_top);
 void		wall_drawing(int x, float height, t_data *data);
 void		clear_window_draw(t_data *data);
 
 /*-----------------------------draw_doors.c-----------------------------*/
 void		door_drawing(int x, float height, t_data *data);
-void		get_door_offset(t_data *data, t_door *door, float wall_height, float y_top);
+void		get_door_offset(t_data *data, t_door *door, float wall_height,
+				float y_top);
 void		my_pixel_put_door(t_door *door, int x, int y, int *color);
-void		get_offset_door(t_data *data, t_door *door, float wall_height, float y_top);
+void		get_offset_door(t_data *data, t_door *door, float wall_height,
+				float y_top);
 int			match_door(int num_door, t_door *door, int x1, int y1);
+
+/*-----------------------------draw_doors.c-----------------------------*/
+void		shadow(t_data *data, int *color);
+
+/*-----------------------------draw_doors_utils-----------------------------*/
+void		get_pos_door(t_data *data, t_door *doors, int *k);
+void		filed_door(t_data *data, t_door *doors);
+int			num_of_door(t_data *data);
+int			match_door(int num_door, t_door *door, int x1, int y1);
+void		init_door(t_data *data);
+int			hit_door_horz(t_data *data, t_ray *ray, int *flag_door, int k);
+int			hit_door_vert(t_data *data, t_ray *ray, int *flag_door, int k);
+
+/*----------------------------- shadow -----------------------------*/
+void		ft_convert_to_rgb(unsigned int color, unsigned int rgb[3]);
+void		decrementbrightness(unsigned int *r, unsigned int *g,
+				unsigned int *b, double decrement);
+int			rgb2int_converter(unsigned int *rgb);
 
 /*-----------------------------move_player.c-----------------------------*/
 int			move_player(t_data *data);
-bool		check_wall(t_data *data, float x, float y);
+bool		check_wall(t_data *data, float x, float y, int flag);
 void		move_right(t_data *data);
 void		move_left(t_data *data);
 void		move_up(t_data *data);
@@ -311,6 +355,7 @@ void		get_texture_offset(t_data *data, t_texture *texture,
 				float wall_height, float y_top);
 void		draw_square(t_data *data, int x, int y, int size);
 void		draw_ammo_bar(t_data *data);
+void		open_door(int keycode, t_data *data);
 
 /*-----------------------------hooks.c-----------------------------*/
 int			key_press(int keycode, t_data *data);

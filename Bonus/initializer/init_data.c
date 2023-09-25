@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:14:30 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/24 23:26:15 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/25 19:45:51 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	default_init(t_data *data)
 	flags.pistol_shoot = false;
 	flags.switch_weapon = true;
 	flags.reload_pistol = false;
-	flags.hit_door = false;
+	flags.flag_door = false;
 	data->flags = &flags;
 }
 
@@ -82,6 +82,28 @@ static void	fill_map_with_spaces(t_data *data)
 	}
 }
 
+void	load_door(t_data *data)
+{
+	t_door	*door;
+
+	door = malloc(sizeof(t_door));
+	if (!door)
+		throw_error(MALLOC_ERROR, g_heap());
+	add_to_garbage(g_heap(), door);
+	door->door_img = malloc(sizeof(t_image));
+	if (!door->door_img)
+		throw_error(MALLOC_ERROR, g_heap());
+	add_to_garbage(g_heap(), door->door_img);
+	door->door_img->img_ptr = my_mlx_xpm_file_to_img(data,
+			"./textures/door/d3.xpm", &door->door_width, &door->door_height);
+	door->door_img->img_data = mlx_get_data_addr(
+			door->door_img->img_ptr, &door->door_img->bpp,
+			&door->door_img->line_length,
+			&door->door_img->endian);
+	data->door = door;
+	init_door(data);
+}
+
 void	init_data(t_data *data, char *path)
 {
 	int	w;
@@ -104,13 +126,6 @@ void	init_data(t_data *data, char *path)
 	load_textures(data);
 	data->bullet_icon = my_mlx_xpm_file_to_img(data,
 			"./textures/pistol/bullet.xpm", &w, &h);
-	data->door = malloc(sizeof(t_door));
-	data->door->door_img = malloc(sizeof(t_door));
-	data->door->door_img->img_ptr = my_mlx_xpm_file_to_img(data,
-			"./textures/door/d3.xpm", &data->door->door_width, &data->door->door_height);
-	data->door->door_img->img_data = mlx_get_data_addr(
-			data->door->door_img->img_ptr, &data->door->door_img->bpp,
-			&data->door->door_img->line_length,
-			&data->door->door_img->endian);
+	load_door(data);
 	mlx_mouse_move(data->mlx->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }
