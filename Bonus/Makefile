@@ -6,18 +6,26 @@
 #    By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/25 20:53:58 by aben-nei         ###   ########.fr        #
+#    Updated: 2023/09/26 21:46:26 by aben-nei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc -Ofast -O3 -I ../mlx/ -I ../libft/ -I ../get_next_line/
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 RM = rm -f
-HDR = cub3d.h
+HDR = cub3d.h ../libft/libft.h ../get_next_line/get_next_line.h
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
 LIB = ../libft/
 OBJ_DIR = obj
+
+LIBFT =	$(LIB)ft_putchar_fd.c $(LIB)ft_strjoin.c $(LIB)ft_strlcat.c\
+		$(LIB)ft_atoi.c $(LIB)ft_putendl_fd.c $(LIB)ft_substr.c\
+		$(LIB)ft_bzero.c $(LIB)ft_strlcpy.c $(LIB)ft_putstr_fd.c\
+		$(LIB)ft_strlen.c $(LIB)ft_split.c $(LIB)ft_isalpha.c\
+		$(LIB)ft_memcpy.c $(LIB)ft_strchr.c $(LIB)ft_strchr1.c\
+		$(LIB)ft_strdup.c $(LIB)ft_isdigit.c $(LIB)ft_memset.c
+
 SRC = main.c \
 g_collector.c \
 cub3d_utils.c \
@@ -51,39 +59,42 @@ animation/pistol_animation.c \
 animation/animation_utils.c \
 minimap/minimap.c \
 minimap/minimap_utils.c \
-$(GNL)
+$(GNL) $(LIBFT)
 
 # Generate the list of object files with the same structure as SRC but in OBJ_DIR
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
-
-LIBFT = $(LIB)/libft.a
 MLX = ../mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
 all: $(NAME)
 
+GREEN = \033[32m
+RESET = \033[0m
+
 # Rules for creating the executable
 $(NAME): $(OBJ)
-	make -C $(LIB)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 	@clear
-	@echo "\033[1;32mCreating\033[0m" $@ "\033[1;32m...\033[0m"
+	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) -o $(NAME)
+	@echo ""$@ "\033[1;32mhas ben Created\033[0m ...\033[0m"
 
 # Rules for creating object files in the OBJ_DIR
 $(OBJ_DIR)/%.o: %.c $(HDR)
 	@mkdir -p $(@D)  # Create the directory if it doesn't exist
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@clear
-	@echo "\033[1;32mCompiling\033[0m" $< "\033[1;32m...\033[0m"
+	@$(eval CNT := $(shell echo $$(($(CNT)+1))))
+	@$(eval PERCENT := $(shell echo $$(($(CNT) * 100 / $(words $(SRC))))))
+	@printf "\033[32mCompiling: \033[0m%-50s \033[32m%d%%\033[0m\n" "$(notdir $<)" "$(PERCENT)"
+
 
 # Rules for cleaning generated .o files
 fclean: clean
 	@$(RM) $(NAME) $(NAME_BNS)
-	@make fclean -C $(LIB)
 	@clear
 	@echo "\033[1;31mDeleting\033[0m" $(NAME) $(NAME_BNS) "\033[1;31m...\033[0m"
-
 clean:
 	@$(RM) -r $(OBJ_DIR)
+	@$(RM) -r libft
+	@$(RM) -r get_next_line
 	@clear
 	@echo "\033[1;31mDeleting\033[0m" Object files "\033[1;31m...\033[0m"
 

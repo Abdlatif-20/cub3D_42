@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:22:48 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/25 18:42:49 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:01:40 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	move_player_helper(t_data *data)
 	flags->redraw_scene = false;
 	flags->switch_weapon = false;
 	flags->reload_pistol = false;
+	flags->knife_shoot = false;
+	flags->pistol_shoot = false;
 }
 
 int	move_player(t_data *data)

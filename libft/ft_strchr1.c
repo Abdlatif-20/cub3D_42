@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 21:09:34 by mel-yous          #+#    #+#             */
-/*   Updated: 2022/11/02 18:34:40 by mel-yous         ###   ########.fr       */
+/*   Created: 2023/09/26 15:56:02 by aben-nei          #+#    #+#             */
+/*   Updated: 2023/09/26 20:14:26 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr1(const char *s, int c, int *door_number)
 {
-	int	len;
+	size_t	len;
+	size_t	i;
 
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	while (len >= 0)
+	len = ft_strlen(s);
+	i = 0;
+	while (i <= len)
 	{
-		if (s[len] == (char)c)
-			return ((char *)s + len);
-		len--;
+		if (s[i] == (char)c)
+			(*door_number)++;
+		i++;
 	}
-	return (NULL);
+	return (0);
 }

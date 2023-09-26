@@ -5,6 +5,12 @@
         "string": "c",
         "string_view": "c",
         "vector": "c",
-        "get_next_line.h": "c"
+        "get_next_line.h": "c",
+        "chrono": "c",
+        "complex": "c",
+        "ios": "c",
+        "istream": "c",
+        "locale": "c",
+        "ostream": "c"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:30:58 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/25 22:07:44 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:02:22 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	open_door(int keycode, t_data *data)
 void	door_drawing(int x, float height, t_data *data)
 {
 	float			y_top;
-	int				color;
+	unsigned int	color;
 	float			y_bottom;
 
 	y_top = data->half_screen - (height / 2);
