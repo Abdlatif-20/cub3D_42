@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:49:49 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 17:50:43 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:40:57 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void draw_minimap(t_data *data)
 	int j;
 	int px;
 	int py;
-	int radius = 100; // Radius of the circle
-	int border_width = 3; // Width of the border
+	int radius = 100;
+	int border_width = 2;
 
 	i = SCREEN_HEIGHT - 210;
 	py = (int)data->player->y - radius - border_width;
@@ -47,7 +47,6 @@ void draw_minimap(t_data *data)
 		j = 0;
 		while (px < data->player->x + radius + border_width)
 		{
-			// Calculate the distance from the current pixel to the center of the circle
 			int distance = (px - (int)data->player->x) * (px - (int)data->player->x) + (py - (int)data->player->y) * (py - (int)data->player->y);
 
 			if (distance <= (radius + border_width) * (radius + border_width))

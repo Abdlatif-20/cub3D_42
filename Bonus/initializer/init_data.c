@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:14:30 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 16:22:06 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/25 10:48:31 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	default_init(t_data *data)
 	flags.pistol_shoot = false;
 	flags.switch_weapon = true;
 	flags.reload_pistol = false;
+	flags.hit_door = false;
 	data->flags = &flags;
 }
 
@@ -103,5 +104,13 @@ void	init_data(t_data *data, char *path)
 	load_textures(data);
 	data->bullet_icon = my_mlx_xpm_file_to_img(data,
 			"./textures/pistol/bullet.xpm", &w, &h);
+	data->door = malloc(sizeof(t_door));
+	data->door->door_img = malloc(sizeof(t_door));
+	data->door->door_img->img_ptr = my_mlx_xpm_file_to_img(data,
+			"./textures/door/scifi_door1.xpm", &data->door->door_width, &data->door->door_height);
+	data->door->door_img->img_data = mlx_get_data_addr(
+			data->door->door_img->img_ptr, &data->door->door_img->bpp,
+			&data->door->door_img->line_length,
+			&data->door->door_img->endian);
 	mlx_mouse_move(data->mlx->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }

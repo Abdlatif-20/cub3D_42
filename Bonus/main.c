@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:30:07 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/24 11:03:02 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:11:46 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	main(int argc, char **argv)
 	init_data(&data, argv[1]);
 	clear_window_draw(&data);
 	knife_animation(&data);
+	mlx_mouse_hook(data.mlx->win_ptr, mouse_hook, &data);
 	mlx_hook(data.mlx->win_ptr, 17, 0, close_game, &data);
 	mlx_hook(data.mlx->win_ptr, 2, 0, key_press, &data);
 	mlx_hook(data.mlx->win_ptr, 3, 0, key_release, &data);
 	mlx_hook(data.mlx->win_ptr, 6, 0, mouse_rotation, &data);
-	mlx_mouse_hook(data.mlx->win_ptr, mouse_hook, &data);
 	mlx_loop_hook(data.mlx->mlx_ptr, move_player, &data);
 	mlx_loop(data.mlx->mlx_ptr);
 	empty_trash(g_heap());

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:14:52 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/24 13:55:33 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:31:59 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	switch_weapon(t_data *data, int keycode)
 		else if (data->player->weapon == PISTOL)
 			data->player->weapon = SNIPER;
 	}
-	if (keycode == 3)
+	else if (keycode == 3)
 	{
 		data->flags->switch_weapon = true;
 		if (data->player->weapon == KNIFE)
@@ -101,12 +101,12 @@ int	mouse_hook(int keycode, int x, int y, t_data *data)
 	{
 		if (data->player->weapon == KNIFE)
 		{
-			play_sound("sound/knifehit.wav");
 			data->flags->knife_shoot = true;
+			play_sound("sound/knifehit.wav");
 		}
 		else
 		{
-			if (data->player->weapon == PISTOL)
+			if (data->player->weapon == PISTOL && data->player->ammo > 0)
 				data->flags->pistol_shoot = true;
 			if (data->player->weapon == SNIPER && data->player->ammo > 0)
 				play_sound("./sound/sniper.wav");
