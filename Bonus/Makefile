@@ -6,7 +6,7 @@
 #    By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/24 23:39:16 by aben-nei         ###   ########.fr        #
+#    Updated: 2023/09/25 20:53:58 by aben-nei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,14 @@ parsing/parsing_utils.c \
 my_mlx_func.c \
 raycasting/raycasting.c \
 raycasting/raycasting_utils.c \
+raycasting/ray_cast_door.c \
 info_getter.c \
 drawing/draw_walls.c \
 drawing/drawing_utils.c \
+drawing/draw_doors.c \
+drawing/draw_doors_utils.c \
+drawing/get_door_texture.c \
+drawing/draw_helper.c \
 engine/move_player.c \
 engine/move_left_right.c \
 engine/move_up_down.c \

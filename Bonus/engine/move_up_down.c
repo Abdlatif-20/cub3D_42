@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_up_down.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:59:40 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/20 22:34:33 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/25 18:50:55 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	move_up(t_data *data)
 
 	x = data->player->x + cos(data->player->angle) * SPEED;
 	y = data->player->y + sin(data->player->angle) * SPEED;
-	if (check_wall(data, x, y))
+	if (check_wall(data, x, y, data->doors[data->index_door].open_door))
 	{
 		data->player->y = y;
 		data->player->x = x;
@@ -34,7 +34,7 @@ void	move_down(t_data *data)
 
 	x = data->player->x - cos(data->player->angle) * SPEED;
 	y = data->player->y - sin(data->player->angle) * SPEED;
-	if (check_wall(data, x, y))
+	if (check_wall(data, x, y, data->doors[data->index_door].open_door))
 	{
 		data->player->y = y;
 		data->player->x = x;

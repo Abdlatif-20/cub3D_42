@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:14:52 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/25 16:31:59 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:40:45 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	key_press(int keycode, t_data *data)
 		data->player->ammo = AMMO_MAX;
 		data->flags->reload_pistol = true;
 	}
+	open_door(keycode, data);
 	return (0);
 }
 

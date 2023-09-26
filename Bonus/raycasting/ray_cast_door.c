@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast_door.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:05:59 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/25 19:16:01 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:35:42 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 int	hit_door_horz(t_data *data, t_ray *ray,
-	int *flag_door, int k)
+	bool *flag_door, int k)
 {
 	if (data->map[(int)(ray->y_horz_int - k)
 		/ SCALE_SIZE][(int)(ray->x_horz_int) / SCALE_SIZE] == 'D')
@@ -34,7 +34,7 @@ int	hit_door_horz(t_data *data, t_ray *ray,
 }
 
 int	hit_door_vert(t_data *data, t_ray *ray,
-	int *flag_door, int k)
+	bool *flag_door, int k)
 {
 	if (data->map[(int)ray->y_vert_int / SCALE_SIZE][(int)(ray->x_vert_int
 		- k) / SCALE_SIZE] == 'D')

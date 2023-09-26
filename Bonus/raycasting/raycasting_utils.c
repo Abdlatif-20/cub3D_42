@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:33:48 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/25 17:36:44 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:35:31 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ float	adjust_angle(float ray_angle)
 	return (new_angle);
 }
 
-static void	horz_increment(t_ray *ray)
+static int	horz_increment(t_data *data, t_ray *ray, bool *flag_door, int k)
 {
+	if (hit_door_horz(data, ray, flag_door, k) == 2)
+		return (2);
 	ray->y_horz_int += ray->y_step;
 	ray->x_horz_int += ray->x_step;
+	return (0);
 }
 
 void	check_horz_intersection(t_data *data, float ray_angle, bool *flag_door)
@@ -50,23 +53,19 @@ void	check_horz_intersection(t_data *data, float ray_angle, bool *flag_door)
 		* SCALE_SIZE && ray->y_horz_int >= 0 && ray->y_horz_int
 		<=data->map_height * SCALE_SIZE && data->map[(int)(ray->y_horz_int - k)
 		/ SCALE_SIZE][(int)(ray->x_horz_int) / SCALE_SIZE] != '1')
-		{
-			if (data->map[(int)(ray->y_horz_int - k)
-				/ SCALE_SIZE][(int)(ray->x_horz_int) / SCALE_SIZE] == 'D')
-			{
-				*flag_door = true;
-				break;
-			}
-			horz_increment(ray);
-		}
+		if (horz_increment(data, ray, flag_door, k) == 2)
+			break ;
 	ray->horz_dist = sqrt(pow(data->player->x - ray->x_horz_int, 2)
 			+ pow(data->player->y - ray->y_horz_int, 2));
 }
 
-static void	vert_increment(t_ray *ray)
+static int	vert_increment(t_data *data, t_ray *ray, bool *flag_door, int k)
 {
+	if (hit_door_vert(data, ray, flag_door, k) == 2)
+		return (2);
 	ray->x_vert_int += ray->x_step;
 	ray->y_vert_int += ray->y_step;
+	return (0);
 }
 
 void	check_vert_intersection(t_data *data, float ray_angle, bool *flag_door)
@@ -91,15 +90,8 @@ void	check_vert_intersection(t_data *data, float ray_angle, bool *flag_door)
 		* SCALE_SIZE && ray->y_vert_int >= 0 && ray->y_vert_int
 		<= data->map_height * SCALE_SIZE && data->map[(int)ray->y_vert_int 
 			/ SCALE_SIZE][(int)(ray->x_vert_int - k) / SCALE_SIZE] != '1')
-		{
-			if (data->map[(int)ray->y_vert_int / SCALE_SIZE][(int)
-				(ray->x_vert_int - k) / SCALE_SIZE] == 'D')
-			{
-				*flag_door = true;
-				break;
-			}
-			vert_increment(ray);
-		}
+		if (vert_increment(data, ray, flag_door, k) == 2)
+			break ;
 	ray->vert_dist = sqrt(pow(data->player->x - ray->x_vert_int, 2)
 			+ pow(data->player->y - ray->y_vert_int, 2));
 }

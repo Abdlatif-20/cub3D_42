@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/25 12:35:37 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:36:31 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_ray		t_ray;
 typedef struct s_flags		t_flags;
 typedef struct s_weapon		t_weapon;
 typedef struct s_door		t_door;
+typedef struct s_vars		t_vars;
 
 enum e_keys
 {
@@ -74,7 +75,8 @@ enum e_keys
 	KEY_UP = 126,
 	KEY_DOWN = 125,
 	KEY_Q = 12,
-	KEY_R = 15
+	KEY_R = 15,
+	KEY_SPACE = 49
 };
 
 enum e_weapon
@@ -185,7 +187,24 @@ struct s_flags
 	bool	pistol_shoot;
 	bool	switch_weapon;
 	bool	reload_pistol;
-	bool	hit_door;
+	bool	hit_door_vert;
+	bool	hit_door_horz;
+	bool	flag_door;
+};
+
+struct s_vars
+{
+	int				x;
+	int				y;
+	int				i;
+	int				j;
+	int				px;
+	int				py;
+	unsigned int	rgb[3];
+	double			color_decrement;
+	int				radius;
+	int				border_width;
+	int				distance;
 };
 
 struct s_data
@@ -207,6 +226,7 @@ struct s_data
 	t_flags		*flags;
 	t_door		*door;
 	t_door		*doors;
+	t_vars		vars;
 	int			index_door;
 
 	int			mouse_x;
@@ -283,6 +303,8 @@ void		cast_all_rays(t_data *data);
 
 /*-----------------------------draw_walls.c-----------------------------*/
 void		colorize_window(t_data *data);
+void		get_color_texture(t_data *data, int *color,
+				float wall_height, float y_top);
 void		wall_drawing(int x, float height, t_data *data);
 void		clear_window_draw(t_data *data);
 
@@ -295,9 +317,27 @@ void		get_offset_door(t_data *data, t_door *door, float wall_height,
 				float y_top);
 int			match_door(int num_door, t_door *door, int x1, int y1);
 
+/*-----------------------------draw_doors.c-----------------------------*/
+void		shadow(t_data *data, int *color);
+
+/*-----------------------------draw_doors_utils-----------------------------*/
+void		get_pos_door(t_data *data, t_door *doors, int *k);
+void		filed_door(t_data *data, t_door *doors);
+int			num_of_door(t_data *data);
+int			match_door(int num_door, t_door *door, int x1, int y1);
+void		init_door(t_data *data);
+int			hit_door_horz(t_data *data, t_ray *ray, bool *flag_door, int k);
+int			hit_door_vert(t_data *data, t_ray *ray, bool *flag_door, int k);
+
+/*----------------------------- shadow -----------------------------*/
+void		ft_convert_to_rgb(unsigned int color, unsigned int rgb[3]);
+void		decrementbrightness(unsigned int *r, unsigned int *g,
+				unsigned int *b, double decrement);
+int			rgb2int_converter(unsigned int *rgb);
+
 /*-----------------------------move_player.c-----------------------------*/
 int			move_player(t_data *data);
-bool		check_wall(t_data *data, float x, float y);
+bool		check_wall(t_data *data, float x, float y, int flag);
 void		move_right(t_data *data);
 void		move_left(t_data *data);
 void		move_up(t_data *data);
@@ -315,6 +355,7 @@ void		get_texture_offset(t_data *data, t_texture *texture,
 				float wall_height, float y_top);
 void		draw_square(t_data *data, int x, int y, int size);
 void		draw_ammo_bar(t_data *data);
+void		open_door(int keycode, t_data *data);
 
 /*-----------------------------hooks.c-----------------------------*/
 int			key_press(int keycode, t_data *data);
