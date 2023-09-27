@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:14:30 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 13:03:17 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:25:24 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void	init_data(t_data *data, char *path)
 	data->bullet_icon = my_mlx_xpm_file_to_img(data,
 			"./textures/pistol/bullet.xpm", &w, &h);
 	load_door(data);
+	load_minimap_directions(data);
 	mlx_mouse_move(data->mlx->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }

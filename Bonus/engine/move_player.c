@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:22:48 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 13:07:41 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 12:43:02 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ int	move_player(t_data *data)
 	}
 	if (flags->redraw_scene || flags->knife_shoot
 		|| flags->pistol_shoot || flags->switch_weapon || flags->reload_pistol)
+	{
 		move_player_helper(data);
+	}
 	if (data->door->door_distance > 40
-		&& !data->doors[data->index_door].open_door)
+		&& !data->doors[data->index_door].open_door && flags->redraw_scene)
 	{
 		i = -1;
 		while (++i < data->num_door)

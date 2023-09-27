@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:19:25 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/16 09:54:15 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:08:25 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static void	space_checker(char **map)
 			}
 			if (i > 0 && i < tab_size(map) - 1 && map[i][j] == '0')
 			{
-				if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ')
+				if ((j < (int)ft_strlen(map[i - 1]) && map[i - 1][j] == ' ')
+					|| (j < (int)ft_strlen(map[i + 1]) && map[i + 1][j] == ' '))
 					throw_error(MAP_NOT_CLOSED, g_heap());
 			}
 			j++;

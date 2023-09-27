@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:57:38 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/16 11:33:55 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:24:42 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ t_image	*init_win_image(t_data *data)
 		throw_error("Error: mlx_get_data_addr failed", g_heap());
 	}
 	return (&win_image);
+}
+
+void	load_minimap_directions(t_data *data)
+{
+	data->vars.north = my_mlx_xpm_file_to_img(data,
+			"./icons/north.xpm", &data->vars.h, &data->vars.h);
+	data->vars.east = my_mlx_xpm_file_to_img(data,
+			"./icons/east.xpm", &data->vars.w, &data->vars.h);
+	data->vars.south = my_mlx_xpm_file_to_img(data,
+			"./icons/south.xpm", &data->vars.w, &data->vars.h);
+	data->vars.west = my_mlx_xpm_file_to_img(data,
+			"./icons/west.xpm", &data->vars.w, &data->vars.h);
 }

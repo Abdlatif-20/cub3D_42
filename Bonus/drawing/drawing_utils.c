@@ -6,13 +6,13 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:28:54 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/25 19:41:47 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:11:42 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	my_pixel_put(t_texture *data, int x, int y, int *color)
+void	my_pixel_put(t_texture *data, int x, int y, unsigned int *color)
 {
 	char	*dst;
 

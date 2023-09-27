@@ -6,16 +6,17 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:49:49 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 11:40:58 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:53:34 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	draw_player(t_data *data, int color)
+static void	draw_player(t_data *data, unsigned int color)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	float	incr;
 
 	i = 0;
 	while (i < 8)
@@ -29,6 +30,15 @@ static void	draw_player(t_data *data, int color)
 		}
 		i++;
 	}
+	incr = -20.0f;
+	while (incr < 40.0f)
+	{
+		dda(data, (t_vars){.x = 104, .y = (SCREEN_HEIGHT - 210) + 104, .x1 = 104
+			+ cos(data->player->angle + (incr * M_PI / 180))
+			* 20, .y1 = (SCREEN_HEIGHT - 210) + 104
+			+ sin(data->player->angle + (incr * M_PI / 180)) * 20}, 0xffffff);
+		incr++;
+	}
 }
 
 void	mini_map_helper(t_data *data, t_vars vars)
@@ -38,21 +48,20 @@ void	mini_map_helper(t_data *data, t_vars vars)
 		if ((int)vars.py / SCALE_SIZE >= 0 && (int)vars.py
 			/ SCALE_SIZE < tab_size(data->map)
 			&& data->map[(int)vars.py / SCALE_SIZE]
+			&& ((int)vars.px / SCALE_SIZE >= 0)
+			&& ((int)vars.px / SCALE_SIZE < (int)ft_strlen(data->map[0]))
+			&& data->map[(int)vars.py / SCALE_SIZE]
 			&& data->map[(int)vars.py / SCALE_SIZE][(int)vars.px
 			/ SCALE_SIZE] == '1')
 			my_mlx_pixel_put(data, vars.j, vars.i, 0x40513B);
-		else if (data->door[data->index_door].open_door && (int)vars.py
-			/ SCALE_SIZE >= 0 && (int)vars.py / SCALE_SIZE < tab_size(data->map)
+		else if ((int)vars.py / SCALE_SIZE >= 0
+			&& (int)vars.py / SCALE_SIZE < tab_size(data->map)
 			&& data->map[(int)vars.py / SCALE_SIZE]
+			&& ((int)vars.px / SCALE_SIZE >= 0)
+			&& ((int)vars.px / SCALE_SIZE < (int)ft_strlen(data->map[0]))
 			&& data->map[(int)vars.py / SCALE_SIZE][(int)vars.px
 			/ SCALE_SIZE] == 'D')
 			my_mlx_pixel_put(data, vars.j, vars.i, 0xE5D283);
-		else if (!data->door[data->index_door].open_door
-			&& (int)vars.py / SCALE_SIZE >= 0 && (int)vars.py 
-			/ SCALE_SIZE < tab_size(data->map) && data->map[(int)vars.py
-				/ SCALE_SIZE] && data->map[(int)vars.py / SCALE_SIZE]
-			[(int)vars.px / SCALE_SIZE] == 'D')
-			my_mlx_pixel_put(data, vars.j, vars.i, 0xffffff);
 		else
 			my_mlx_pixel_put(data, vars.j, vars.i, 0xB99B6B);
 	}

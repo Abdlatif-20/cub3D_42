@@ -6,14 +6,14 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 20:50:14 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/25 20:50:39 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:12:46 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 static void	get_color_texture_helper(t_data *data, float wall_height,
-	float y_top, int *color)
+	float y_top, unsigned int *color)
 {
 	t_texture	*value;
 
@@ -33,14 +33,14 @@ static void	get_color_texture_helper(t_data *data, float wall_height,
 }
 
 void	get_color_door_texture(t_data *data,
-	int *color, float wall_height, float y_top)
+	unsigned int *color, float wall_height, float y_top)
 {
 	get_offset_door(data, data->door, wall_height, y_top);
 	my_pixel_put_door(data->door, data->door->x_offset,
 		data->door->y_offset, color);
 }
 
-void	get_color_wall_texture(t_data *data, int *color,
+void	get_color_wall_texture(t_data *data, unsigned int *color,
 	float wall_height, float y_top)
 {
 	t_texture	*value;
@@ -66,7 +66,7 @@ void	get_color_wall_texture(t_data *data, int *color,
 	}
 }
 
-void	get_color_texture(t_data *data, int *color,
+void	get_color_texture(t_data *data, unsigned int *color,
 	float wall_height, float y_top)
 {
 	if (!data->flags->flag_door)

@@ -6,13 +6,13 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:41:12 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/25 21:50:13 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:17:52 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	my_pixel_put_door(t_door *door, int x, int y, int *color)
+void	my_pixel_put_door(t_door *door, int x, int y, unsigned int *color)
 {
 	char	*dst;
 
@@ -46,7 +46,7 @@ void	ft_convert_to_rgb(unsigned int color, unsigned int rgb[3])
 }
 
 void	decrementbrightness(unsigned int *r, unsigned int *g,
-		unsigned int *b, double decrement)
+		unsigned int *b, float decrement)
 {
 	*r = *r * decrement;
 	*g = *g * decrement;

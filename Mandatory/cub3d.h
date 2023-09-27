@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 16:28:26 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 11:19:07 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 /*========================= GAME CONSTANTS =========================*/
 # define SCALE_SIZE 32
-# define SPEED 5
+# define SPEED 3.5
 # define KEYBOARD_ROTSPEED 2.5
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -199,7 +199,7 @@ void		contains_player(char *str, int *p);
 void		map_checker(char **map);
 
 /*-----------------------------my_mlx_func.c-----------------------------*/
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color);
 void		*my_mlx_new_img(t_data *data, int width, int height);
 void		my_mlx_destroyer(t_data *data);
 void		my_pixel_put(t_texture *data, int x, int y, int *color);

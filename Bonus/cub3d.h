@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 11:36:31 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 13:25:13 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 
 /*========================= GAME CONSTANTS =========================*/
 # define SCALE_SIZE 32
-# define SPEED 4
-# define KEYBOARD_ROTSPEED 2.5
+# define SPEED 8
+# define KEYBOARD_ROTSPEED 3.5
 # define MOUSE_ROTSPEED 0.0008
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
@@ -196,12 +196,27 @@ struct s_vars
 {
 	int				x;
 	int				y;
+	int				x1;
+	int				y1;
 	int				i;
 	int				j;
+	int				dx;
+	int				dy;
+	float			cur_x;
+	float			cur_y;
+	float			xinc;
+	float			yinc;
+	int				steps;
 	int				px;
 	int				py;
+	int				h;
+	int				w;
+	void			*north;
+	void			*south;
+	void			*east;
+	void			*west;
 	unsigned int	rgb[3];
-	double			color_decrement;
+	float			color_decrement;
 	int				radius;
 	int				border_width;
 	int				distance;
@@ -272,16 +287,17 @@ void		contains_player(char *str, int *p);
 void		map_checker(char **map);
 
 /*-----------------------------my_mlx_func.c-----------------------------*/
-void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color);
 void		*my_mlx_new_img(t_data *data, int width, int height);
 void		my_mlx_destroyer(t_data *data);
-void		my_pixel_put(t_texture *data, int x, int y, int *color);
+void		my_pixel_put(t_texture *data, int x, int y, unsigned int *color);
 void		*my_mlx_xpm_file_to_img(t_data *data, char *path,
 				int *width, int *height);
 
 /*-----------------------------init_mlx.c-----------------------------*/
 t_mlx		*init_mlx(void);
 t_image		*init_win_image(t_data *data);
+void		load_minimap_directions(t_data *data);
 
 /*-----------------------------init_player.c-----------------------------*/
 t_player	*init_player(t_data *data);
@@ -303,7 +319,7 @@ void		cast_all_rays(t_data *data);
 
 /*-----------------------------draw_walls.c-----------------------------*/
 void		colorize_window(t_data *data);
-void		get_color_texture(t_data *data, int *color,
+void		get_color_texture(t_data *data, unsigned int *color,
 				float wall_height, float y_top);
 void		wall_drawing(int x, float height, t_data *data);
 void		clear_window_draw(t_data *data);
@@ -312,13 +328,13 @@ void		clear_window_draw(t_data *data);
 void		door_drawing(int x, float height, t_data *data);
 void		get_door_offset(t_data *data, t_door *door, float wall_height,
 				float y_top);
-void		my_pixel_put_door(t_door *door, int x, int y, int *color);
+void		my_pixel_put_door(t_door *door, int x, int y, unsigned int *color);
 void		get_offset_door(t_data *data, t_door *door, float wall_height,
 				float y_top);
 int			match_door(int num_door, t_door *door, int x1, int y1);
 
 /*-----------------------------draw_doors.c-----------------------------*/
-void		shadow(t_data *data, int *color);
+void		shadow(t_data *data, unsigned int *color);
 
 /*-----------------------------draw_doors_utils-----------------------------*/
 void		get_pos_door(t_data *data, t_door *doors, int *k);
@@ -329,10 +345,10 @@ void		init_door(t_data *data);
 int			hit_door_horz(t_data *data, t_ray *ray, bool *flag_door, int k);
 int			hit_door_vert(t_data *data, t_ray *ray, bool *flag_door, int k);
 
-/*----------------------------- shadow -----------------------------*/
+/*----------------------------- shadow.c -----------------------------*/
 void		ft_convert_to_rgb(unsigned int color, unsigned int rgb[3]);
 void		decrementbrightness(unsigned int *r, unsigned int *g,
-				unsigned int *b, double decrement);
+				unsigned int *b, float decrement);
 int			rgb2int_converter(unsigned int *rgb);
 
 /*-----------------------------move_player.c-----------------------------*/
@@ -349,7 +365,6 @@ void		rotate_right(t_data *data);
 int			mouse_rotation(int x, int y, t_data *data);
 
 /*-----------------------------drawing_utils.c-----------------------------*/
-void		my_pixel_put(t_texture *data, int x, int y, int *color);
 t_texture	*get_value(t_texture *texture, char *key);
 void		get_texture_offset(t_data *data, t_texture *texture,
 				float wall_height, float y_top);
@@ -378,6 +393,6 @@ void		play_sound(char *sound_path);
 void		draw_minimap(t_data *data);
 
 /*-----------------------------minimap_utils.c-----------------------------*/
-void		DDA(t_data *data, int x0, int y0, int x1, int y1);
+void		dda(t_data *data, t_vars var, unsigned int color);
 
 #endif

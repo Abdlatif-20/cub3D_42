@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   my_mlx_func.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:39:43 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/18 12:04:48 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:30:14 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color)
 {
 	char	*dst;
 
+	if (x < 0 || x >= SCREEN_WIDTH || y < 0 || y >= SCREEN_HEIGHT)
+		return ;
 	dst = data->window_img->img_data
 		+ (y * data->window_img->line_length + x * (data->window_img->bpp / 8));
 	*(unsigned int *)dst = color;
