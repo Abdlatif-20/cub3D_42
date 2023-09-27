@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:30:23 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 13:01:39 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:08:28 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	wall_drawing(int x, float height, t_data *data)
 	{
 		data->flags->flag_door = 0;
 		get_color_texture(data, &color, height, y_top);
-		// shadow(data, &color);
+		shadow(data, &color);
 		my_mlx_pixel_put(data, x, y_top, color);
 		y_top++;
 	}

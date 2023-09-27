@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 18:22:48 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 13:05:42 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:07:41 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ static void	move_player_helper(t_data *data)
 	}
 	flags->switch_weapon = false;
 	flags->reload_pistol = false;
-	flags->redraw_scene = false;
 }
 
 int	move_player(t_data *data)
 {
 	t_flags	*flags;
-	// int		i;
+	int		i;
 
 	flags = data->flags;
 	move_rotate(data);
@@ -61,19 +60,15 @@ int	move_player(t_data *data)
 		play_sound("./sound/wallhit.wav");
 		data->player->already_hit = true;
 	}
-	if (flags->redraw_scene)
-	{
+	if (flags->redraw_scene || flags->knife_shoot
+		|| flags->pistol_shoot || flags->switch_weapon || flags->reload_pistol)
 		move_player_helper(data);
+	if (data->door->door_distance > 40
+		&& !data->doors[data->index_door].open_door)
+	{
+		i = -1;
+		while (++i < data->num_door)
+			data->doors[data->index_door].open_door = 1;
 	}
-	// if (flags->redraw_scene || flags->knife_shoot
-	// 	|| flags->pistol_shoot || flags->switch_weapon || flags->reload_pistol)
-	// 	move_player_helper(data);
-	// if (data->door->door_distance > 40
-	// 	&& !data->doors[data->index_door].open_door)
-	// {
-		// i = -1;
-		// while (++i < data->num_door)
-			// data->doors[data->index_door].open_door = 1;
-	// }
-	return (0);
+	return (flags->redraw_scene = false, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:30:58 by aben-nei          #+#    #+#             */
-/*   Updated: 2023/09/26 13:00:08 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:16:06 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	open_door(int keycode, t_data *data)
 		if (data->door->door_distance < 40
 			&& data->doors[data->index_door].open_door)
 			data->doors[data->index_door].open_door = 0;
+		data->flags->redraw_scene = true;
 	}
 }
 
@@ -39,7 +40,7 @@ void	door_drawing(int x, float height, t_data *data)
 	{
 		data->flags->flag_door = 1;
 		get_color_texture(data, &color, height, y_top);
-		// shadow(data, &color);
+		shadow(data, &color);
 		my_mlx_pixel_put(data, x, y_top, color);
 		y_top++;
 	}
