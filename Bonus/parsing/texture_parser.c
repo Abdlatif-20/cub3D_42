@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:28:27 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/16 09:50:34 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:09:18 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@ void	fill_tetxures_list(t_data *data, char *key, char *value)
 {
 	if (key && (!ft_strcmp(key, "NO") || !ft_strcmp(key, "SO")
 			|| !ft_strcmp(key, "WE") || !ft_strcmp(key, "EA")))
-	{
-		add_to_garbage(g_heap(), key);
-		add_to_garbage(g_heap(), value);
 		add_to_textures(&data->textures, key, value);
-	}
 }
 
 void	textures_checker(t_data	*data)

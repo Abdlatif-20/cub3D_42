@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:44:18 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/16 09:53:09 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:18:51 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ static void	parse_texture_rgb(char *line, t_data *data)
 	while (line[i] && line[i] != ' ')
 		i++;
 	key = ft_substr(line, 0, i);
+	add_to_garbage(g_heap(), key);
+	if (key && (ft_strcmp(key, "NO") && ft_strcmp(key, "SO")
+			&& ft_strcmp(key, "EA") && ft_strcmp(key, "WE")
+			&& ft_strcmp(key, "C") && ft_strcmp(key, "F")))
+		throw_error("error\n", g_heap());
 	while (line[i] && line[i] == ' ')
 		i++;
 	value = ft_substr(line, i, ft_strlen(line) - i - 1);
 	if (!key || !value)
 		throw_error(MALLOC_ERROR, g_heap());
+	add_to_garbage(g_heap(), value);
 	fill_tetxures_list(data, key, value);
 	fill_color(data, key, value);
 }

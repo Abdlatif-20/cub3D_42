@@ -66,17 +66,9 @@ int	get_color(char *value)
 void	fill_color(t_data *data, char *key, char *value)
 {
 	if (key && value && !ft_strcmp(key, "C"))
-	{
 		data->celling_color = get_color(value);
-		free(key);
-		free(value);
-	}
 	else if (key && value && !ft_strcmp(key, "F"))
-	{
 		data->floor_color = get_color(value);
-		free(key);
-		free(value);
-	}
 }
 
 void	color_checker(t_data *data)

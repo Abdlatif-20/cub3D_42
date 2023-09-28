@@ -6,13 +6,13 @@
 #    By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/27 11:20:56 by mel-yous         ###   ########.fr        #
+#    Updated: 2023/09/28 11:44:39 by mel-yous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc -Ofast -O3
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM = rm -f
 HDR = cub3d.h ../libft/libft.h ../get_next_line/get_next_line.h
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
@@ -70,16 +70,16 @@ show_banner:
 
 # Rules for creating the executable
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) -o $(NAME)
-	@clear
+	$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) -o $(NAME)
+	
 	@echo ""$@ "\033[1;32mhas ben Created\033[0m ...\033[0m"
 
 
 # Rules for creating object files in the OBJ_DIR
 $(OBJ_DIR)/%.o: %.c $(HDR)
-	@mkdir -p $(@D)  # Create the directory if it doesn't exist
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@clear
+	mkdir -p $(@D)  # Create the directory if it doesn't exist
+	$(CC) $(CFLAGS) -c $< -o $@
+
 	@$(eval CNT := $(shell echo $$(($(CNT)+1))))
 	@$(eval PERCENT := $(shell echo $$(($(CNT) * 191 / $(words $(SRC))))))
 	@printf "\033[32mCompiling: \033[0m%-50s \033[32m%d%%\033[0m\n" "$(notdir $<)" "$(PERCENT)"

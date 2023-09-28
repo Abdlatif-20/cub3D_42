@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 23:28:20 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/08/25 14:52:04 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 16:33:19 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	ft_skipper(const char *str, int *ptrsign)
 	}
 	return (i);
 }
+
 
 int	ft_atoi(const char *str)
 {

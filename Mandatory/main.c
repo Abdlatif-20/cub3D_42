@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:30:07 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/24 23:31:24 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:14:39 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,15 @@ static int	key_release(int keycode, t_data *data)
 		data->flags->rotate_right = false;
 	return (0);
 }
+void	ff()
+{
+	system("leaks cub3D");
+}
 
 int	main(int argc, char **argv)
 {
+	atexit(ff);
 	t_data	data;
-
 	if (argc != 2)
 		throw_error(ARGS_ERROR, NULL);
 	check_extension(argv[1]);

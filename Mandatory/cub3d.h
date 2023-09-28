@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/27 11:19:07 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 10:19:14 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 
 /*========================= GAME CONSTANTS =========================*/
 # define SCALE_SIZE 32
-# define SPEED 3.5
+# define SPEED 4
 # define KEYBOARD_ROTSPEED 2.5
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720

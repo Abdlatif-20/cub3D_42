@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/27 13:25:13 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:09:52 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ void		color_checker(t_data *data);
 /*-----------------------------parsing_utils.c-----------------------------*/
 bool		is_player(char c);
 bool		contains_bad_char(char *str);
-void		contains_player(char *str, int *p);
+void		contains_player_door(char *str, int *p, int *d);
 
 /*-----------------------------map_parser.c-----------------------------*/
 void		map_checker(char **map);

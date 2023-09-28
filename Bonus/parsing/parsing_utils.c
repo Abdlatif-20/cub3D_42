@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:28:04 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/22 13:26:47 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/27 15:09:30 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	contains_bad_char(char *str)
 	return (false);
 }
 
-void	contains_player(char *str, int *p)
+void	contains_player_door(char *str, int *p, int *d)
 {
 	int	i;
 
@@ -41,6 +41,8 @@ void	contains_player(char *str, int *p)
 	{
 		if (is_player(str[i]))
 			(*p)++;
+		if (str[i] == 'D')
+			(*d)++;
 		i++;
 	}
 }
