@@ -6,37 +6,55 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 19:37:12 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 22:34:39 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/28 15:14:41 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+bool	check_if_not_wall_door(char **map, float x, float y)
+{
+	if (map[(int)(y) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] != '1' &&
+		map[(int)(y) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] != '1' &&
+		map[(int)(y + 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != '1' &&
+		map[(int)(y - 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != '1' &&
+		map[(int)(y + 2) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] != '1'
+		&& map[(int)(y) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != '1' &&
+		map[(int)(y) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] != 'D' &&
+		map[(int)(y) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] != 'D' &&
+		map[(int)(y + 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != 'D' &&
+		map[(int)(y - 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != 'D' &&
+		map[(int)(y + 2) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] != 'D'
+		&& map[(int)(y - 2) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] != 'D'
+		&& map[(int)(y) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != 'D')
+		return (true);
+	return (false);
+}
+
 bool	check_wall(t_data *data, float x, float y, int flag)
 {
-	if (data->map[(int)(y) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] != '1' &&
-		data->map[(int)(y) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] != '1' &&
-		data->map[(int)(y + 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != '1' &&
-		data->map[(int)(y - 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] != '1' &&
-		data->map[(int)(y + 2) / SCALE_SIZE]
-		[(int)(x + 2) / SCALE_SIZE] != '1' && data->map[(int)(y)
-		/ SCALE_SIZE][(int)(x) / SCALE_SIZE] != '1' && data->map[(int)(y - 2)
-		/ SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] != 'D' &&
-		data->map[(int)(y + 2) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] != 'D')
-		return (data->player->hit_wall = false, 
+	char	**map;
+
+	if (x + 2 >= data->map_width * SCALE_SIZE || x - 2 < 0
+		|| y + 2 >= data->map_height * SCALE_SIZE || y - 2 < 0)
+		return (false);
+	map = data->map;
+	if (check_if_not_wall_door(map, x, y))
+		return (data->player->hit_wall = false,
 			data->player->already_hit = false, true);
-	if (data->door->door_distance > 40 && (data->map[(int)(y) / SCALE_SIZE]
+	if (data->door->door_distance > 40 && (map[(int)(y) / SCALE_SIZE]
 		[(int)(x) / SCALE_SIZE] == 'D' ||
-		data->map[(int)(y) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] == 'D'))
+		map[(int)(y) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] == 'D'))
 		flag = 0;
 	if (!flag)
-	{
-		if (data->map[(int)(y) / SCALE_SIZE][(int)(x) / SCALE_SIZE] == 'D' ||
-			data->map[(int)(y - 2) / SCALE_SIZE][(int)(x - 2)
-			/ SCALE_SIZE] == 'D' || data->map[(int)(y + 2) / SCALE_SIZE]
-			[(int)(x + 2) / SCALE_SIZE] == 'D' || data->map[(int)(y - 2)
-			/ SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] == '0')
-			return (true);
-	}
+		if (map[(int)(y) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] == 'D' ||
+			map[(int)(y) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] == 'D' ||
+			map[(int)(y + 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] == 'D' ||
+			map[(int)(y - 2) / SCALE_SIZE][(int)(x) / SCALE_SIZE] == 'D' ||
+			map[(int)(y + 2) / SCALE_SIZE][(int)(x + 2) / SCALE_SIZE] == 'D'
+			|| map[(int)(y - 2) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] == 'D'
+			|| map[(int)(y) / SCALE_SIZE][(int)(x) / SCALE_SIZE] == 'D'
+			|| map[(int)(y - 2) / SCALE_SIZE][(int)(x - 2) / SCALE_SIZE] == '0')
+			return (flag = 1, true);
 	return (data->player->hit_wall = true, false);
 }

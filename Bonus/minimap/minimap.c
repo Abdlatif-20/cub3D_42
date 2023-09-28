@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:49:49 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/27 09:53:34 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:48:06 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	draw_player(t_data *data, unsigned int color)
 		dda(data, (t_vars){.x = 104, .y = (SCREEN_HEIGHT - 210) + 104, .x1 = 104
 			+ cos(data->player->angle + (incr * M_PI / 180))
 			* 20, .y1 = (SCREEN_HEIGHT - 210) + 104
-			+ sin(data->player->angle + (incr * M_PI / 180)) * 20}, 0xffffff);
+			+ sin(data->player->angle + (incr * M_PI / 180)) * 20}, 0x00FF66);
 		incr++;
 	}
 }

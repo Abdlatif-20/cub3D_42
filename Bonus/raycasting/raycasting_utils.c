@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 10:33:48 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/26 11:35:31 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:38:27 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	check_horz_intersection(t_data *data, float ray_angle, bool *flag_door)
 		ray->y_step *= -1;
 	ray->x_step = ray->y_step / tan(ray_angle);
 	while (ray->x_horz_int >= 0 && ray->x_horz_int <= data->map_width
-		* SCALE_SIZE && ray->y_horz_int >= 0 && ray->y_horz_int
-		<=data->map_height * SCALE_SIZE && data->map[(int)(ray->y_horz_int - k)
+		* SCALE_SIZE && ray->y_horz_int - k > 0 && ray->y_horz_int - k
+		< data->map_height * SCALE_SIZE && data->map[(int)(ray->y_horz_int - k)
 		/ SCALE_SIZE][(int)(ray->x_horz_int) / SCALE_SIZE] != '1')
 		if (horz_increment(data, ray, flag_door, k) == 2)
 			break ;
@@ -86,7 +86,7 @@ void	check_vert_intersection(t_data *data, float ray_angle, bool *flag_door)
 	if (!ray->ray_looking_right)
 		ray->x_step *= -1;
 	ray->y_step = ray->x_step * tan(ray_angle);
-	while (ray->x_vert_int >= 0 && ray->x_vert_int <= data->map_width
+	while (ray->x_vert_int - k > 0 && ray->x_vert_int - k < data->map_width
 		* SCALE_SIZE && ray->y_vert_int >= 0 && ray->y_vert_int
 		<= data->map_height * SCALE_SIZE && data->map[(int)ray->y_vert_int 
 			/ SCALE_SIZE][(int)(ray->x_vert_int - k) / SCALE_SIZE] != '1')

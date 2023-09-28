@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:14:30 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/23 16:27:25 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:28:03 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,19 @@ static void	load_textures(t_data *data)
 	add_to_garbage(g_heap(), new_img);
 	texture_tmp = data->textures;
 	texture_tmp->texture_img = new_img;
-	i = 0;
-	while (i < 4 && texture_tmp)
+	i = -1;
+	while (++i < 4 && texture_tmp)
 	{
 		new_img[i].img_ptr = my_mlx_xpm_file_to_img(data,
 				texture_tmp->value, &texture_tmp->xpm_width,
 				&texture_tmp->xpm_height);
+		if (texture_tmp->xpm_width > 800 || texture_tmp->xpm_height > 800)
+			throw_error(IMG_SIZE_ERROR, g_heap());
 		new_img[i].img_data = mlx_get_data_addr(new_img[i].img_ptr,
 				&new_img[i].bpp, &new_img[i].line_length, &new_img[i].endian);
 		if (!new_img[i].img_data)
 			throw_error(FILE_ERROR, g_heap());
 		texture_tmp->texture_img = &new_img[i];
-		i++;
 		texture_tmp = texture_tmp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/27 11:19:07 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 11:46:06 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@
 # define FILE_ERROR "Error: file is not valid"
 # define MLX_NEW_IMG_ERROR "Error: mlx_new_image failed"
 # define MLX_XPM_FILE_TO_IMG_ERROR "Error: mlx_xpm_file_to_image failed"
+# define IMG_SIZE_ERROR "Error: image size is not valid"
 
 /*========================= GAME CONSTANTS =========================*/
 # define SCALE_SIZE 32
-# define SPEED 3.5
+# define SPEED 2.5
 # define KEYBOARD_ROTSPEED 2.5
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720

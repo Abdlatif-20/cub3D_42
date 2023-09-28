@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/27 13:25:13 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/28 12:31:58 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@
 # define MLX_NEW_IMG_ERROR "Error: mlx_new_image failed"
 # define MLX_XPM_FILE_TO_IMG_ERROR "Error: mlx_xpm_file_to_image failed"
 # define DOOR_ERROR "Error: something is wrong with doors"
+# define IMG_SIZE_ERROR "Error: image size is not valid"
 
 /*========================= GAME CONSTANTS =========================*/
 # define SCALE_SIZE 32
-# define SPEED 8
+# define SPEED 5
 # define KEYBOARD_ROTSPEED 3.5
 # define MOUSE_ROTSPEED 0.0008
 # define SCREEN_WIDTH 1280
