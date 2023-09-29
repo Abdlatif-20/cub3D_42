@@ -6,7 +6,7 @@
 /*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 21:29:53 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/28 11:46:06 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/29 09:52:57 by aben-nei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
-# include "../libft/libft.h"
-# include "../get_next_line/get_next_line.h"
-# include "../mlx/mlx.h"
+# include "libft.h"
+# include "get_next_line.h"
+# include "mlx.h"
 
 /*========================= ERROR MESSAGES =========================*/
 # define MAP_ERROR "Error: something is wrong in the map"

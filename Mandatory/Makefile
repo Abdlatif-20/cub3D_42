@@ -6,13 +6,13 @@
 #    By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/28 11:38:34 by aben-nei         ###   ########.fr        #
+#    Updated: 2023/09/29 10:05:52 by aben-nei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
-CC = cc -Ofast -O3
-CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CC = cc -Ofast -O3 -I ../mlx/ -I ../libft/ -I ../get_next_line/
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 HDR = cub3d.h ../libft/libft.h ../get_next_line/get_next_line.h
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
@@ -73,6 +73,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(MLX) $(OBJ) $(MLXFLAGS) -o $(NAME)
 	@clear
 	@echo ""$@ "\033[1;32mhas ben Created\033[0m ...\033[0m"
+	@mv get_next_line libft obj
 
 
 # Rules for creating object files in the OBJ_DIR
@@ -92,8 +93,6 @@ fclean: clean
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
-	@$(RM) -r libft
-	@$(RM) -r get_next_line
 	@clear
 	@echo "\033[1;31mDeleting\033[0m" Object files "\033[1;31m...\033[0m"
 
