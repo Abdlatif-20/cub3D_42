@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 10:55:05 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/29 10:57:00 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:28:01 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,42 +252,42 @@ struct s_data
 	void		*bullet_icon;
 };
 
-/*-----------------------------g_collector.c-----------------------------*/
+/*-----------------------------g_collector_bonus.c-------------------------*/
 void		add_to_garbage(t_garbage **heap, void *address);
 void		empty_trash(t_garbage **heap);
 t_garbage	**g_heap(void);
 
-/*-----------------------------cub3d_utils.c-----------------------------*/
+/*-----------------------------cub3d_utils_bonus.c-------------------------*/
 void		throw_error(char *msg, t_garbage **heap);
 int			ft_strcmp(char *s1, char *s2);
 int			tab_size(char **tab);
 char		*free_s1_join(char *s1, char *s2);
 void		free_tab(char **tab);
 
-/*-----------------------------map_reader.c-----------------------------*/
+/*-----------------------------map_reader_bonus.c-------------------------*/
 void		read_map(char *path, t_data *data);
 
-/*-----------------------------init_data.c-----------------------------*/
+/*-----------------------------init_data_bonus.c-------------------------*/
 void		init_data(t_data *data, char *path);
 
-/*-----------------------------texture_parser.c-----------------------------*/
+/*-----------------------------texture_parser_bonus.c-------------------------*/
 void		fill_tetxures_list(t_data *data, char *key, char *value);
 void		textures_checker(t_data	*data);
 
-/*-----------------------------color_parser.c-----------------------------*/
+/*-----------------------------color_parser_bonus.c-------------------------*/
 int			get_color(char *value);
 void		fill_color(t_data *data, char *key, char *value);
 void		color_checker(t_data *data);
 
-/*-----------------------------parsing_utils.c-----------------------------*/
+/*-----------------------------parsing_utils_bonus.c-------------------------*/
 bool		is_player(char c);
 bool		contains_bad_char(char *str);
 void		contains_player_door(char *str, int *p, int *d);
 
-/*-----------------------------map_parser.c-----------------------------*/
+/*-----------------------------map_parser_bonus.c-------------------------*/
 void		map_checker(char **map);
 
-/*-----------------------------my_mlx_func.c-----------------------------*/
+/*-----------------------------my_mlx_func_bonus.c-------------------------*/
 void		my_mlx_pixel_put(t_data *data, int x, int y, unsigned int color);
 void		*my_mlx_new_img(t_data *data, int width, int height);
 void		my_mlx_destroyer(t_data *data);
@@ -295,37 +295,37 @@ void		my_pixel_put(t_texture *data, int x, int y, unsigned int *color);
 void		*my_mlx_xpm_file_to_img(t_data *data, char *path,
 				int *width, int *height);
 
-/*-----------------------------init_mlx.c-----------------------------*/
+/*-----------------------------init_mlx_bonus.c-------------------------*/
 t_mlx		*init_mlx(void);
 t_image		*init_win_image(t_data *data);
 void		load_minimap_directions(t_data *data);
 
-/*-----------------------------init_player.c-----------------------------*/
+/*-----------------------------init_player_bonus.c-------------------------*/
 t_player	*init_player(t_data *data);
 
-/*-----------------------------info_getter.c-----------------------------*/
+/*-----------------------------info_getter_bonus.c-------------------------*/
 int			*get_player_coord(char **map);
 int			get_map_width(char **map);
 int			get_map_height(char **map);
 
-/*-----------------------------raycasting_utils.c-----------------------------*/
+/*-----------------------------raycasting_utils_bonus.c-----------------------*/
 float		adjust_angle(float ray_angle);
 void		check_horz_intersection(t_data *data, float ray_angle,
 				bool *flag_door);
 void		check_vert_intersection(t_data *data, float ray_angle,
 				bool *flag_door);
 
-/*-----------------------------raycasting.c-----------------------------*/
+/*-----------------------------raycasting_bonus.c-------------------------*/
 void		cast_all_rays(t_data *data);
 
-/*-----------------------------draw_walls.c-----------------------------*/
+/*-----------------------------draw_walls_bonus.c-------------------------*/
 void		colorize_window(t_data *data);
 void		get_color_texture(t_data *data, unsigned int *color,
 				float wall_height, float y_top);
 void		wall_drawing(int x, float height, t_data *data);
 void		clear_window_draw(t_data *data);
 
-/*-----------------------------draw_doors.c-----------------------------*/
+/*-----------------------------draw_doors_bonus.c-------------------------*/
 void		door_drawing(int x, float height, t_data *data);
 void		get_door_offset(t_data *data, t_door *door, float wall_height,
 				float y_top);
@@ -334,7 +334,7 @@ void		get_offset_door(t_data *data, t_door *door, float wall_height,
 				float y_top);
 int			match_door(int num_door, t_door *door, int x1, int y1);
 
-/*-----------------------------draw_doors.c-----------------------------*/
+/*-----------------------------draw_doors_bonus.c-------------------------*/
 void		shadow(t_data *data, unsigned int *color);
 
 /*-----------------------------draw_doors_utils-----------------------------*/
@@ -346,13 +346,13 @@ void		init_door(t_data *data);
 int			hit_door_horz(t_data *data, t_ray *ray, bool *flag_door, int k);
 int			hit_door_vert(t_data *data, t_ray *ray, bool *flag_door, int k);
 
-/*----------------------------- shadow.c -----------------------------*/
+/*----------------------------- shadow_bonus.c -----------------------------*/
 void		ft_convert_to_rgb(unsigned int color, unsigned int rgb[3]);
 void		decrementbrightness(unsigned int *r, unsigned int *g,
 				unsigned int *b, float decrement);
 int			rgb2int_converter(unsigned int *rgb);
 
-/*-----------------------------move_player.c-----------------------------*/
+/*-----------------------------move_player_bonus.c-------------------------*/
 int			move_player(t_data *data);
 bool		check_wall(t_data *data, float x, float y, int flag);
 void		move_right(t_data *data);
@@ -360,12 +360,12 @@ void		move_left(t_data *data);
 void		move_up(t_data *data);
 void		move_down(t_data *data);
 
-/*-----------------------------rotation.c-----------------------------*/
+/*-----------------------------rotation_bonus.c-------------------------*/
 void		rotate_left(t_data *data);
 void		rotate_right(t_data *data);
 int			mouse_rotation(int x, int y, t_data *data);
 
-/*-----------------------------drawing_utils.c-----------------------------*/
+/*-----------------------------drawing_utils_bonus.c-------------------------*/
 t_texture	*get_value(t_texture *texture, char *key);
 void		get_texture_offset(t_data *data, t_texture *texture,
 				float wall_height, float y_top);
@@ -373,27 +373,27 @@ void		draw_square(t_data *data, int x, int y, int size);
 void		draw_ammo_bar(t_data *data);
 void		open_door(int keycode, t_data *data);
 
-/*-----------------------------hooks.c-----------------------------*/
+/*-----------------------------hooks_bonus.c-------------------------*/
 int			key_press(int keycode, t_data *data);
 int			key_release(int keycode, t_data *data);
 int			close_game(t_data *data);
 int			mouse_hook(int keycode, int x, int y, t_data *data);
 
-/*-----------------------------knife_animation.c-----------------------------*/
+/*-----------------------------knife_animation_bonus.c----------------------*/
 void		knife_animation(t_data *data);
 
-/*-----------------------------pistol_animation.c-----------------------------*/
+/*-----------------------------pistol_animation_bonus.c----------------------*/
 void		pistol_animation(t_data *data);
 void		sniper_mode(t_data *data);
 
-/*-----------------------------animation_utls.c-----------------------------*/
+/*-----------------------------animation_utls_bonus.c-------------------------*/
 void		load_put_image(t_data *data, char *dir, char *frame);
 void		play_sound(char *sound_path);
 
-/*-----------------------------minimap.c-----------------------------*/
+/*-----------------------------minimap_bonus.c-------------------------*/
 void		draw_minimap(t_data *data);
 
-/*-----------------------------minimap_utils.c-----------------------------*/
+/*-----------------------------minimap_utils_bonus.c-------------------------*/
 void		dda(t_data *data, t_vars var, unsigned int color);
 
 #endif

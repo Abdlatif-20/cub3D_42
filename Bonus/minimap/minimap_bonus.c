@@ -6,7 +6,7 @@
 /*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:49:49 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/29 10:53:28 by mel-yous         ###   ########.fr       */
+/*   Updated: 2023/09/29 12:28:37 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	draw_player(t_data *data, unsigned int color)
 {
 	int		i;
 	int		j;
-	float	incr;
 
 	i = 0;
 	while (i < 8)
@@ -29,15 +28,6 @@ static void	draw_player(t_data *data, unsigned int color)
 			j++;
 		}
 		i++;
-	}
-	incr = -20.0f;
-	while (incr < 40.0f)
-	{
-		dda(data, (t_vars){.x = 104, .y = (SCREEN_HEIGHT - 210) + 104, .x1 = 104
-			+ cos(data->player->angle + (incr * M_PI / 180))
-			* 20, .y1 = (SCREEN_HEIGHT - 210) + 104
-			+ sin(data->player->angle + (incr * M_PI / 180)) * 20}, 0x00FF66);
-		incr++;
 	}
 }
 
