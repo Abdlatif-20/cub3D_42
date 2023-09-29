@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   init_data_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:14:30 by mel-yous          #+#    #+#             */
-/*   Updated: 2023/09/28 11:28:03 by aben-nei         ###   ########.fr       */
+/*   Updated: 2023/09/29 10:53:28 by mel-yous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 static void	default_init(t_data *data)
 {
@@ -28,6 +28,13 @@ static void	default_init(t_data *data)
 	flags.rotate_left = false;
 	flags.rotate_right = false;
 	flags.redraw_scene = false;
+	flags.hide_mouse = false;
+	flags.adjust_mouse = false;
+	flags.knife_shoot = false;
+	flags.pistol_shoot = false;
+	flags.switch_weapon = true;
+	flags.reload_pistol = false;
+	flags.flag_door = false;
 	data->flags = &flags;
 }
 
@@ -76,8 +83,33 @@ static void	fill_map_with_spaces(t_data *data)
 	}
 }
 
+void	load_door(t_data *data)
+{
+	t_door	*door;
+
+	door = malloc(sizeof(t_door));
+	if (!door)
+		throw_error(MALLOC_ERROR, g_heap());
+	add_to_garbage(g_heap(), door);
+	door->door_img = malloc(sizeof(t_image));
+	if (!door->door_img)
+		throw_error(MALLOC_ERROR, g_heap());
+	add_to_garbage(g_heap(), door->door_img);
+	door->door_img->img_ptr = my_mlx_xpm_file_to_img(data,
+			"./textures/door/d3.xpm", &door->door_width, &door->door_height);
+	door->door_img->img_data = mlx_get_data_addr(
+			door->door_img->img_ptr, &door->door_img->bpp,
+			&door->door_img->line_length,
+			&door->door_img->endian);
+	data->door = door;
+	init_door(data);
+}
+
 void	init_data(t_data *data, char *path)
 {
+	int	w;
+	int	h;
+
 	default_init(data);
 	read_map(path, data);
 	textures_checker(data);
@@ -90,5 +122,12 @@ void	init_data(t_data *data, char *path)
 	data->window_img = init_win_image(data);
 	data->player = init_player(data);
 	data->textures->texture_img = NULL;
+	data->mouse_x = SCREEN_WIDTH / 2;
+	data->mouse_y = SCREEN_HEIGHT / 2;
 	load_textures(data);
+	data->bullet_icon = my_mlx_xpm_file_to_img(data,
+			"./textures/pistol/bullet.xpm", &w, &h);
+	load_door(data);
+	load_minimap_directions(data);
+	mlx_mouse_move(data->mlx->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 }

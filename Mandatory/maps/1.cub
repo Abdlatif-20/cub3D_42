@@ -3,9 +3,9 @@ SO ./textures/metal_2.xpm
 EA ./textures/metal_4.xpm
 WE ./textures/metal_3.xpm
 C 34,55,147
-F 30,012,4
+F 30, 22,4
 
-111111111
-111101111
-1N1010001
+1111111111
+11110111101
+11N1000111
 111111111
