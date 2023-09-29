@@ -6,7 +6,7 @@
 #    By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/29 11:39:05 by mel-yous         ###   ########.fr        #
+#    Updated: 2023/09/29 12:09:53 by mel-yous         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,10 +65,19 @@ $(GNL) $(LIBFT)
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 MLX = ../mlx/libmlx.a
 MLXFLAGS = -framework OpenGL -framework AppKit
-all: $(NAME)
+all: $(NAME) show_banner
 
-GREEN = \033[32m
-RESET = \033[0m
+BANNER_TEXT = "\
+	░█████╗░██╗░░░██╗██████╗░██████╗░██████╗░\
+	██╔══██╗██║░░░██║██╔══██╗╚════██╗██╔══██╗\
+	██║░░╚═╝██║░░░██║██████╦╝░█████╔╝██║░░██║\
+	██║░░██╗██║░░░██║██╔══██╗░╚═══██╗██║░░██║\
+	╚█████╔╝╚██████╔╝██████╦╝██████╔╝██████╔╝\
+	░╚════╝░░╚═════╝░╚═════╝░╚═════╝░╚═════╝░"
+
+show_banner:
+	@printf "\033[32m%s\033[0m\n" "$(BANNER_TEXT)"
+	@printf "\t\tCopyright (c) 2023 \033[1;35m%s\033[0m\n" "aben-nei, mel-yous"
 
 # Rules for creating the executable
 $(NAME): $(OBJ)
