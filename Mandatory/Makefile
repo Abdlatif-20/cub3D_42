@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mel-yous <mel-yous@student.42.fr>          +#+  +:+       +#+         #
+#    By: aben-nei <aben-nei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/13 21:30:31 by mel-yous          #+#    #+#              #
-#    Updated: 2023/09/29 12:10:17 by mel-yous         ###   ########.fr        #
+#    Updated: 2023/10/07 17:23:26 by aben-nei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc -Ofast -O3 -I ../mlx/ -I ../libft/ -I ../get_next_line/
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Wno-misleading-indentation
 RM = rm -f
 HDR = cub3d.h ../libft/libft.h ../get_next_line/get_next_line.h
 GNL = ../get_next_line/get_next_line.c ../get_next_line/get_next_line_utils.c
@@ -53,7 +53,7 @@ $(GNL) $(LIBFT)
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 MLX = ../mlx/libmlx.a
-MLXFLAGS = -framework OpenGL -framework AppKit
+MLXFLAGS = -L/usr/local/lib -lmlx -lXext -lX11 -lm
 all: $(NAME) show_banner
 
 BANNER_TEXT = "\
