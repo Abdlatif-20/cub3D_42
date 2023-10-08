@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 /maps
 *.dSYM
+=======
+obj/
+*.dSYM
+libft/*.o
+>>>>>>> Simo
