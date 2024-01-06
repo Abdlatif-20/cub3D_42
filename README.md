@@ -18,6 +18,24 @@ In summary The goal of ``cub3d`` is to make *something* using raycasting (like [
 * weapon
 * Minimap
 
+## Usage
+The program can be build with a simple make to make a mandatory part inside Mandatory folder
+
+And make bonus to make a bonus part inside Bonus folder
+
+You can run the program with use `./cub3D<map>` Or `./cub3D_bonus <map>`
+
+## DDA algorithm
+The DDA-line algorithm rasterizes the line segment between two specified points using calculations in floating-point numbers or integers.  
+Let the segment be defined by the real coordinates of the ends (x1, y1), (x2, y2). The raster (integer) coordinates of the endpoints are rounded values of the source coordinates: x_start =round (X1), y_start = round(Y1), x_end = round(x2), and y_end = round(Y2).  
+
+A larger absolute number, (x_end - x_start) or (y_end - y_start), increased by 1 L of the rasterization cycle.  
+
+At the beginning of the cycle the auxiliary real variables x and g are assigned the initial coordinates of the beginning of the segment: x = x1, y = y1. at each step of the loop, these real variables get increments (x_end - x_start) / L, (y_end - y_start) / L. The raster coordinates produced at each step are the result of rounding the corresponding real values x and y.  
+
+The use of calculations with real numbers and only a single use of rounding to finally obtain the value of the raster coordinate results in high accuracy and low performance of the algorithm.  
+
+
 ## Ressources
 
 * [Playable Wolfenstein 3D](http://users.atw.hu/wolf3d/)
