@@ -1,34 +1,28 @@
-# CUB3D 42-CURSUS
+# cub3d
 
-This project introcuded me to the beautiful world of raycasting using C language and Minilibx library.
+The goal of ``cub3d`` is to make *something* using raycasting (like [Wolfenstein 3D](https://fr.wikipedia.org/wiki/Wolfenstein_3D)).
 
-## Game Features
+<img align="center" src="Screen 1.png" alt="Screenshot of the game" />
 
-- Map Parsing & Error Managment
-- Looking Up & Down
-- Wall Collision
-- Mouse Rotation
-- Sound Effects
-- Mini Map
-- Multiple Weapons
-- Shadow Effect
-- Doors
 
-### Final Grade
+<img align="center" src="Screen 2.png" alt="Screenshot of the game" />
 
-**125** ✅
+* WASD to move, QE or Left/Right directional keys to rotate camera
+* use mouse to rotate angle of player and see down and up. 
+* ESC to quit
+* Textures or colors for each sides (North, South, West, East) and Sky/Floor
+* Shadows based on the distance
+* knif
+* weapon
+* Minimap
 
-### Installation & Run
+## Ressources
 
-1. Clone the project source code
-2. Enter to bonus folder
-3. Do 'make' command and wait the compilation process
-4. Boom there is an executable named cub3D, run it with a map of your choice
-5. Example: ./cub3D maps/3.cub
-
-If you want to see mandatory part do the same thing but in **Mandatory** folder.
-
-### Project Teammates
-
-[ABDELLATYF EN-NEIYMY](https://github.com/Abdlatif-20)<br />
-[MOHAMED EL YOUSSFI](https://github.com/SimoRedDevil)
+* [Playable Wolfenstein 3D](http://users.atw.hu/wolf3d/)
+* [Raycasting in JS](http://www.playfuljs.com/a-first-person-engine-in-265-lines/)
+* [Some X11 event numbers](https://github.com/qst0/ft_libgfx)
+* [Full tutorial in English](https://lodev.org/cgtutor/raycasting.html)
+* [Full tutorial in French (translation of the English tutorial)](http://forums.mediabox.fr/wiki/tutoriaux/flashplatform/affichage/3d/raycasting)
+* [Images in minilibx](https://github.com/keuhdall/images_example)
+* [BMP format on StackOverflow](https://stackoverflow.com/questions/2654480/writing-bmp-image-in-pure-c-c-without-other-libraries)
+* [BMP format explanation](https://web.archive.org/web/20080912171714/http://www.fortunecity.com/skyscraper/windows/364/bmpffrmt.html)
